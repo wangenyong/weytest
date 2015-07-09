@@ -23,9 +23,11 @@
     <item android:title="Sub items">
         <menu>
             <item
+                android:id="@+id/sub_item_1"
                 android:icon="@drawable/ic_action_dashboard"
                 android:title="Sub item 1" />
             <item
+                android:id="@+id/sub_item_2"
                 android:icon="@drawable/ic_action_find_in_page"
                 android:title="Sub item 2" />
         </menu>
