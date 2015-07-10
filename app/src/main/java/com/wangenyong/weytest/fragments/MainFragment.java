@@ -3,12 +3,14 @@ package com.wangenyong.weytest.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.wangenyong.mylibrary.decorators.DividerGridItemDecoration;
 import com.wangenyong.weytest.R;
 import com.wangenyong.weytest.adapters.MainAdapter;
 
@@ -35,7 +37,7 @@ public class MainFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private List<String> strings = Arrays.asList("button", "edittext", "tab", "reyclerView", "animation", "textview", "layout", "custom");
+    private List<String> strings = Arrays.asList("button", "edittext", "tab", "reyclerView", "animation", "textview", "layout", "custom", "dialog");
 
 
     /**
@@ -79,6 +81,8 @@ public class MainFragment extends Fragment {
         homeRecyclerView.setHasFixedSize(true);
         homeRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 4));
         MainAdapter mainAdapter = new MainAdapter(getActivity(), strings);
+        homeRecyclerView.addItemDecoration(new DividerGridItemDecoration(getActivity()));
+        homeRecyclerView.setItemAnimator(new DefaultItemAnimator());
         homeRecyclerView.setAdapter(mainAdapter);
 
         return rootView;

@@ -17,10 +17,15 @@ import java.util.List;
 public class MainAdapter extends RecyclerView.Adapter {
     private Context context;
     private List<String> stringList;
+    private OnItemClickLitener mOnItemClickLitener;
 
     public MainAdapter(Context context, List<String> stringList) {
         this.context = context;
         this.stringList = stringList;
+    }
+
+    public void setOnItemClickLitener(OnItemClickLitener mOnItemClickLitener) {
+        this.mOnItemClickLitener = mOnItemClickLitener;
     }
 
     @Override
@@ -35,14 +40,51 @@ public class MainAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
         final String s = stringList.get(position);
-        MainViewHolder mainViewHolder = (MainViewHolder) viewHolder;
+        final MainViewHolder mainViewHolder = (MainViewHolder) viewHolder;
         mainViewHolder.mainTitleTv.setText(s);
+
+        if (mOnItemClickLitener != null)
+        {
+            mainViewHolder.itemView.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    int pos = mainViewHolder.getLayoutPosition();
+                    mOnItemClickLitener.onItemClick(mainViewHolder.itemView, pos);
+                }
+            });
+
+            mainViewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener()
+            {
+                @Override
+                public boolean onLongClick(View v)
+                {
+                    int pos = mainViewHolder.getLayoutPosition();
+                    mOnItemClickLitener.onItemLongClick(mainViewHolder.itemView, pos);
+                    return false;
+                }
+            });
+        }
     }
 
     @Override
     public int getItemCount() {
         return stringList.size();
     }
+
+
+    public void addData(int position) {
+        stringList.add(position, "Insert One");
+        notifyItemInserted(position);
+    }
+
+    public void removeData(int position) {
+        stringList.remove(position);
+        notifyItemRemoved(position);
+    }
+
+
 
     // inner class to hold a reference to each item of RecyclerView
     public static class MainViewHolder extends RecyclerView.ViewHolder {
@@ -53,5 +95,12 @@ public class MainAdapter extends RecyclerView.Adapter {
             super(itemLayoutView);
             mainTitleTv = (TextView) itemLayoutView.findViewById(R.id.tv_main_item);
         }
+    }
+
+
+
+    public interface OnItemClickLitener {
+        void onItemClick(View view, int position);
+        void onItemLongClick(View view , int position);
     }
 }
