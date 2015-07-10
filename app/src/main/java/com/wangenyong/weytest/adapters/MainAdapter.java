@@ -62,7 +62,7 @@ public class MainAdapter extends RecyclerView.Adapter {
                 {
                     int pos = mainViewHolder.getLayoutPosition();
                     mOnItemClickLitener.onItemLongClick(mainViewHolder.itemView, pos);
-                    return false;
+                    return true;
                 }
             });
         }

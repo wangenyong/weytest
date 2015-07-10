@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.wangenyong.mylibrary.decorators.DividerGridItemDecoration;
 import com.wangenyong.weytest.R;
@@ -83,6 +84,19 @@ public class MainFragment extends Fragment {
         MainAdapter mainAdapter = new MainAdapter(getActivity(), strings);
         homeRecyclerView.addItemDecoration(new DividerGridItemDecoration(getActivity()));
         homeRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        mainAdapter.setOnItemClickLitener(new MainAdapter.OnItemClickLitener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Toast.makeText(getActivity(), position + " click",
+                        Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onItemLongClick(View view, int position) {
+                Toast.makeText(getActivity(), position + " long click",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
         homeRecyclerView.setAdapter(mainAdapter);
 
         return rootView;
