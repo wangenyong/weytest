@@ -14,4 +14,6 @@
     <string name="drawer_animation">动画</string>
     <string name="drawer_tools">工具</string>
 
+    <!-- View -->
+    <string name="view_button">按钮</string>
 </resources>

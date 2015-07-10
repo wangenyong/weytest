@@ -5,9 +5,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wangenyong.weytest.R;
+import com.wangenyong.weytest.bean.Component;
 
 import java.util.List;
 
@@ -16,12 +18,12 @@ import java.util.List;
  */
 public class MainAdapter extends RecyclerView.Adapter {
     private Context context;
-    private List<String> stringList;
+    private List<Component> componentList;
     private OnItemClickLitener mOnItemClickLitener;
 
-    public MainAdapter(Context context, List<String> stringList) {
+    public MainAdapter(Context context, List<Component> componentList) {
         this.context = context;
-        this.stringList = stringList;
+        this.componentList = componentList;
     }
 
     public void setOnItemClickLitener(OnItemClickLitener mOnItemClickLitener) {
@@ -39,9 +41,11 @@ public class MainAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
-        final String s = stringList.get(position);
+        final Component component = componentList.get(position);
         final MainViewHolder mainViewHolder = (MainViewHolder) viewHolder;
-        mainViewHolder.mainTitleTv.setText(s);
+        mainViewHolder.iconImg.setImageResource(component.getIconId());
+        mainViewHolder.iconImg.setColorFilter(component.getColor());
+        mainViewHolder.titleTv.setText(component.getTitle());
 
         if (mOnItemClickLitener != null)
         {
@@ -70,17 +74,19 @@ public class MainAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return stringList.size();
+        return componentList.size();
     }
 
 
+    /**
     public void addData(int position) {
-        stringList.add(position, "Insert One");
+        componentList.add(position, "Insert One");
         notifyItemInserted(position);
     }
+     */
 
     public void removeData(int position) {
-        stringList.remove(position);
+        componentList.remove(position);
         notifyItemRemoved(position);
     }
 
@@ -88,12 +94,14 @@ public class MainAdapter extends RecyclerView.Adapter {
 
     // inner class to hold a reference to each item of RecyclerView
     public static class MainViewHolder extends RecyclerView.ViewHolder {
-        TextView mainTitleTv;
+        ImageView iconImg;
+        TextView titleTv;
 
 
         public MainViewHolder(View itemLayoutView) {
             super(itemLayoutView);
-            mainTitleTv = (TextView) itemLayoutView.findViewById(R.id.tv_main_item);
+            iconImg = (ImageView) itemLayoutView.findViewById(R.id.img_main_item);
+            titleTv = (TextView) itemLayoutView.findViewById(R.id.tv_main_item);
         }
     }
 

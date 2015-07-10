@@ -14,8 +14,9 @@ import android.widget.Toast;
 import com.wangenyong.mylibrary.decorators.DividerGridItemDecoration;
 import com.wangenyong.weytest.R;
 import com.wangenyong.weytest.adapters.MainAdapter;
+import com.wangenyong.weytest.bean.Component;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -38,7 +39,7 @@ public class MainFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private List<String> strings = Arrays.asList("button", "edittext", "tab", "reyclerView", "animation", "textview", "layout", "custom", "dialog");
+    private List<Component> components = new ArrayList<Component>();
 
 
     /**
@@ -79,9 +80,11 @@ public class MainFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
         ButterKnife.inject(this, rootView);
 
+
+        initComponents();
         homeRecyclerView.setHasFixedSize(true);
         homeRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 4));
-        MainAdapter mainAdapter = new MainAdapter(getActivity(), strings);
+        MainAdapter mainAdapter = new MainAdapter(getActivity(), components);
         homeRecyclerView.addItemDecoration(new DividerGridItemDecoration(getActivity()));
         homeRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mainAdapter.setOnItemClickLitener(new MainAdapter.OnItemClickLitener() {
@@ -102,5 +105,9 @@ public class MainFragment extends Fragment {
         return rootView;
     }
 
+
+    private void initComponents() {
+        components.add(new Component(R.drawable.ic_view_button, getString(R.string.view_button), getResources().getColor(R.color.accent_color)));
+    }
 
 }
