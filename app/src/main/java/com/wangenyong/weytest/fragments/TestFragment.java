@@ -1,4 +1,4 @@
-package com.wangenyong.weytest;
+package com.wangenyong.weytest.fragments;
 
 
 import android.graphics.Color;

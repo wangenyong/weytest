@@ -13,6 +13,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.wangenyong.weytest.fragments.MainFragment;
+import com.wangenyong.weytest.fragments.TestFragment;
+
 public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
@@ -92,6 +95,9 @@ public class MainActivity extends AppCompatActivity {
 
         Class fragmentClass;
         switch(menuItem.getItemId()) {
+            case R.id.nav_home:
+                fragment = MainFragment.newInstance("", "");
+                break;
             default:
                 fragment = TestFragment.newInstance(menuItem.getTitle().toString());
         }
