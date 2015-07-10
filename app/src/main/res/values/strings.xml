@@ -9,4 +9,9 @@
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
 
+    <!-- Drawer -->
+    <string name="drawer_view">视图组件</string>
+    <string name="drawer_animation">动画</string>
+    <string name="drawer_tools">工具</string>
+
 </resources>

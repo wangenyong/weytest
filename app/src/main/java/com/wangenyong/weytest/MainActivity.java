@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
         Class fragmentClass;
         switch(menuItem.getItemId()) {
-            case R.id.nav_home:
+            case R.id.nav_view:
                 fragment = MainFragment.newInstance("", "");
                 break;
             default:
