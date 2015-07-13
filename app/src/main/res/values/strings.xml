@@ -19,6 +19,8 @@
     <string name="view_button">按钮</string>
 
     <!-- Button -->
+    <string name="button_standard">标准按钮</string>
     <string name="button_border">圆角边框透明按钮</string>
+    <string name="button_flat">常规按钮</string>
 
 </resources>

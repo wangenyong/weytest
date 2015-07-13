@@ -55,13 +55,19 @@ public class ViewsActivity extends AppCompatActivity {
     private void initCustomViews() {
         myViews.clear();
 
-        Button borderButton = new Button(this);
-        borderButton.setText(getString(R.string.button_border));
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
         int size = DimensionTools.dpToPx(16, getResources());
         lp.setMargins(size, size, size, size);
+
+        Button button = new Button(this);
+        button.setText(getString(R.string.button_standard));
+        button.setLayoutParams(lp);
+        myViews.add(new MyView(getString(R.string.button_standard), button));
+
+        Button borderButton = new Button(this);
+        borderButton.setText(getString(R.string.button_border));
         borderButton.setLayoutParams(lp);
         borderButton.setTextColor(getResources().getColor(R.color.primary_color));
         borderButton.setBackgroundResource(R.drawable.btn_selector_transparent_corner_boder);
