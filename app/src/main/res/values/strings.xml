@@ -16,4 +16,5 @@
 
     <!-- View -->
     <string name="view_button">按钮</string>
+    <string name="title_activity_buttons">ButtonsActivity</string>
 </resources>
