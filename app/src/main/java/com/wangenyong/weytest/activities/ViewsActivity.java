@@ -15,7 +15,7 @@ import android.widget.LinearLayout;
 import com.wangenyong.mylibrary.tools.DimensionTools;
 import com.wangenyong.weytest.R;
 import com.wangenyong.weytest.adapters.ViewsAdapter;
-import com.wangenyong.weytest.bean.CustomView;
+import com.wangenyong.weytest.bean.MyView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +31,7 @@ public class ViewsActivity extends AppCompatActivity {
 
     private RecyclerView.LayoutManager mLayoutManager;
     private ViewsAdapter viewsAdapter;
-    private List<CustomView> customViews = new ArrayList<CustomView>();
+    private List<MyView> myViews = new ArrayList<MyView>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,12 +48,12 @@ public class ViewsActivity extends AppCompatActivity {
 
         mLayoutManager = new LinearLayoutManager(this);
         viewsRecyclerView.setLayoutManager(mLayoutManager);
-        viewsAdapter = new ViewsAdapter(this, customViews);
+        viewsAdapter = new ViewsAdapter(this, myViews);
         viewsRecyclerView.setAdapter(viewsAdapter);
     }
 
     private void initCustomViews() {
-        customViews.clear();
+        myViews.clear();
 
         Button borderButton = new Button(this);
         borderButton.setText(getString(R.string.button_border));
@@ -66,7 +66,7 @@ public class ViewsActivity extends AppCompatActivity {
         borderButton.setTextColor(getResources().getColor(R.color.primary_color));
         borderButton.setBackgroundResource(R.drawable.btn_selector_transparent_corner_boder);
 
-        customViews.add(new CustomView(getString(R.string.button_border), borderButton));
+        myViews.add(new MyView(getString(R.string.button_border), borderButton));
     }
 
     @Override

@@ -5,11 +5,11 @@ import android.view.View;
 /**
  * Created by wangenyong on 15/7/13.
  */
-public class CustomView {
+public class MyView {
     private String title;
     private View view;
 
-    public CustomView(String title, View view) {
+    public MyView(String title, View view) {
         this.title = title;
         this.view = view;
     }

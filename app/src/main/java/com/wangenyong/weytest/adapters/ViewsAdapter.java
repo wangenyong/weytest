@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.wangenyong.weytest.R;
-import com.wangenyong.weytest.bean.CustomView;
+import com.wangenyong.weytest.bean.MyView;
 
 import java.util.List;
 
@@ -18,10 +18,10 @@ import java.util.List;
  */
 public class ViewsAdapter extends RecyclerView.Adapter<ViewsAdapter.ViewHolder> {
     private Context context;
-    private List<CustomView> customViewList;
+    private List<MyView> myViewList;
 
-    public ViewsAdapter(Context context, List<CustomView> customViewList) {
-        this.customViewList = customViewList;
+    public ViewsAdapter(Context context, List<MyView> myViewList) {
+        this.myViewList = myViewList;
         this.context = context;
     }
 
@@ -39,9 +39,9 @@ public class ViewsAdapter extends RecyclerView.Adapter<ViewsAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
-        final CustomView customView = customViewList.get(position);
-        viewHolder.viewTitleTv.setText(customView.getTitle());
-        viewHolder.viewLL.addView(customView.getView());
+        final MyView myView = myViewList.get(position);
+        viewHolder.viewTitleTv.setText(myView.getTitle());
+        viewHolder.viewLL.addView(myView.getView());
 
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,7 +53,7 @@ public class ViewsAdapter extends RecyclerView.Adapter<ViewsAdapter.ViewHolder> 
 
     @Override
     public int getItemCount() {
-        return customViewList.size();
+        return myViewList.size();
     }
 
     // inner class to hold a reference to each item of RecyclerView
