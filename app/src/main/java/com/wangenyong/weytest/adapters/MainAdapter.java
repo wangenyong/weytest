@@ -1,6 +1,7 @@
 package com.wangenyong.weytest.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wangenyong.weytest.R;
+import com.wangenyong.weytest.activities.ViewsActivity;
 import com.wangenyong.weytest.bean.Component;
 
 import java.util.List;
@@ -56,6 +58,8 @@ public class MainAdapter extends RecyclerView.Adapter {
                 {
                     int pos = mainViewHolder.getLayoutPosition();
                     mOnItemClickLitener.onItemClick(mainViewHolder.itemView, pos);
+                    Intent intent = new Intent(context, ViewsActivity.class);
+                    context.startActivity(intent);
                 }
             });
 

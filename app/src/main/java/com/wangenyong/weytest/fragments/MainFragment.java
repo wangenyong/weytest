@@ -92,6 +92,7 @@ public class MainFragment extends Fragment {
             public void onItemClick(View view, int position) {
                 Toast.makeText(getActivity(), position + " click",
                         Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
