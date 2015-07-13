@@ -62,12 +62,16 @@ public class ViewsActivity extends AppCompatActivity {
         lp.setMargins(size, size, size, size);
 
         Button button = new Button(this);
-        button.setText(getString(R.string.button_standard));
+        button.setText(getString(R.string.button_standard_en));
         button.setLayoutParams(lp);
         myViews.add(new MyView(getString(R.string.button_standard), button));
 
+        Button borderlessButton = (Button) getLayoutInflater().inflate(R.layout.button_borderless, null);
+        borderlessButton.setLayoutParams(lp);
+        myViews.add(new MyView(getString(R.string.button_borderless), borderlessButton));
+
         Button borderButton = new Button(this);
-        borderButton.setText(getString(R.string.button_border));
+        borderButton.setText(getString(R.string.button_border_en));
         borderButton.setLayoutParams(lp);
         borderButton.setTextColor(getResources().getColor(R.color.primary_color));
         borderButton.setBackgroundResource(R.drawable.btn_selector_transparent_corner_boder);

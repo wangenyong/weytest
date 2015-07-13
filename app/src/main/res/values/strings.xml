@@ -20,7 +20,10 @@
 
     <!-- Button -->
     <string name="button_standard">标准按钮</string>
+    <string name="button_standard_en">STANDARD BUTTON</string>
     <string name="button_border">圆角边框透明按钮</string>
-    <string name="button_flat">常规按钮</string>
+    <string name="button_border_en">BORDER_BUTTON</string>
+    <string name="button_borderless">无边框按钮</string>
+    <string name="button_borderless_en">BORDERLESS_BUTTON</string>
 
 </resources>
