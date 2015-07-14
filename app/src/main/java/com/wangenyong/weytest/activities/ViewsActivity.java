@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -106,6 +107,11 @@ public class ViewsActivity extends AppCompatActivity {
         backdropImg.setImageResource(R.drawable.img_view_edittext_header);
         viewsCoolapsingLayout.setTitle(getString(R.string.view_edittext));
         myViews.clear();
+
+        EditText editText = new EditText(this);
+        editText.setHint(getString(R.string.edittext_standard_en));
+        editText.setLayoutParams(lp);
+        myViews.add(new MyView(getString(R.string.edittext_standard), editText));
     }
 
     @Override

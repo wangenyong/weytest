@@ -17,7 +17,7 @@
 
     <!-- View -->
     <string name="view_button">按钮</string>
-    <string name="view_edittext">编辑框</string>
+    <string name="view_edittext">输入</string>
 
     <!-- Button -->
     <string name="button_standard">标准按钮</string>
@@ -28,5 +28,9 @@
     <string name="button_borderless_en">BORDERLESS_BUTTON</string>
     <string name="button_paper">自定义按钮</string>
     <string name="button_paper_en">PAPER_BUTTON</string>
+
+    <!-- Edittext -->
+    <string name="edittext_standard">标准输入框</string>
+    <string name="edittext_standard_en">stander edittext</string>
 
 </resources>
