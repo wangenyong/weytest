@@ -1,0 +1,25 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.wangenyong.weytest.fragments.DefaultFragment">
+
+    <TextView
+        android:id="@+id/tv_default_fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/summary"
+        android:textSize="18sp"
+        android:layout_centerInParent="true" />
+
+    <ImageView
+        android:id="@+id/img_default_fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerInside"
+        android:adjustViewBounds="true"
+        android:src="@drawable/img_logo"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/tv_default_fragment"/>
+
+</RelativeLayout>

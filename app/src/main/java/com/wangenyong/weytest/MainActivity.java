@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.wangenyong.weytest.fragments.DefaultFragment;
 import com.wangenyong.weytest.fragments.MainFragment;
 import com.wangenyong.weytest.fragments.TestFragment;
 
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle drawerToggle;
     private Toolbar toolbar;
+    private FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,9 @@ public class MainActivity extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, DefaultFragment.newInstance("", "")).commit();
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerToggle = setupDrawerToggle();
@@ -111,7 +116,6 @@ public class MainActivity extends AppCompatActivity {
          */
 
         // Insert the fragment by replacing any existing fragment
-        FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
 
         // Highlight the selected item, update the title, and close the drawer
