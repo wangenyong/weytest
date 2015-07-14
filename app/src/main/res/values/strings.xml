@@ -29,6 +29,8 @@
     <string name="button_borderless_en">BORDERLESS_BUTTON</string>
     <string name="button_paper">自定义按钮</string>
     <string name="button_paper_en">PAPER_BUTTON</string>
+    <string name="button_material">Material按钮</string>
+    <string name="button_material_en">MATERIAL_BUTTON</string>
 
     <!-- Edittext -->
     <string name="edittext_standard">标准输入框</string>

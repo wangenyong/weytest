@@ -95,12 +95,17 @@ public class ViewsActivity extends AppCompatActivity {
         borderButton.setLayoutParams(lp);
         borderButton.setTextColor(getResources().getColor(R.color.primary_color));
         borderButton.setBackgroundResource(R.drawable.btn_selector_transparent_corner_boder);
-
         myViews.add(new MyView(getString(R.string.button_border), borderButton));
 
         FrameLayout frameLayout = (FrameLayout) getLayoutInflater().inflate(R.layout.button_paper, null);
         frameLayout.setLayoutParams(lp);
         myViews.add(new MyView(getString(R.string.button_paper), frameLayout));
+
+        Button materialButton = new Button(this);
+        materialButton.setText(getString(R.string.button_material_en));
+        materialButton.setLayoutParams(lp);
+        materialButton.setBackgroundResource(R.drawable.btn_material);
+        myViews.add(new MyView(getString(R.string.button_material), materialButton));
     }
 
     private void initEdittexts() {
