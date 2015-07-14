@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -77,6 +78,10 @@ public class ViewsActivity extends AppCompatActivity {
         borderButton.setBackgroundResource(R.drawable.btn_selector_transparent_corner_boder);
 
         myViews.add(new MyView(getString(R.string.button_border), borderButton));
+
+        FrameLayout frameLayout = (FrameLayout) getLayoutInflater().inflate(R.layout.button_paper, null);
+        frameLayout.setLayoutParams(lp);
+        myViews.add(new MyView(getString(R.string.button_paper), frameLayout));
     }
 
     @Override
