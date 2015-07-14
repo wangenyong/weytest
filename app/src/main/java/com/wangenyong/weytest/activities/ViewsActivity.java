@@ -112,6 +112,12 @@ public class ViewsActivity extends AppCompatActivity {
         editText.setHint(getString(R.string.edittext_standard_en));
         editText.setLayoutParams(lp);
         myViews.add(new MyView(getString(R.string.edittext_standard), editText));
+
+        EditText cornerBorderEditText = new EditText(this);
+        cornerBorderEditText.setHint(getString(R.string.edittext_border_corner_en));
+        cornerBorderEditText.setLayoutParams(lp);
+        cornerBorderEditText.setBackgroundResource(R.drawable.edittext_selector_corner_border);
+        myViews.add(new MyView(getString(R.string.edittext_border_corner), cornerBorderEditText));
     }
 
     @Override

@@ -33,5 +33,7 @@
     <!-- Edittext -->
     <string name="edittext_standard">标准输入框</string>
     <string name="edittext_standard_en">stander edittext</string>
+    <string name="edittext_border_corner">圆角输入框</string>
+    <string name="edittext_border_corner_en">border corner edittext</string>
 
 </resources>
