@@ -108,7 +108,11 @@ public class MainFragment extends Fragment {
 
 
     private void initComponents() {
-        components.add(new Component(R.drawable.ic_view_button, getString(R.string.view_button), getResources().getColor(R.color.accent_color)));
+        components.clear();
+        components.add(new Component(R.drawable.ic_view_button, getString(R.string.view_button),
+                getResources().getColor(R.color.accent_color), Component.BUTTON));
+        components.add(new Component(R.drawable.ic_view_edittext, getString(R.string.view_edittext),
+                getResources().getColor(R.color.accent_color), Component.EDITTEXT));
     }
 
 }

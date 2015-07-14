@@ -17,6 +17,7 @@
 
     <!-- View -->
     <string name="view_button">按钮</string>
+    <string name="view_edittext">编辑框</string>
 
     <!-- Button -->
     <string name="button_standard">标准按钮</string>

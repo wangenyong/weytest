@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.wangenyong.weytest.R;
 import com.wangenyong.weytest.activities.ViewsActivity;
 import com.wangenyong.weytest.bean.Component;
+import com.wangenyong.weytest.bean.Constants;
 
 import java.util.List;
 
@@ -49,16 +50,14 @@ public class MainAdapter extends RecyclerView.Adapter {
         mainViewHolder.iconImg.setColorFilter(component.getColor());
         mainViewHolder.titleTv.setText(component.getTitle());
 
-        if (mOnItemClickLitener != null)
-        {
+        if (mOnItemClickLitener != null) {
             mainViewHolder.itemView.setOnClickListener(new View.OnClickListener()
             {
                 @Override
                 public void onClick(View v)
                 {
-                    int pos = mainViewHolder.getLayoutPosition();
-                    mOnItemClickLitener.onItemClick(mainViewHolder.itemView, pos);
                     Intent intent = new Intent(context, ViewsActivity.class);
+                    intent.putExtra(Constants.INTENT_VIEW, component.getType());
                     context.startActivity(intent);
                 }
             });
