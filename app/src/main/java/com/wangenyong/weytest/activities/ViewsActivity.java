@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
 import com.wangenyong.mylibrary.tools.DimensionTools;
+import com.wangenyong.mylibrary.views.TintableImageView;
 import com.wangenyong.weytest.R;
 import com.wangenyong.weytest.adapters.ViewsAdapter;
 import com.wangenyong.weytest.bean.Component;
@@ -110,6 +111,10 @@ public class ViewsActivity extends AppCompatActivity {
         materialButton.setLayoutParams(lp);
         materialButton.setBackgroundResource(R.drawable.btn_material);
         myViews.add(new MyView(getString(R.string.button_material), materialButton));
+
+        TintableImageView tintableButton = (TintableImageView) getLayoutInflater().inflate(R.layout.button_tintable, null);
+        tintableButton.setLayoutParams(lp);
+        myViews.add(new MyView(getString(R.string.button_tintable), tintableButton));
     }
 
     private void initEdittexts() {
