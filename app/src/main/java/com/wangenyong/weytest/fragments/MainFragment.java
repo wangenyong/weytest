@@ -113,6 +113,8 @@ public class MainFragment extends Fragment {
                 getResources().getColor(R.color.accent_color), Component.BUTTON));
         components.add(new Component(R.drawable.ic_view_edittext, getString(R.string.view_edittext),
                 getResources().getColor(R.color.accent_color), Component.EDITTEXT));
+        components.add(new Component(R.drawable.ic_view_progress, getString(R.string.view_progress),
+                getResources().getColor(R.color.accent_color), Component.PROGRESS));
     }
 
 }

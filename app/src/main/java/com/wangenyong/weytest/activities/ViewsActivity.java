@@ -64,6 +64,9 @@ public class ViewsActivity extends AppCompatActivity {
             case Component.EDITTEXT:
                 initEdittexts();
                 break;
+            case Component.PROGRESS:
+                initProgress();
+                break;
             default:
                 initButtons();
         }
@@ -123,6 +126,12 @@ public class ViewsActivity extends AppCompatActivity {
         cornerBorderEditText.setLayoutParams(lp);
         cornerBorderEditText.setBackgroundResource(R.drawable.edittext_selector_corner_border);
         myViews.add(new MyView(getString(R.string.edittext_border_corner), cornerBorderEditText));
+    }
+
+    private void initProgress() {
+        backdropImg.setImageResource(R.drawable.img_view_progress_header);
+        viewsCoolapsingLayout.setTitle(getString(R.string.view_progress));
+        myViews.clear();
     }
 
     @Override
