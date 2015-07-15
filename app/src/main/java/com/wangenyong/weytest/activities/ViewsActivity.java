@@ -147,6 +147,10 @@ public class ViewsActivity extends AppCompatActivity {
         horizontalDeBar.setIndeterminate(false);
         horizontalDeBar.setProgress(60);
         myViews.add(new MyView(getString(R.string.progress_standard_horizontal_de), horizontalDeBar));
+
+        FrameLayout customBar = (FrameLayout) getLayoutInflater().inflate(R.layout.progressbar_custom, null);
+        customBar.setLayoutParams(lp);
+        myViews.add(new MyView(getString(R.string.progress_custom), customBar));
     }
 
     @Override
