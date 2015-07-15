@@ -41,5 +41,6 @@
 
     <!-- Progress -->
     <string name="progress_standard">标准进度条</string>
+    <string name="progress_standard_horizontal">标准水平进度条</string>
 
 </resources>

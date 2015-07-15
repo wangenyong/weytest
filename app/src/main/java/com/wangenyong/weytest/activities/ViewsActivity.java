@@ -138,7 +138,9 @@ public class ViewsActivity extends AppCompatActivity {
         progressBar.setLayoutParams(lp);
         myViews.add(new MyView(getString(R.string.progress_standard), progressBar));
 
-
+        ProgressBar horizontalBar = (ProgressBar) getLayoutInflater().inflate(R.layout.progressbar_horizontal, null);
+        horizontalBar.setLayoutParams(lp);
+        myViews.add(new MyView(getString(R.string.progress_standard_horizontal), horizontalBar));
     }
 
     @Override
