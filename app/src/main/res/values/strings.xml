@@ -39,4 +39,7 @@
     <string name="edittext_border_corner">圆角输入框</string>
     <string name="edittext_border_corner_en">border corner edittext</string>
 
+    <!-- Progress -->
+    <string name="progress_standard">标准进度条</string>
+
 </resources>

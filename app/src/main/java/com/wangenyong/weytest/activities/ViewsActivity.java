@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import com.wangenyong.mylibrary.tools.DimensionTools;
 import com.wangenyong.weytest.R;
@@ -132,6 +133,10 @@ public class ViewsActivity extends AppCompatActivity {
         backdropImg.setImageResource(R.drawable.img_view_progress_header);
         viewsCoolapsingLayout.setTitle(getString(R.string.view_progress));
         myViews.clear();
+
+        ProgressBar progressBar = new ProgressBar(this);
+        progressBar.setLayoutParams(lp);
+        myViews.add(new MyView(getString(R.string.progress_standard), progressBar));
     }
 
     @Override
