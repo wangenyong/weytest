@@ -137,6 +137,8 @@ public class ViewsActivity extends AppCompatActivity {
         ProgressBar progressBar = new ProgressBar(this);
         progressBar.setLayoutParams(lp);
         myViews.add(new MyView(getString(R.string.progress_standard), progressBar));
+
+
     }
 
     @Override
