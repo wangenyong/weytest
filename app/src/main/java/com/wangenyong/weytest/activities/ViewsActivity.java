@@ -165,6 +165,11 @@ public class ViewsActivity extends AppCompatActivity {
         backdropImg.setImageResource(R.drawable.img_view_imageview_header);
         viewsCoolapsingLayout.setTitle(getString(R.string.view_image));
         myViews.clear();
+
+        ImageView imageView = new ImageView(this);
+        imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+        imageView.setImageResource(R.drawable.img_android);
+        myViews.add(new MyView(getString(R.string.imageview_standard), imageView));
     }
 
     @Override
