@@ -72,6 +72,9 @@ public class ViewsActivity extends AppCompatActivity {
             case Component.IMAGE:
                 initImage();
                 break;
+            case Component.CHART:
+                initChart();
+                break;
             default:
                 initButtons();
         }
@@ -170,6 +173,12 @@ public class ViewsActivity extends AppCompatActivity {
         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
         imageView.setImageResource(R.drawable.img_android);
         myViews.add(new MyView(getString(R.string.imageview_standard), imageView));
+    }
+
+    private void initChart() {
+        backdropImg.setImageResource(R.drawable.img_view_chart_header);
+        viewsCoolapsingLayout.setTitle(getString(R.string.view_chart));
+        myViews.clear();
     }
 
     @Override
