@@ -69,6 +69,9 @@ public class ViewsActivity extends AppCompatActivity {
             case Component.PROGRESS:
                 initProgress();
                 break;
+            case Component.IMAGE:
+                initImage();
+                break;
             default:
                 initButtons();
         }
@@ -156,6 +159,12 @@ public class ViewsActivity extends AppCompatActivity {
         FrameLayout customBar = (FrameLayout) getLayoutInflater().inflate(R.layout.progressbar_custom, null);
         customBar.setLayoutParams(lp);
         myViews.add(new MyView(getString(R.string.progress_custom), customBar));
+    }
+
+    private void initImage() {
+        backdropImg.setImageResource(R.drawable.img_view_imageview_header);
+        viewsCoolapsingLayout.setTitle(getString(R.string.view_image));
+        myViews.clear();
     }
 
     @Override
