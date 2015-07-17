@@ -1,6 +1,7 @@
 package com.wangenyong.weytest.activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -16,11 +17,16 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
+import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.utils.PercentFormatter;
 import com.wangenyong.mylibrary.tools.DimensionTools;
 import com.wangenyong.mylibrary.views.TintableImageView;
 import com.wangenyong.weytest.R;
@@ -45,6 +51,17 @@ public class ViewsActivity extends AppCompatActivity {
     private ViewsAdapter viewsAdapter;
     private List<MyView> myViews = new ArrayList<MyView>();
     LinearLayout.LayoutParams lp;
+
+    protected String[] mMonths = new String[] {
+            "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"
+    };
+
+    protected String[] mParties = new String[] {
+            "Party A", "Party B", "Party C", "Party D", "Party E", "Party F", "Party G", "Party H",
+            "Party I", "Party J", "Party K", "Party L", "Party M", "Party N", "Party O", "Party P",
+            "Party Q", "Party R", "Party S", "Party T", "Party U", "Party V", "Party W", "Party X",
+            "Party Y", "Party Z"
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -191,6 +208,7 @@ public class ViewsActivity extends AppCompatActivity {
         int size = DimensionTools.dpToPx(16, getResources());
         chartLp.setMargins(size, size, size, size);
 
+        //LineChart
         LineChart lineChart = new LineChart(this);
         lineChart.setLayoutParams(chartLp);
         lineChart.setDescription(getString(R.string.chart_line));
@@ -228,13 +246,68 @@ public class ViewsActivity extends AppCompatActivity {
         dataSets.add(setComp1);
         dataSets.add(setComp2);
 
-        ArrayList<String> xVals = new ArrayList<String>();
-        xVals.add("1.Q"); xVals.add("2.Q"); xVals.add("3.Q"); xVals.add("4.Q");
+        ArrayList<String> lineXVals = new ArrayList<String>();
+        lineXVals.add("1.Q"); lineXVals.add("2.Q"); lineXVals.add("3.Q"); lineXVals.add("4.Q");
 
-        LineData data = new LineData(xVals, dataSets);
+        LineData data = new LineData(lineXVals, dataSets);
 
         lineChart.setData(data);
         myViews.add(new MyView(getString(R.string.chart_line), lineChart));
+
+        //PieChart
+        PieChart pieChart = new PieChart(this);
+        pieChart.setLayoutParams(chartLp);
+
+        ArrayList<Entry> pieYVals1 = new ArrayList<Entry>();
+        int count = 3;
+        float mult = 100;
+        for (int i = 0; i < count + 1; i++) {
+            pieYVals1.add(new Entry((float) (Math.random() * mult) + mult / 5, i));
+        }
+
+        ArrayList<String> pieXVals = new ArrayList<String>();
+        pieXVals.add("1.Q"); pieXVals.add("2.Q"); pieXVals.add("3.Q"); pieXVals.add("4.Q");
+
+        PieDataSet pieDataSet = new PieDataSet(pieYVals1, "Election Results");
+        pieDataSet.setSliceSpace(3f);
+        pieDataSet.setSelectionShift(5f);
+
+        ArrayList<Integer> colors = new ArrayList<Integer>();
+        colors.add(getResources().getColor(R.color.primary_color));
+        colors.add(getResources().getColor(R.color.accent_color));
+        colors.add(getResources().getColor(R.color.dark_primary_color));
+        colors.add(getResources().getColor(R.color.light_primary_color));
+
+        pieDataSet.setColors(colors);
+        PieData pieData = new PieData(pieXVals, pieDataSet);
+        pieData.setValueFormatter(new PercentFormatter());
+        pieData.setValueTextSize(8f);
+        pieData.setValueTextColor(Color.WHITE);
+
+        pieChart.setData(pieData);
+        pieChart.setUsePercentValues(true);
+        pieChart.setDescription(getString(R.string.chart_pie));
+        pieChart.setDragDecelerationFrictionCoef(0.95f);
+        pieChart.setDrawHoleEnabled(true);
+        pieChart.setHoleColorTransparent(false);
+        pieChart.setTransparentCircleColor(Color.WHITE);
+        pieChart.setHoleRadius(40f);
+        pieChart.setTransparentCircleRadius(48f);
+        pieChart.setDrawCenterText(true);
+        pieChart.setCenterText("WoW!");
+        pieChart.setCenterTextColor(getResources().getColor(R.color.primary_color));
+        pieChart.setRotationAngle(0);
+        pieChart.setRotationEnabled(true);
+        pieChart.animateY(1500, Easing.EasingOption.EaseInOutQuad);
+        /**
+        Legend l = pieChart.getLegend();
+        l.setPosition(Legend.LegendPosition.RIGHT_OF_CHART);
+        l.setXEntrySpace(7f);
+        l.setYEntrySpace(0f);
+        l.setYOffset(0f);
+         */
+        pieChart.highlightValues(null);
+        myViews.add(new MyView(getString(R.string.chart_pie), pieChart));
     }
 
     @Override
