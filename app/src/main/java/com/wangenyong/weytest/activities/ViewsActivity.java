@@ -18,9 +18,14 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
 import com.github.mikephil.charting.animation.Easing;
+import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -259,10 +264,10 @@ public class ViewsActivity extends AppCompatActivity {
         pieChart.setLayoutParams(chartLp);
 
         ArrayList<Entry> pieYVals1 = new ArrayList<Entry>();
-        int count = 3;
-        float mult = 100;
-        for (int i = 0; i < count + 1; i++) {
-            pieYVals1.add(new Entry((float) (Math.random() * mult) + mult / 5, i));
+        int pieCount = 3;
+        float pieMult = 100;
+        for (int i = 0; i < pieCount + 1; i++) {
+            pieYVals1.add(new Entry((float) (Math.random() * pieMult) + pieMult / 5, i));
         }
 
         ArrayList<String> pieXVals = new ArrayList<String>();
@@ -308,6 +313,72 @@ public class ViewsActivity extends AppCompatActivity {
          */
         pieChart.highlightValues(null);
         myViews.add(new MyView(getString(R.string.chart_pie), pieChart));
+
+        //BarChart
+        BarChart barChart = new BarChart(this);
+        barChart.setLayoutParams(chartLp);
+        int barCount = 12;
+        float barRange = 50;
+
+        ArrayList<String> barXVals = new ArrayList<String>();
+        for (int i = 0; i < barCount; i++) {
+            barXVals.add(mMonths[i % 12]);
+        }
+
+        ArrayList<BarEntry> barYVals = new ArrayList<BarEntry>();
+
+        for (int i = 0; i < barCount; i++) {
+            float barMult = (barRange + 1);
+            float val = (float) (Math.random() * barMult);
+            barYVals.add(new BarEntry(val, i));
+        }
+
+        BarDataSet barDataSet = new BarDataSet(barYVals, "DataSet");
+        barDataSet.setBarSpacePercent(35f);
+        barDataSet.setColor(getResources().getColor(R.color.primary_color));
+
+        ArrayList<BarDataSet> barDataSets = new ArrayList<BarDataSet>();
+        barDataSets.add(barDataSet);
+
+        BarData barData = new BarData(barXVals, barDataSets);
+        barChart.setData(barData);
+        barChart.setDrawValueAboveBar(true);
+        barChart.setDescription("");
+        // if more than 60 entries are displayed in the chart, no values will be drawn
+        barChart.setMaxVisibleValueCount(60);
+        // scaling can now only be done on x- and y-axis separately
+        barChart.setPinchZoom(false);
+        // draw shadows for each bar that show the maximum value
+        barChart.setDrawBarShadow(false);
+        barChart.setDrawGridBackground(true);
+
+        XAxis barXAxis = barChart.getXAxis();
+        barXAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        barXAxis.setDrawGridLines(true);
+        barXAxis.setSpaceBetweenLabels(2);
+
+        YAxis barLeftAxis = barChart.getAxisLeft();
+        barLeftAxis.setLabelCount(6);
+        barLeftAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);
+        barLeftAxis.setSpaceTop(15f);
+        barLeftAxis.setDrawGridLines(true);
+
+        YAxis barRightAxis = barChart.getAxisRight();
+        barRightAxis.setDrawGridLines(false);
+        barRightAxis.setLabelCount(6);
+        barRightAxis.setSpaceTop(15f);
+
+        /**
+         Legend l = mChart.getLegend();
+         l.setPosition(LegendPosition.BELOW_CHART_LEFT);
+         l.setForm(LegendForm.SQUARE);
+         l.setFormSize(9f);
+         l.setTextSize(11f);
+         l.setXEntrySpace(4f);
+         */
+
+        myViews.add(new MyView(getString(R.string.chart_bar), barChart));
+
     }
 
     @Override
