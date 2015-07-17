@@ -1,5 +1,6 @@
 package com.wangenyong.weytest;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -13,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.wangenyong.weytest.activities.TmpActivity;
 import com.wangenyong.weytest.fragments.DefaultFragment;
 import com.wangenyong.weytest.fragments.MainFragment;
 import com.wangenyong.weytest.fragments.TestFragment;
@@ -103,6 +105,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.nav_view:
                 fragment = MainFragment.newInstance("", "");
                 break;
+            case R.id.nav_tmp:
+                Intent intent = new Intent(MainActivity.this, TmpActivity.class);
+                startActivity(intent);
+                return;
             default:
                 fragment = TestFragment.newInstance(menuItem.getTitle().toString());
         }

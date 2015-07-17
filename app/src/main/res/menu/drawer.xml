@@ -14,6 +14,10 @@
             android:id="@+id/nav_tools"
             android:icon="@drawable/ic_action_tools"
             android:title="@string/drawer_tools" />
+        <item
+            android:id="@+id/nav_tmp"
+            android:icon="@drawable/ic_action_tmp"
+            android:title="@string/drawer_tmp" />
     </group>
 
     <item android:title="Sub items">

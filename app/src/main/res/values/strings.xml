@@ -5,6 +5,7 @@
     <string name="action_settings">Settings</string>
     <string name="summary">Dashui Collection :)</string>
     <string name="title_activity_buttons">ButtonsActivity</string>
+    <string name="title_activity_tmp">临时测试页面</string>
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -15,6 +16,7 @@
     <string name="drawer_view">视图组件</string>
     <string name="drawer_animation">动画</string>
     <string name="drawer_tools">工具</string>
+    <string name="drawer_tmp">临时页面</string>
 
     <!-- View -->
     <string name="view_button">按钮</string>
@@ -53,4 +55,5 @@
 
     <!-- Chart -->
     <string name="chart_line">线性图表</string>
+
 </resources>
