@@ -185,28 +185,44 @@ public class ViewsActivity extends AppCompatActivity {
         viewsCoolapsingLayout.setTitle(getString(R.string.view_chart));
         myViews.clear();
 
-        LineChart lineChart = new LineChart(this);
-        lineChart.setLayoutParams(lp);
-        myViews.add(new MyView(getString(R.string.chart_line), lineChart));
+        LinearLayout.LayoutParams chartLp = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                DimensionTools.dpToPx(180, getResources()));
+        int size = DimensionTools.dpToPx(16, getResources());
+        chartLp.setMargins(size, size, size, size);
 
+        LineChart lineChart = new LineChart(this);
+        lineChart.setLayoutParams(chartLp);
         lineChart.setDescription(getString(R.string.chart_line));
 
         ArrayList<Entry> valsComp1 = new ArrayList<Entry>();
         ArrayList<Entry> valsComp2 = new ArrayList<Entry>();
 
-        Entry c1e1 = new Entry(100.000f, 0); // 0 == quarter 1
+        Entry c1e1 = new Entry(60.000f, 0); // 0 == quarter 1
         valsComp1.add(c1e1);
         Entry c1e2 = new Entry(50.000f, 1); // 1 == quarter 2 ...
         valsComp1.add(c1e2);
-        Entry c2e1 = new Entry(120.000f, 0); // 0 == quarter 1
+        Entry c1e3 = new Entry(20.000f, 2); // 2 == quarter 3 ...
+        valsComp1.add(c1e3);
+        Entry c1e4 = new Entry(40.000f, 3); // 4 == quarter 4 ...
+        valsComp1.add(c1e4);
+        Entry c2e1 = new Entry(50.000f, 0); // 0 == quarter 1
         valsComp2.add(c2e1);
-        Entry c2e2 = new Entry(110.000f, 1); // 1 == quarter 2 ...
+        Entry c2e2 = new Entry(30.000f, 1); // 1 == quarter 2 ...
         valsComp2.add(c2e2);
+        Entry c2e3 = new Entry(40.000f, 2); // 2 == quarter 3 ...
+        valsComp2.add(c2e3);
+        Entry c2e4 = new Entry(10.000f, 3); // 4 == quarter 4 ...
+        valsComp2.add(c2e4);
 
         LineDataSet setComp1 = new LineDataSet(valsComp1, "Company 1");
         setComp1.setAxisDependency(YAxis.AxisDependency.LEFT);
+        setComp1.setColor(getResources().getColor(R.color.primary_color));
+        setComp1.setCircleColor(getResources().getColor(R.color.primary_color));
         LineDataSet setComp2 = new LineDataSet(valsComp2, "Company 2");
         setComp2.setAxisDependency(YAxis.AxisDependency.LEFT);
+        setComp2.setColor(getResources().getColor(R.color.accent_color));
+        setComp2.setCircleColor(getResources().getColor(R.color.accent_color));
 
         ArrayList<LineDataSet> dataSets = new ArrayList<LineDataSet>();
         dataSets.add(setComp1);
@@ -218,9 +234,7 @@ public class ViewsActivity extends AppCompatActivity {
         LineData data = new LineData(xVals, dataSets);
 
         lineChart.setData(data);
-        lineChart.invalidate();
-
-
+        myViews.add(new MyView(getString(R.string.chart_line), lineChart));
     }
 
     @Override

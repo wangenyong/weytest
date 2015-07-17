@@ -54,6 +54,6 @@
     <string name="imageview_standard">标准图片</string>
 
     <!-- Chart -->
-    <string name="chart_line">线性图表</string>
+    <string name="chart_line">直线图表</string>
 
 </resources>
