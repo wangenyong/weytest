@@ -72,6 +72,7 @@
     <string name="dialog_basic">基础类型</string>
     <string name="dialog_basic_long_content">基础类型（长内容）</string>
     <string name="dialog_basic_icon">基础类型（图标）</string>
+    <string name="dialog_stack">堆栈式对话框</string>
 
 
 

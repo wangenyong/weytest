@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
+import com.afollestad.materialdialogs.GravityEnum;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.BarChart;
@@ -491,6 +492,25 @@ public class ViewsActivity extends AppCompatActivity {
             }
         });
         myViews.add(new MyView(getString(R.string.dialog_basic_icon), basicIcon));
+
+        //stackDialog
+        Button stackDialog = new Button(this);
+        stackDialog.setLayoutParams(lp);
+        stackDialog.setText(getString(R.string.dialog_stack));
+        stackDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new MaterialDialog.Builder(ViewsActivity.this)
+                        .title(R.string.dialog_title)
+                        .content(R.string.dialog_content_short)
+                        .positiveText(R.string.dialog_confirm)
+                        .negativeText(R.string.dialog_cancel)
+                        .btnStackedGravity(GravityEnum.END)
+                        .forceStacking(true)
+                        .show();
+            }
+        });
+        myViews.add(new MyView(getString(R.string.dialog_stack), stackDialog));
     }
 
     @Override
