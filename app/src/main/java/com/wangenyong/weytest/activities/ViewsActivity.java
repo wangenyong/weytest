@@ -3,6 +3,7 @@ package com.wangenyong.weytest.activities;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.StringRes;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,6 +18,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.GravityEnum;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -59,6 +61,7 @@ public class ViewsActivity extends AppCompatActivity {
     private ViewsAdapter viewsAdapter;
     private List<MyView> myViews = new ArrayList<MyView>();
     LinearLayout.LayoutParams lp;
+    private Toast mToast;
 
     protected String[] mMonths = new String[] {
             "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"
@@ -511,6 +514,40 @@ public class ViewsActivity extends AppCompatActivity {
             }
         });
         myViews.add(new MyView(getString(R.string.dialog_stack), stackDialog));
+
+        //callbackDialog
+        Button callbackDialog = new Button(this);
+        callbackDialog.setLayoutParams(lp);
+        callbackDialog.setText(getString(R.string.dialog_callback));
+        callbackDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new MaterialDialog.Builder(ViewsActivity.this)
+                        .title(R.string.dialog_title)
+                        .content(R.string.dialog_content_short)
+                        .positiveText(R.string.dialog_confirm)
+                        .negativeText(R.string.dialog_cancel)
+                        .neutralText(R.string.dialog_more_info)
+                        .callback(new MaterialDialog.ButtonCallback() {
+                            @Override
+                            public void onPositive(MaterialDialog dialog) {
+                                showToast("Positive!");
+                            }
+
+                            @Override
+                            public void onNegative(MaterialDialog dialog) {
+                                showToast("Negative...");
+                            }
+
+                            @Override
+                            public void onNeutral(MaterialDialog dialog) {
+                                showToast("Neutral");
+                            }
+                        })
+                        .show();
+            }
+        });
+        myViews.add(new MyView(getString(R.string.dialog_callback), callbackDialog));
     }
 
     @Override
@@ -534,4 +571,18 @@ public class ViewsActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    private void showToast(String message) {
+        if (mToast != null) {
+            mToast.cancel();
+            mToast = null;
+        }
+        mToast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
+        mToast.show();
+    }
+
+    private void showToast(@StringRes int message) {
+        showToast(getString(message));
+    }
 }
+
