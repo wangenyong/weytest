@@ -65,6 +65,7 @@
     <string name="dialog_confirm">确定</string>
     <string name="dialog_cancel">取消</string>
     <string name="dialog_basic_no_title">基础类型（不包含标题）</string>
+    <string name="dialog_basic">基础类型</string>
 
 
 

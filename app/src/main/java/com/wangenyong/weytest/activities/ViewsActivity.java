@@ -438,6 +438,23 @@ public class ViewsActivity extends AppCompatActivity {
             }
         });
         myViews.add(new MyView(getString(R.string.dialog_basic_no_title), basicNoTitle));
+
+        //basic
+        Button basic = new Button(this);
+        basic.setText(getString(R.string.dialog_basic));
+        basic.setLayoutParams(lp);
+        basic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new MaterialDialog.Builder(ViewsActivity.this)
+                        .title(R.string.dialog_title)
+                        .content(R.string.dialog_content_short)
+                        .positiveText(R.string.dialog_confirm)
+                        .negativeText(R.string.dialog_cancel)
+                        .show();
+            }
+        });
+        myViews.add(new MyView(getString(R.string.dialog_basic), basic));
     }
 
     @Override
