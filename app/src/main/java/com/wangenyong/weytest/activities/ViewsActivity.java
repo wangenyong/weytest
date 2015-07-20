@@ -570,7 +570,6 @@ public class ViewsActivity extends AppCompatActivity {
         myViews.add(new MyView(getString(R.string.dialog_list), listDialog));
 
         //longListDialog
-
         Button longListDialog = new Button(this);
         longListDialog.setLayoutParams(lp);
         longListDialog.setText(getString(R.string.dialog_list_long));
@@ -592,6 +591,28 @@ public class ViewsActivity extends AppCompatActivity {
 
         myViews.add(new MyView(getString(R.string.dialog_list_long), longListDialog));
 
+        //singleChoiceDialog
+        Button singleChoiceDialog = new Button(this);
+        singleChoiceDialog.setLayoutParams(lp);
+        singleChoiceDialog.setText(getString(R.string.dialog_single_choice));
+        singleChoiceDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new MaterialDialog.Builder(ViewsActivity.this)
+                        .title(R.string.dialog_title)
+                        .items(R.array.dialog_socialNetworks)
+                        .itemsCallbackSingleChoice(2, new MaterialDialog.ListCallbackSingleChoice() {
+                            @Override
+                            public boolean onSelection(MaterialDialog materialDialog, View view, int i, CharSequence charSequence) {
+                                showToast(i + ": " + charSequence);
+                                return true;
+                            }
+                        })
+                        .positiveText(R.string.dialog_confirm)
+                        .show();
+            }
+        });
+        myViews.add(new MyView(getString(R.string.dialog_single_choice), singleChoiceDialog));
     }
 
     @Override
