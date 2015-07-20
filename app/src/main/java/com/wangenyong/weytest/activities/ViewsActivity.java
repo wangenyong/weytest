@@ -9,10 +9,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.InputType;
+import android.text.TextWatcher;
+import android.text.method.PasswordTransformationMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -20,8 +26,11 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.GravityEnum;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.afollestad.materialdialogs.ThemeSingleton;
+import com.afollestad.materialdialogs.internal.MDTintHelper;
 import com.afollestad.materialdialogs.simplelist.MaterialSimpleListAdapter;
 import com.afollestad.materialdialogs.simplelist.MaterialSimpleListItem;
 import com.github.mikephil.charting.animation.Easing;
@@ -422,6 +431,10 @@ public class ViewsActivity extends AppCompatActivity {
     /**
      * Dialogs
      */
+    private EditText passwordInput;
+    private View positiveAction;
+    private MaterialDialog customDialog;
+
     private void initDialog() {
         backdropImg.setImageResource(R.drawable.img_view_dialog_header);
         viewsCoolapsingLayout.setTitle(getString(R.string.view_dialog));
@@ -682,6 +695,70 @@ public class ViewsActivity extends AppCompatActivity {
             }
         });
         myViews.add(new MyView(getString(R.string.dialog_simple_choice), simpleDialog));
+
+        //customViewDialog
+        Button customViewDialog = new Button(this);
+        customViewDialog.setLayoutParams(lp);
+        customViewDialog.setText(getString(R.string.dialog_custom_view));
+        customViewDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                customDialog = new MaterialDialog.Builder(ViewsActivity.this)
+                        .title(R.string.googleWifi)
+                        .customView(R.layout.dialog_customview, true)
+                        .positiveText(R.string.connect)
+                        .negativeText(android.R.string.cancel)
+                        .callback(new MaterialDialog.ButtonCallback() {
+                            @Override
+                            public void onPositive(MaterialDialog dialog) {
+                                showToast("Password: " + passwordInput.getText().toString());
+                            }
+
+                            @Override
+                            public void onNegative(MaterialDialog dialog) {
+
+                            }
+                        }).build();
+                positiveAction = customDialog.getActionButton(DialogAction.POSITIVE);
+                passwordInput = (EditText) customDialog.getCustomView().findViewById(R.id.password);
+                passwordInput.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        positiveAction.setEnabled(s.toString().trim().length() > 0);
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                    }
+                });
+
+                // Toggling the show password CheckBox will mask or unmask the password input EditText
+                CheckBox checkbox = (CheckBox) customDialog.getCustomView().findViewById(R.id.showPassword);
+                checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        passwordInput.setInputType(!isChecked ? InputType.TYPE_TEXT_VARIATION_PASSWORD : InputType.TYPE_CLASS_TEXT);
+                        passwordInput.setTransformationMethod(!isChecked ? PasswordTransformationMethod.getInstance() : null);
+                    }
+                });
+
+                int widgetColor = ThemeSingleton.get().widgetColor;
+                MDTintHelper.setTint(checkbox,
+                        widgetColor == 0 ? getResources().getColor(R.color.accent_color) : widgetColor);
+
+                MDTintHelper.setTint(passwordInput,
+                        widgetColor == 0 ? getResources().getColor(R.color.accent_color) : widgetColor);
+
+                customDialog.show();
+                positiveAction.setEnabled(false); // disabled by default
+            }
+        });
+
+        myViews.add(new MyView(getString(R.string.dialog_custom_view), customViewDialog));
     }
 
     @Override

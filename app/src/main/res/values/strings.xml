@@ -80,6 +80,17 @@
     <string name="dialog_single_choice">单选对话框</string>
     <string name="dialog_multiple_choice">多选对话框</string>
     <string name="dialog_simple_choice">简单对话框</string>
+    <string name="dialog_custom_view">自定义对话框</string>
+    <string name="signalStrength">Signal strength</string>
+    <string name="excellent">Excellent</string>
+    <string name="security">Security</string>
+    <string name="securityType">802.1x EAP</string>
+    <string name="password">Password</string>
+    <string name="showPassword">Show password</string>
+    <string name="ssid">SSID</string>
+    <string name="ssidLit">Material Dialogs</string>
+    <string name="googleWifi">Google Wifi</string>
+    <string name="connect">Connect</string>
 
     <string-array name="dialog_socialNetworks">
         <item>Twitter</item>
