@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -17,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
@@ -115,18 +117,21 @@ public class ViewsActivity extends AppCompatActivity {
         viewsRecyclerView.setAdapter(viewsAdapter);
     }
 
-
-
+    /**
+     * Buttons
+     */
     private void initButtons() {
         backdropImg.setImageResource(R.drawable.img_view_button_header);
         viewsCoolapsingLayout.setTitle(getString(R.string.view_button));
         myViews.clear();
 
+        //button
         Button button = new Button(this);
         button.setText(getString(R.string.button_standard_en));
         button.setLayoutParams(lp);
         myViews.add(new MyView(getString(R.string.button_standard), button));
 
+        //borderlessButton
         Button borderlessButton = (Button) getLayoutInflater().inflate(R.layout.button_borderless, null);
         borderlessButton.setLayoutParams(lp);
         myViews.add(new MyView(getString(R.string.button_borderless), borderlessButton));
@@ -138,31 +143,39 @@ public class ViewsActivity extends AppCompatActivity {
         borderButton.setBackgroundResource(R.drawable.btn_selector_transparent_corner_boder);
         myViews.add(new MyView(getString(R.string.button_border), borderButton));
 
+        //paperButton
         FrameLayout frameLayout = (FrameLayout) getLayoutInflater().inflate(R.layout.button_paper, null);
         frameLayout.setLayoutParams(lp);
         myViews.add(new MyView(getString(R.string.button_paper), frameLayout));
 
+        //materialButton
         Button materialButton = new Button(this);
         materialButton.setText(getString(R.string.button_material_en));
         materialButton.setLayoutParams(lp);
         materialButton.setBackgroundResource(R.drawable.btn_material);
         myViews.add(new MyView(getString(R.string.button_material), materialButton));
 
+        //tintableButton
         TintableImageView tintableButton = (TintableImageView) getLayoutInflater().inflate(R.layout.button_tintable, null);
         tintableButton.setLayoutParams(lp);
         myViews.add(new MyView(getString(R.string.button_tintable), tintableButton));
     }
 
+    /**
+     * Edittexts
+     */
     private void initEdittexts() {
         backdropImg.setImageResource(R.drawable.img_view_edittext_header);
         viewsCoolapsingLayout.setTitle(getString(R.string.view_edittext));
         myViews.clear();
 
+        //editText
         EditText editText = new EditText(this);
         editText.setHint(getString(R.string.edittext_standard_en));
         editText.setLayoutParams(lp);
         myViews.add(new MyView(getString(R.string.edittext_standard), editText));
 
+        //cornerBorderEditText
         EditText cornerBorderEditText = new EditText(this);
         cornerBorderEditText.setHint(getString(R.string.edittext_border_corner_en));
         cornerBorderEditText.setLayoutParams(lp);
@@ -170,41 +183,55 @@ public class ViewsActivity extends AppCompatActivity {
         myViews.add(new MyView(getString(R.string.edittext_border_corner), cornerBorderEditText));
     }
 
+    /**
+     * Progresses
+     */
     private void initProgress() {
         backdropImg.setImageResource(R.drawable.img_view_progress_header);
         viewsCoolapsingLayout.setTitle(getString(R.string.view_progress));
         myViews.clear();
 
+        //progress
         ProgressBar progressBar = new ProgressBar(this);
         progressBar.setLayoutParams(lp);
         myViews.add(new MyView(getString(R.string.progress_standard), progressBar));
 
+        //horizontalBar
         ProgressBar horizontalBar = (ProgressBar) getLayoutInflater().inflate(R.layout.progressbar_horizontal, null);
         horizontalBar.setLayoutParams(lp);
         myViews.add(new MyView(getString(R.string.progress_standard_horizontal), horizontalBar));
 
+        //horizontalDeBar
         ProgressBar horizontalDeBar = (ProgressBar) getLayoutInflater().inflate(R.layout.progressbar_horizontal, null);
         horizontalDeBar.setLayoutParams(lp);
         horizontalDeBar.setIndeterminate(false);
         horizontalDeBar.setProgress(60);
         myViews.add(new MyView(getString(R.string.progress_standard_horizontal_de), horizontalDeBar));
 
+        //customBar
         FrameLayout customBar = (FrameLayout) getLayoutInflater().inflate(R.layout.progressbar_custom, null);
         customBar.setLayoutParams(lp);
         myViews.add(new MyView(getString(R.string.progress_custom), customBar));
     }
 
+    /**
+     * Images
+     */
     private void initImage() {
         backdropImg.setImageResource(R.drawable.img_view_imageview_header);
         viewsCoolapsingLayout.setTitle(getString(R.string.view_image));
         myViews.clear();
 
+        //ImageView
         ImageView imageView = new ImageView(this);
         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
         imageView.setImageResource(R.drawable.img_android);
         myViews.add(new MyView(getString(R.string.imageview_standard), imageView));
     }
 
+    /**
+     * Charts
+     */
     private void initChart() {
         backdropImg.setImageResource(R.drawable.img_view_chart_header);
         viewsCoolapsingLayout.setTitle(getString(R.string.view_chart));
@@ -386,11 +413,31 @@ public class ViewsActivity extends AppCompatActivity {
 
     }
 
-
+    /**
+     * Dialogs
+     */
     private void initDialog() {
         backdropImg.setImageResource(R.drawable.img_view_dialog_header);
         viewsCoolapsingLayout.setTitle(getString(R.string.view_dialog));
         myViews.clear();
+
+        //basicNoTitle
+        Button basicNoTitle = new Button(this);
+        basicNoTitle.setText(getString(R.string.dialog_basic_no_title));
+        basicNoTitle.setLayoutParams(lp);
+        basicNoTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MaterialDialog materialDialog = new MaterialDialog.Builder(ViewsActivity.this)
+                        .content(R.string.dialog_content_short)
+                        .positiveText(R.string.dialog_confirm)
+                        .negativeText(R.string.dialog_cancel).build();
+                materialDialog.setCancelable(false);
+                materialDialog.show();
+
+            }
+        });
+        myViews.add(new MyView(getString(R.string.dialog_basic_no_title), basicNoTitle));
     }
 
     @Override

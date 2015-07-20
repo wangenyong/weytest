@@ -59,4 +59,13 @@
     <string name="chart_pie">饼形图表</string>
     <string name="chart_bar">柱状图表</string>
 
+    <!-- Dialog -->
+    <string name="dialog_title">对话框标题</string>
+    <string name="dialog_content_short">本应用主要用于常用组件的展示。</string>
+    <string name="dialog_confirm">确定</string>
+    <string name="dialog_cancel">取消</string>
+    <string name="dialog_basic_no_title">基础类型（不包含标题）</string>
+
+
+
 </resources>

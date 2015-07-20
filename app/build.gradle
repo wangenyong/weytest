@@ -24,4 +24,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.2.0'
     compile project(path: ':weylibrary')
     compile files('libs/mpandroidchartlibrary-2-1-0.jar')
+    compile 'com.afollestad:material-dialogs:0.7.6.0'
 }
