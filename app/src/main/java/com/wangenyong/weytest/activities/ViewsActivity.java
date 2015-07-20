@@ -613,6 +613,37 @@ public class ViewsActivity extends AppCompatActivity {
             }
         });
         myViews.add(new MyView(getString(R.string.dialog_single_choice), singleChoiceDialog));
+
+        //multipleChoiceDialog
+        Button multipleChoiceDialog = new Button(this);
+        multipleChoiceDialog.setLayoutParams(lp);
+        multipleChoiceDialog.setText(getString(R.string.dialog_multiple_choice));
+        multipleChoiceDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new MaterialDialog.Builder(ViewsActivity.this)
+                        .title(R.string.dialog_title)
+                        .items(R.array.dialog_socialNetworks)
+                        .itemsCallbackMultiChoice(new Integer[]{1, 3}, new MaterialDialog.ListCallbackMultiChoice() {
+                            @Override
+                            public boolean onSelection(MaterialDialog materialDialog, Integer[] integers, CharSequence[] charSequences) {
+                                StringBuilder str = new StringBuilder();
+                                for (int i = 0; i < integers.length; i++) {
+                                    if (i > 0) str.append('\n');
+                                    str.append(integers[i]);
+                                    str.append(": ");
+                                    str.append(charSequences[i]);
+                                }
+                                showToast(str.toString());
+                                return true;
+                            }
+                        })
+                        .alwaysCallMultiChoiceCallback()
+                        .positiveText(R.string.dialog_confirm)
+                        .show();
+            }
+        });
+        myViews.add(new MyView(getString(R.string.dialog_multiple_choice), multipleChoiceDialog));
     }
 
     @Override
