@@ -79,6 +79,7 @@
     <string name="dialog_list_long">长列表对话框</string>
     <string name="dialog_single_choice">单选对话框</string>
     <string name="dialog_multiple_choice">多选对话框</string>
+    <string name="dialog_simple_choice">简单对话框</string>
 
     <string-array name="dialog_socialNetworks">
         <item>Twitter</item>

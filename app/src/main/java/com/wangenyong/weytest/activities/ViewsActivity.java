@@ -22,6 +22,8 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.GravityEnum;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.afollestad.materialdialogs.simplelist.MaterialSimpleListAdapter;
+import com.afollestad.materialdialogs.simplelist.MaterialSimpleListItem;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
@@ -644,6 +646,42 @@ public class ViewsActivity extends AppCompatActivity {
             }
         });
         myViews.add(new MyView(getString(R.string.dialog_multiple_choice), multipleChoiceDialog));
+
+        //simpleDialog
+        Button simpleDialog = new Button(this);
+        simpleDialog.setLayoutParams(lp);
+        simpleDialog.setText(getString(R.string.dialog_simple_choice));
+
+        final MaterialSimpleListAdapter adapter = new MaterialSimpleListAdapter(this);
+        adapter.add(new MaterialSimpleListItem.Builder(this)
+                .content("username@gmail.com")
+                .icon(R.drawable.ic_action_android)
+                .build());
+        adapter.add(new MaterialSimpleListItem.Builder(this)
+                .content("user02@gmail.com")
+                .icon(R.drawable.ic_action_android)
+                .build());
+        adapter.add(new MaterialSimpleListItem.Builder(this)
+                .content(R.string.dialog_more_info)
+                .icon(R.drawable.ic_action_android)
+                .build());
+
+        simpleDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new MaterialDialog.Builder(ViewsActivity.this)
+                        .title(R.string.dialog_title)
+                        .adapter(adapter, new MaterialDialog.ListCallback() {
+                            @Override
+                            public void onSelection(MaterialDialog materialDialog, View view, int i, CharSequence charSequence) {
+                                MaterialSimpleListItem item = adapter.getItem(i);
+                                showToast(item.getContent().toString());
+                            }
+                        })
+                        .show();
+            }
+        });
+        myViews.add(new MyView(getString(R.string.dialog_simple_choice), simpleDialog));
     }
 
     @Override
