@@ -102,6 +102,9 @@ public class ViewsActivity extends AppCompatActivity {
             case Component.CHART:
                 initChart();
                 break;
+            case Component.DIALOG:
+                initDialog();
+                break;
             default:
                 initButtons();
         }
@@ -381,6 +384,13 @@ public class ViewsActivity extends AppCompatActivity {
 
         myViews.add(new MyView(getString(R.string.chart_bar), barChart));
 
+    }
+
+
+    private void initDialog() {
+        backdropImg.setImageResource(R.drawable.img_view_dialog_header);
+        viewsCoolapsingLayout.setTitle(getString(R.string.view_dialog));
+        myViews.clear();
     }
 
     @Override

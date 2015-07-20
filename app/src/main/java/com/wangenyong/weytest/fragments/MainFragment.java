@@ -119,6 +119,8 @@ public class MainFragment extends Fragment {
                 getResources().getColor(R.color.accent_color), Component.IMAGE));
         components.add(new Component(R.drawable.ic_view_chart, getString(R.string.view_chart),
                 getResources().getColor(R.color.accent_color), Component.CHART));
+        components.add(new Component(R.drawable.ic_view_dialog, getString(R.string.view_dialog),
+                getResources().getColor(R.color.accent_color), Component.DIALOG));
     }
 
 }

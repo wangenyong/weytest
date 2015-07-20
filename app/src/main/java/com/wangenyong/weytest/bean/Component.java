@@ -9,6 +9,7 @@ public class Component {
     public final static int PROGRESS = 10002;
     public final static int IMAGE = 10003;
     public final static int CHART = 10004;
+    public final static int DIALOG = 10005;
     private int iconId;
     private String title;
     private int color;

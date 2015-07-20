@@ -24,6 +24,7 @@
     <string name="view_progress">进度</string>
     <string name="view_image">图片</string>
     <string name="view_chart">图表</string>
+    <string name="view_dialog">对话框</string>
 
     <!-- Button -->
     <string name="button_standard">标准按钮</string>
