@@ -568,6 +568,30 @@ public class ViewsActivity extends AppCompatActivity {
             }
         });
         myViews.add(new MyView(getString(R.string.dialog_list), listDialog));
+
+        //longListDialog
+
+        Button longListDialog = new Button(this);
+        longListDialog.setLayoutParams(lp);
+        longListDialog.setText(getString(R.string.dialog_list_long));
+        longListDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new MaterialDialog.Builder(ViewsActivity.this)
+                        .items(R.array.dialog_states)
+                        .itemsCallback(new MaterialDialog.ListCallback() {
+                            @Override
+                            public void onSelection(MaterialDialog materialDialog, View view, int i, CharSequence charSequence) {
+                                showToast(i + ": " + charSequence);
+                            }
+                        })
+                        .positiveText(R.string.dialog_cancel)
+                        .show();
+            }
+        });
+
+        myViews.add(new MyView(getString(R.string.dialog_list_long), longListDialog));
+
     }
 
     @Override

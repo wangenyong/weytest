@@ -41,6 +41,7 @@ public class ViewsAdapter extends RecyclerView.Adapter<ViewsAdapter.ViewHolder> 
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
         final MyView myView = myViewList.get(position);
         viewHolder.viewTitleTv.setText(myView.getTitle());
+        viewHolder.viewLL.removeAllViews();
         viewHolder.viewLL.addView(myView.getView());
 
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
