@@ -257,6 +257,8 @@ public class ViewsActivity extends AppCompatActivity {
         LineData data = new LineData(lineXVals, dataSets);
 
         lineChart.setData(data);
+        lineChart.setDragEnabled(false);
+        lineChart.setScaleEnabled(false);
         myViews.add(new MyView(getString(R.string.chart_line), lineChart));
 
         //PieChart
