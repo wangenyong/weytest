@@ -548,6 +548,26 @@ public class ViewsActivity extends AppCompatActivity {
             }
         });
         myViews.add(new MyView(getString(R.string.dialog_callback), callbackDialog));
+
+        //listDialog
+        Button listDialog = new Button(this);
+        listDialog.setLayoutParams(lp);
+        listDialog.setText(getString(R.string.dialog_list));
+        listDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new MaterialDialog.Builder(ViewsActivity.this)
+                        .title(R.string.dialog_title)
+                        .items(R.array.dialog_socialNetworks)
+                        .itemsCallback(new MaterialDialog.ListCallback() {
+                            @Override
+                            public void onSelection(MaterialDialog materialDialog, View view, int i, CharSequence charSequence) {
+                                showToast(i + ": " + charSequence);
+                            }
+                        }).show();
+            }
+        });
+        myViews.add(new MyView(getString(R.string.dialog_list), listDialog));
     }
 
     @Override

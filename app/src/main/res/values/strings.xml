@@ -75,6 +75,14 @@
     <string name="dialog_basic_icon">基础类型（图标）</string>
     <string name="dialog_stack">堆栈式对话框</string>
     <string name="dialog_callback">回调对话框</string>
+    <string name="dialog_list">列表对话框</string>
+
+    <string-array name="dialog_socialNetworks">
+        <item>Twitter</item>
+        <item>Google+</item>
+        <item>Instagram</item>
+        <item>Facebook</item>
+    </string-array>
 
 
 
