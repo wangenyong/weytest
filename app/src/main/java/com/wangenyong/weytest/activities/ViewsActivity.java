@@ -472,6 +472,25 @@ public class ViewsActivity extends AppCompatActivity {
             }
         });
         myViews.add(new MyView(getString(R.string.dialog_basic_long_content), basicLongContent));
+
+        //basicIcon
+        Button basicIcon = new Button(this);
+        basicIcon.setLayoutParams(lp);
+        basicIcon.setText(getString(R.string.dialog_basic_icon));
+        basicIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new MaterialDialog.Builder(ViewsActivity.this)
+                        .iconRes(R.drawable.ic_action_android)
+                        .limitIconToDefaultSize()
+                        .title(R.string.dialog_title)
+                        .content(R.string.dialog_content_short)
+                        .positiveText(R.string.dialog_confirm)
+                        .negativeText(R.string.dialog_cancel)
+                        .show();
+            }
+        });
+        myViews.add(new MyView(getString(R.string.dialog_basic_icon), basicIcon));
     }
 
     @Override
