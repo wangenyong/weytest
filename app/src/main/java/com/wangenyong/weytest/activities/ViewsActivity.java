@@ -455,6 +455,23 @@ public class ViewsActivity extends AppCompatActivity {
             }
         });
         myViews.add(new MyView(getString(R.string.dialog_basic), basic));
+
+        //basicLongContent
+        Button basicLongContent = new Button(this);
+        basicLongContent.setLayoutParams(lp);
+        basicLongContent.setText(getString(R.string.dialog_basic_long_content));
+        basicLongContent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new MaterialDialog.Builder(ViewsActivity.this)
+                        .title(R.string.dialog_useGoogleLocationServices)
+                        .content(R.string.dialog_loremIpsum)
+                        .positiveText(R.string.dialog_agree)
+                        .negativeText(R.string.dialog_disagree)
+                        .show();
+            }
+        });
+        myViews.add(new MyView(getString(R.string.dialog_basic_long_content), basicLongContent));
     }
 
     @Override
