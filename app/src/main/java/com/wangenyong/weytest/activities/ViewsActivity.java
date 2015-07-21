@@ -2,6 +2,8 @@ package com.wangenyong.weytest.activities;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.StringRes;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -56,6 +58,7 @@ import com.wangenyong.weytest.bean.Component;
 import com.wangenyong.weytest.bean.Constants;
 import com.wangenyong.weytest.bean.MyView;
 import com.wangenyong.weytest.dialogs.ChangelogDialog;
+import com.wangenyong.weytest.dialogs.ColorChooserDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +66,7 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class ViewsActivity extends AppCompatActivity {
+public class ViewsActivity extends AppCompatActivity implements ColorChooserDialog.Callback {
     @InjectView(R.id.toolbar_views) Toolbar viewsToolbar;
     @InjectView(R.id.collapsing_toolbar_views) CollapsingToolbarLayout viewsCoolapsingLayout;
     @InjectView(R.id.recyclerview_views) RecyclerView viewsRecyclerView;
@@ -435,6 +438,7 @@ public class ViewsActivity extends AppCompatActivity {
     private EditText passwordInput;
     private View positiveAction;
     private MaterialDialog customDialog;
+    static int selectedColorIndex = -1;
 
     private void initDialog() {
         backdropImg.setImageResource(R.drawable.img_view_dialog_header);
@@ -773,7 +777,31 @@ public class ViewsActivity extends AppCompatActivity {
             }
         });
         myViews.add(new MyView(getString(R.string.dialog_custom_webview), customWebViewDialog));
+
+        //customColorChooserDialog
+        Button customColorChooserDialog = new Button(this);
+        customColorChooserDialog.setLayoutParams(lp);
+        customColorChooserDialog.setText(getString(R.string.dialog_custom_color_chooser));
+        customColorChooserDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new ColorChooserDialog().show(ViewsActivity.this, selectedColorIndex);
+            }
+        });
+        myViews.add(new MyView(getString(R.string.dialog_custom_color_chooser), customColorChooserDialog));
     }
+
+    @Override
+    public void onColorSelection(int index, int color, int darker) {
+        selectedColorIndex = index;
+        //noinspection ConstantConditions
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(color));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(darker);
+            getWindow().setNavigationBarColor(color);
+        }
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
