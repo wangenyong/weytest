@@ -839,6 +839,41 @@ public class ViewsActivity extends AppCompatActivity implements ColorChooserDial
             }
         });
         myViews.add(new MyView(getString(R.string.dialog_input), inputDialog));
+
+        //indeterminateCircleDialog
+        Button indeterminateCircleDialog = new Button(this);
+        indeterminateCircleDialog.setLayoutParams(lp);
+        indeterminateCircleDialog.setText(getString(R.string.dialog_progress_indeterminate_circle));
+        indeterminateCircleDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new MaterialDialog.Builder(ViewsActivity.this)
+                        .title(R.string.progress_dialog)
+                        .content(R.string.please_wait)
+                        .progress(true, 0)
+                        .progressIndeterminateStyle(false)
+                        .show();
+            }
+        });
+        myViews.add(new MyView(getString(R.string.dialog_progress_indeterminate_circle), indeterminateCircleDialog));
+
+        //indeterminateHorizontalDialog
+        Button indeterminateHorizontalDialog = new Button(this);
+        indeterminateHorizontalDialog.setLayoutParams(lp);
+        indeterminateHorizontalDialog.setText(getString(R.string.dialog_progress_indeterminate_horizontal));
+        indeterminateHorizontalDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new MaterialDialog.Builder(ViewsActivity.this)
+                        .title(R.string.progress_dialog)
+                        .content(R.string.please_wait)
+                        .progress(true, 0)
+                        .progressIndeterminateStyle(true)
+                        .show();
+            }
+        });
+        myViews.add(new MyView(getString(R.string.dialog_progress_indeterminate_horizontal), indeterminateHorizontalDialog));
+
     }
 
     @Override

@@ -85,6 +85,9 @@
     <string name="dialog_custom_color_chooser">颜色选择对话框</string>
     <string name="dialog_theme">主题对话框</string>
     <string name="dialog_input">输入对话框</string>
+    <string name="dialog_progress_indeterminate_circle">普通进度提示对话框</string>
+    <string name="dialog_progress_indeterminate_horizontal">水平进度提示对话框</string>
+    <string name="dialog_progress_determinate">Determinate进度提示对话框</string>
     <string name="signalStrength">Signal strength</string>
     <string name="excellent">Excellent</string>
     <string name="security">Security</string>
@@ -100,6 +103,9 @@
     <string name="input_hint">John Appleseed</string>
     <string name="input_content">What\'s your name?</string>
     <string name="submit">Submit</string>
+    <string name="input_content_custominvalidation">Do not type hello, or else!</string>
+    <string name="progress_dialog">Progress Dialog</string>
+    <string name="please_wait">Please wait…</string>
 
     <string-array name="dialog_socialNetworks">
         <item>Twitter</item>
