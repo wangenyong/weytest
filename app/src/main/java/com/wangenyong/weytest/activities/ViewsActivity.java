@@ -31,6 +31,7 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.GravityEnum;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.afollestad.materialdialogs.Theme;
 import com.afollestad.materialdialogs.ThemeSingleton;
 import com.afollestad.materialdialogs.internal.MDTintHelper;
 import com.afollestad.materialdialogs.simplelist.MaterialSimpleListAdapter;
@@ -789,6 +790,30 @@ public class ViewsActivity extends AppCompatActivity implements ColorChooserDial
             }
         });
         myViews.add(new MyView(getString(R.string.dialog_custom_color_chooser), customColorChooserDialog));
+
+        //themeDialog
+        Button themeDialog = new Button(this);
+        themeDialog.setLayoutParams(lp);
+        themeDialog.setText(getString(R.string.dialog_theme));
+        themeDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new MaterialDialog.Builder(ViewsActivity.this)
+                        .title(R.string.dialog_title)
+                        .content(R.string.dialog_content_short)
+                        .positiveText(R.string.dialog_confirm)
+                        .negativeText(R.string.dialog_cancel)
+                        .titleGravity(GravityEnum.CENTER)
+                        .titleColorRes(R.color.white)
+                        .contentColorRes(android.R.color.white)
+                        .backgroundColorRes(R.color.material_blue_grey_800)
+                        .positiveColor(Color.WHITE)
+                        .negativeColorAttr(android.R.attr.textColorSecondaryInverse)
+                        .theme(Theme.DARK)
+                        .show();
+            }
+        });
+        myViews.add(new MyView(getString(R.string.dialog_theme), themeDialog));
     }
 
     @Override
