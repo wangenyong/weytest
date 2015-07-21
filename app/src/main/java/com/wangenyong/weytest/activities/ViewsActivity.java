@@ -1,5 +1,6 @@
 package com.wangenyong.weytest.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -78,6 +79,7 @@ public class ViewsActivity extends AppCompatActivity implements ColorChooserDial
     private List<MyView> myViews = new ArrayList<MyView>();
     LinearLayout.LayoutParams lp;
     private Toast mToast;
+    private Thread mThread;
 
     protected String[] mMonths = new String[] {
             "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"
@@ -874,6 +876,62 @@ public class ViewsActivity extends AppCompatActivity implements ColorChooserDial
         });
         myViews.add(new MyView(getString(R.string.dialog_progress_indeterminate_horizontal), indeterminateHorizontalDialog));
 
+        //determinateDialog
+        Button determinateDialog = new Button(this);
+        determinateDialog.setLayoutParams(lp);
+        determinateDialog.setText(getString(R.string.dialog_progress_determinate));
+        determinateDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new MaterialDialog.Builder(ViewsActivity.this)
+                        .title(R.string.progress_dialog)
+                        .content(R.string.please_wait)
+                        .contentGravity(GravityEnum.CENTER)
+                        .progress(false, 150, true)
+                        .cancelListener(new DialogInterface.OnCancelListener() {
+                            @Override
+                            public void onCancel(DialogInterface dialog) {
+                                if (mThread != null) {
+                                    mThread.interrupt();
+                                }
+                            }
+                        })
+                        .showListener(new DialogInterface.OnShowListener() {
+                            @Override
+                            public void onShow(final DialogInterface dialog) {
+                                final MaterialDialog dialogInterface = (MaterialDialog) dialog;
+                                startThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        while (dialogInterface.getCurrentProgress() != dialogInterface.getMaxProgress() &&
+                                                !Thread.currentThread().isInterrupted()) {
+                                            if (dialogInterface.isCancelled()) {
+                                                break;
+                                            }
+                                            try {
+                                                Thread.sleep(50);
+                                            } catch (InterruptedException e) {
+                                                break;
+                                            }
+                                            dialogInterface.incrementProgress(1);
+                                        }
+                                        runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                mThread = null;
+                                                dialogInterface.setContent(getString(R.string.done));
+                                            }
+                                        });
+                                    }
+                                });
+                            }
+                        })
+                        .show();
+
+            }
+        });
+        myViews.add(new MyView(getString(R.string.dialog_progress_determinate), determinateDialog));
+
     }
 
     @Override
@@ -921,6 +979,13 @@ public class ViewsActivity extends AppCompatActivity implements ColorChooserDial
 
     private void showToast(@StringRes int message) {
         showToast(getString(message));
+    }
+
+    private void startThread(Runnable run) {
+        if (mThread != null)
+            mThread.interrupt();
+        mThread = new Thread(run);
+        mThread.start();
     }
 }
 
