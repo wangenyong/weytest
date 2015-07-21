@@ -55,6 +55,7 @@ import com.wangenyong.weytest.adapters.ViewsAdapter;
 import com.wangenyong.weytest.bean.Component;
 import com.wangenyong.weytest.bean.Constants;
 import com.wangenyong.weytest.bean.MyView;
+import com.wangenyong.weytest.dialogs.ChangelogDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -759,6 +760,19 @@ public class ViewsActivity extends AppCompatActivity {
         });
 
         myViews.add(new MyView(getString(R.string.dialog_custom_view), customViewDialog));
+
+        //customWebViewDialog
+        Button customWebViewDialog = new Button(this);
+        customWebViewDialog.setLayoutParams(lp);
+        customWebViewDialog.setText(getString(R.string.dialog_custom_webview));
+        customWebViewDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ChangelogDialog.create(false, getResources().getColor(R.color.accent_color))
+                        .show(getSupportFragmentManager(), "changelog");
+            }
+        });
+        myViews.add(new MyView(getString(R.string.dialog_custom_webview), customWebViewDialog));
     }
 
     @Override
