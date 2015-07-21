@@ -814,6 +814,31 @@ public class ViewsActivity extends AppCompatActivity implements ColorChooserDial
             }
         });
         myViews.add(new MyView(getString(R.string.dialog_theme), themeDialog));
+
+        //inputDialog
+        Button inputDialog = new Button(this);
+        inputDialog.setLayoutParams(lp);
+        inputDialog.setText(getString(R.string.dialog_input));
+        inputDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new MaterialDialog.Builder(ViewsActivity.this)
+                        .title(R.string.dialog_title)
+                        .content(R.string.input_content)
+                        .inputType(InputType.TYPE_CLASS_TEXT |
+                                InputType.TYPE_TEXT_VARIATION_PERSON_NAME |
+                                InputType.TYPE_TEXT_FLAG_CAP_WORDS)
+                        .inputMaxLength(16)
+                        .positiveText(R.string.submit)
+                        .input(R.string.input_hint, R.string.input_hint, false, new MaterialDialog.InputCallback() {
+                            @Override
+                            public void onInput(MaterialDialog dialog, CharSequence input) {
+                                showToast("Hello, " + input.toString() + "!");
+                            }
+                        }).show();
+            }
+        });
+        myViews.add(new MyView(getString(R.string.dialog_input), inputDialog));
     }
 
     @Override

@@ -84,6 +84,7 @@
     <string name="dialog_custom_webview">WebView对话框</string>
     <string name="dialog_custom_color_chooser">颜色选择对话框</string>
     <string name="dialog_theme">主题对话框</string>
+    <string name="dialog_input">输入对话框</string>
     <string name="signalStrength">Signal strength</string>
     <string name="excellent">Excellent</string>
     <string name="security">Security</string>
@@ -96,6 +97,9 @@
     <string name="connect">Connect</string>
     <string name="changelog">Changelog</string>
     <string name="color_chooser">Color Chooser</string>
+    <string name="input_hint">John Appleseed</string>
+    <string name="input_content">What\'s your name?</string>
+    <string name="submit">Submit</string>
 
     <string-array name="dialog_socialNetworks">
         <item>Twitter</item>
