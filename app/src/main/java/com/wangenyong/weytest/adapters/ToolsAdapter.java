@@ -1,13 +1,16 @@
 package com.wangenyong.weytest.adapters;
 
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wangenyong.weytest.R;
+import com.wangenyong.weytest.bean.MyTool;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,16 +19,16 @@ import java.util.List;
  * Created by wangenyong on 15/7/22.
  */
 public class ToolsAdapter extends RecyclerView.Adapter<ToolsAdapter.ViewHolder> {
-    private List<String> mDatas;
+    private List<MyTool> myTools;
     private LayoutInflater mInflater;
     private List<Integer> mHeights;
 
-    public ToolsAdapter(Context context, List<String> mDatas) {
+    public ToolsAdapter(Context context, List<MyTool> myTools) {
         mInflater = LayoutInflater.from(context);
-        this.mDatas = mDatas;
+        this.myTools = myTools;
 
         mHeights = new ArrayList<Integer>();
-        for (int i = 0; i < mDatas.size(); i++)
+        for (int i = 0; i < myTools.size(); i++)
         {
             mHeights.add( (int) (100 + Math.random() * 300));
         }
@@ -46,25 +49,27 @@ public class ToolsAdapter extends RecyclerView.Adapter<ToolsAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
-        ViewGroup.LayoutParams lp = viewHolder.viewTitleTv.getLayoutParams();
-        lp.height = mHeights.get(position);
-
-        viewHolder.viewTitleTv.setLayoutParams(lp);
-        viewHolder.viewTitleTv.setText(mDatas.get(position));
+        final MyTool myTool = myTools.get(position);
+        viewHolder.imageView.setImageResource(myTool.getImage());
+        viewHolder.viewTitleTv.setText(myTool.getTitle());
     }
 
     @Override
     public int getItemCount() {
-        return mDatas.size();
+        return myTools.size();
     }
 
     // inner class to hold a reference to each item of RecyclerView
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView viewTitleTv;
+        CardView cardView;
+        ImageView imageView;
 
         public ViewHolder(View itemLayoutView) {
             super(itemLayoutView);
             viewTitleTv = (TextView) itemLayoutView.findViewById(R.id.tv_tools_item);
+            cardView = (CardView) itemLayoutView.findViewById(R.id.cardview_tools_item);
+            imageView = (ImageView) itemLayoutView.findViewById(R.id.img_tools_item);
         }
     }
 }

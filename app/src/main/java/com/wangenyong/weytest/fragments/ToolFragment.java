@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.wangenyong.weytest.R;
 import com.wangenyong.weytest.adapters.ToolsAdapter;
+import com.wangenyong.weytest.bean.MyTool;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +33,7 @@ public class ToolFragment extends Fragment {
 
     @InjectView(R.id.recyclerview_tool) RecyclerView toolRecyclerView;
     private ToolsAdapter toolsAdapter;
-    private List<String> mDatas;
+    private List<MyTool> myTools = new ArrayList<MyTool>();
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -77,8 +78,8 @@ public class ToolFragment extends Fragment {
         ButterKnife.inject(this, rootView);
 
         initData();
-        toolsAdapter = new ToolsAdapter(getActivity(), mDatas);
-        toolRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
+        toolsAdapter = new ToolsAdapter(getActivity(), myTools);
+        toolRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         toolRecyclerView.setAdapter(toolsAdapter);
         toolRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
@@ -86,12 +87,11 @@ public class ToolFragment extends Fragment {
     }
 
 
-    protected void initData()
-    {
-        mDatas = new ArrayList<String>();
-        for (int i = 'A'; i < 'z'; i++)
-        {
-            mDatas.add("" + (char) i);
-        }
+    protected void initData() {
+        myTools.clear();
+        myTools.add(new MyTool(R.drawable.img_tools_scanner, getString(R.string.tools_qrcode)));
+        myTools.add(new MyTool(R.drawable.img_tools_photo, getString(R.string.tools_photo)));
+        myTools.add(new MyTool(R.drawable.img_tools_date, getString(R.string.tools_date)));
+        myTools.add(new MyTool(R.drawable.img_tools_shake, getString(R.string.tools_shake)));
     }
 }
