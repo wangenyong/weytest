@@ -7,10 +7,6 @@
             android:icon="@drawable/ic_action_view"
             android:title="@string/drawer_view" />
         <item
-            android:id="@+id/nav_animation"
-            android:icon="@drawable/ic_action_animation"
-            android:title="@string/drawer_animation" />
-        <item
             android:id="@+id/nav_tools"
             android:icon="@drawable/ic_action_tools"
             android:title="@string/drawer_tools" />
