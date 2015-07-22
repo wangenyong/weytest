@@ -93,5 +93,7 @@ public class ToolFragment extends Fragment {
         myTools.add(new MyTool(R.drawable.img_tools_photo, getString(R.string.tools_photo)));
         myTools.add(new MyTool(R.drawable.img_tools_date, getString(R.string.tools_date)));
         myTools.add(new MyTool(R.drawable.img_tools_shake, getString(R.string.tools_shake)));
+        myTools.add(new MyTool(R.drawable.img_tools_map, getString(R.string.tools_map)));
+        myTools.add(new MyTool(R.drawable.img_tools_gps, getString(R.string.tools_gps)));
     }
 }
