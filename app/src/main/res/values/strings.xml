@@ -14,8 +14,7 @@
 
     <!-- Drawer -->
     <string name="drawer_view">视图组件</string>
-    <string name="drawer_animation">动画</string>
-    <string name="drawer_tools">工具</string>
+    <string name="drawer_tools">工具集合</string>
     <string name="drawer_tmp">临时页面</string>
 
     <!-- View -->
