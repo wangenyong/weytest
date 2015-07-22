@@ -18,6 +18,7 @@ import com.wangenyong.weytest.activities.TmpActivity;
 import com.wangenyong.weytest.fragments.DefaultFragment;
 import com.wangenyong.weytest.fragments.MainFragment;
 import com.wangenyong.weytest.fragments.TestFragment;
+import com.wangenyong.weytest.fragments.ToolFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -104,6 +105,9 @@ public class MainActivity extends AppCompatActivity {
         switch(menuItem.getItemId()) {
             case R.id.nav_view:
                 fragment = MainFragment.newInstance("", "");
+                break;
+            case R.id.nav_tools:
+                fragment = ToolFragment.newInstance("", "");
                 break;
             case R.id.nav_tmp:
                 Intent intent = new Intent(MainActivity.this, TmpActivity.class);
