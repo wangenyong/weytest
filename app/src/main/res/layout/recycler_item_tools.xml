@@ -10,13 +10,13 @@
         android:layout_height="wrap_content"
         card_view:cardCornerRadius="2dp"
         card_view:cardElevation="1dp"
-        card_view:cardUseCompatPadding="true"
-        android:background="?android:attr/selectableItemBackground">
+        card_view:cardUseCompatPadding="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="?android:attr/selectableItemBackground">
 
             <ImageView
                 android:id="@+id/img_tools_item"

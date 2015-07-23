@@ -92,17 +92,23 @@ public class ToolFragment extends Fragment implements ToolsAdapter.OnItemClickLi
 
     protected void initData() {
         myTools.clear();
-        myTools.add(new MyTool(R.drawable.img_tools_scanner, getString(R.string.tools_qrcode)));
-        myTools.add(new MyTool(R.drawable.img_tools_photo, getString(R.string.tools_photo)));
-        myTools.add(new MyTool(R.drawable.img_tools_date, getString(R.string.tools_date)));
-        myTools.add(new MyTool(R.drawable.img_tools_shake, getString(R.string.tools_shake)));
-        myTools.add(new MyTool(R.drawable.img_tools_map, getString(R.string.tools_map)));
-        myTools.add(new MyTool(R.drawable.img_tools_gps, getString(R.string.tools_gps)));
+        myTools.add(new MyTool(R.drawable.img_tools_scanner, getString(R.string.tools_qrcode), MyTool.Types.QRCODE));
+        myTools.add(new MyTool(R.drawable.img_tools_photo, getString(R.string.tools_photo), MyTool.Types.PHOTO));
+        myTools.add(new MyTool(R.drawable.img_tools_date, getString(R.string.tools_date), MyTool.Types.DATE));
+        myTools.add(new MyTool(R.drawable.img_tools_shake, getString(R.string.tools_shake), MyTool.Types.SHAKE));
+        myTools.add(new MyTool(R.drawable.img_tools_map, getString(R.string.tools_map), MyTool.Types.MAP));
+        myTools.add(new MyTool(R.drawable.img_tools_gps, getString(R.string.tools_gps), MyTool.Types.GPS));
     }
 
     @Override
     public void onItemClick(View view, int position) {
-        Toast.makeText(getActivity(), String.valueOf(position), Toast.LENGTH_SHORT).show();
+        switch (myTools.get(position).getToolTypes()) {
+            case QRCODE:
+                Toast.makeText(getActivity(), String.valueOf(position), Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                Toast.makeText(getActivity(), getString(R.string.toools_developing), Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

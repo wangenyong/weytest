@@ -33,6 +33,8 @@
     <string name="tools_map">地图</string>
     <string name="tools_gps">GPS</string>
 
+    <string name="toools_developing">该功能正在开发中</string>
+
     <!-- Button -->
     <string name="button_standard">标准按钮</string>
     <string name="button_standard_en">STANDARD BUTTON</string>
