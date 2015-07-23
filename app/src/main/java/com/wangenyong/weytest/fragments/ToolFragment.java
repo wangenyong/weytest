@@ -1,6 +1,7 @@
 package com.wangenyong.weytest.fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.wangenyong.mylibrary.zxing.Intents;
 import com.wangenyong.weytest.R;
 import com.wangenyong.weytest.adapters.ToolsAdapter;
 import com.wangenyong.weytest.bean.MyTool;
@@ -104,7 +106,9 @@ public class ToolFragment extends Fragment implements ToolsAdapter.OnItemClickLi
     public void onItemClick(View view, int position) {
         switch (myTools.get(position).getToolTypes()) {
             case QRCODE:
-                Toast.makeText(getActivity(), String.valueOf(position), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Intents.Scan.ACTION);
+                intent.putExtra(Intents.Scan.RESULT_DISPLAY_DURATION_MS, 0L);
+                startActivityForResult(intent, 100);
                 break;
             default:
                 Toast.makeText(getActivity(), getString(R.string.toools_developing), Toast.LENGTH_SHORT).show();
@@ -114,5 +118,16 @@ public class ToolFragment extends Fragment implements ToolsAdapter.OnItemClickLi
     @Override
     public void onItemLongClick(View view, int position) {
 
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        // TODO Auto-generated method stub
+        /**
+         Log.d("QRCode Result", "requestCode: " + String.valueOf(requestCode));
+         Log.d("QRCode Result", "resultCode: " + String.valueOf(resultCode));
+         Log.d("QRCode Result", "intentAction: " + intent.getAction());
+         Log.d("QRCode Result", "scanResult: " + intent.getStringExtra(Intents.Scan.RESULT));
+         */
+        Toast.makeText(getActivity(), intent.getStringExtra(Intents.Scan.RESULT), Toast.LENGTH_SHORT).show();
     }
 }
