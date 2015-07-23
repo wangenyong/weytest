@@ -9,6 +9,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.wangenyong.weytest.R;
 import com.wangenyong.weytest.adapters.ToolsAdapter;
@@ -25,7 +26,7 @@ import butterknife.InjectView;
  * Use the {@link ToolFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ToolFragment extends Fragment {
+public class ToolFragment extends Fragment implements ToolsAdapter.OnItemClickLitener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -79,9 +80,11 @@ public class ToolFragment extends Fragment {
 
         initData();
         toolsAdapter = new ToolsAdapter(getActivity(), myTools);
+        toolsAdapter.setOnItemClickLitener(this);
         toolRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         toolRecyclerView.setAdapter(toolsAdapter);
         toolRecyclerView.setItemAnimator(new DefaultItemAnimator());
+
 
         return rootView;
     }
@@ -95,5 +98,15 @@ public class ToolFragment extends Fragment {
         myTools.add(new MyTool(R.drawable.img_tools_shake, getString(R.string.tools_shake)));
         myTools.add(new MyTool(R.drawable.img_tools_map, getString(R.string.tools_map)));
         myTools.add(new MyTool(R.drawable.img_tools_gps, getString(R.string.tools_gps)));
+    }
+
+    @Override
+    public void onItemClick(View view, int position) {
+        Toast.makeText(getActivity(), String.valueOf(position), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onItemLongClick(View view, int position) {
+
     }
 }

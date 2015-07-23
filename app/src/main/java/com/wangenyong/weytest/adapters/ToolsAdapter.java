@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.wangenyong.weytest.R;
 import com.wangenyong.weytest.bean.MyTool;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,17 +20,15 @@ import java.util.List;
 public class ToolsAdapter extends RecyclerView.Adapter<ToolsAdapter.ViewHolder> {
     private List<MyTool> myTools;
     private LayoutInflater mInflater;
-    private List<Integer> mHeights;
+    private OnItemClickLitener mOnItemClickLitener;
 
     public ToolsAdapter(Context context, List<MyTool> myTools) {
         mInflater = LayoutInflater.from(context);
         this.myTools = myTools;
+    }
 
-        mHeights = new ArrayList<Integer>();
-        for (int i = 0; i < myTools.size(); i++)
-        {
-            mHeights.add( (int) (100 + Math.random() * 300));
-        }
+    public void setOnItemClickLitener(OnItemClickLitener mOnItemClickLitener) {
+        this.mOnItemClickLitener = mOnItemClickLitener;
     }
 
 
@@ -48,10 +45,19 @@ public class ToolsAdapter extends RecyclerView.Adapter<ToolsAdapter.ViewHolder> 
 
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         final MyTool myTool = myTools.get(position);
         viewHolder.imageView.setImageResource(myTool.getImage());
         viewHolder.viewTitleTv.setText(myTool.getTitle());
+
+        if (mOnItemClickLitener != null) {
+            viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mOnItemClickLitener.onItemClick(v, position);
+                }
+            });
+        }
     }
 
     @Override
@@ -71,5 +77,12 @@ public class ToolsAdapter extends RecyclerView.Adapter<ToolsAdapter.ViewHolder> 
             cardView = (CardView) itemLayoutView.findViewById(R.id.cardview_tools_item);
             imageView = (ImageView) itemLayoutView.findViewById(R.id.img_tools_item);
         }
+    }
+
+
+    public interface OnItemClickLitener {
+        void onItemClick(View view, int position);
+
+        void onItemLongClick(View view, int position);
     }
 }
