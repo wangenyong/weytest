@@ -128,6 +128,8 @@ public class ToolFragment extends Fragment implements ToolsAdapter.OnItemClickLi
          Log.d("QRCode Result", "intentAction: " + intent.getAction());
          Log.d("QRCode Result", "scanResult: " + intent.getStringExtra(Intents.Scan.RESULT));
          */
-        Toast.makeText(getActivity(), intent.getStringExtra(Intents.Scan.RESULT), Toast.LENGTH_SHORT).show();
+        if (intent != null) {
+            Toast.makeText(getActivity(), intent.getStringExtra(Intents.Scan.RESULT), Toast.LENGTH_SHORT).show();
+        }
     }
 }
