@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.simplelist.MaterialSimpleListAdapter;
 import com.afollestad.materialdialogs.simplelist.MaterialSimpleListItem;
+import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.wangenyong.mylibrary.tools.PhotoTools;
 import com.wangenyong.mylibrary.zxing.Intents;
 import com.wangenyong.weytest.R;
@@ -115,6 +116,7 @@ public class ToolFragment extends Fragment implements ToolsAdapter.OnItemClickLi
         myTools.add(new MyTool(R.drawable.img_tools_gps, getString(R.string.tools_gps), MyTool.Types.GPS));
     }
 
+    private MaterialCalendarView materialCalendarView;
     @Override
     public void onItemClick(View view, int position) {
         switch (myTools.get(position).getToolTypes()) {
@@ -148,6 +150,20 @@ public class ToolFragment extends Fragment implements ToolsAdapter.OnItemClickLi
                     })
                     .negativeText(getString(R.string.dialog_cancel))
                     .show();
+                break;
+            case DATE:
+                MaterialDialog materialDialog = new MaterialDialog.Builder(getActivity())
+                        .customView(R.layout.dialog_date_picker, true)
+                        .positiveText(R.string.dialog_confirm)
+                        .callback(new MaterialDialog.ButtonCallback() {
+                            @Override
+                            public void onPositive(MaterialDialog dialog) {
+                                Toast.makeText(getActivity(), materialCalendarView.getSelectedDate().toString(), Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .build();
+                materialCalendarView = (MaterialCalendarView) materialDialog.getCustomView().findViewById(R.id.calendarView_dialog);
+                materialDialog.show();
                 break;
             default:
                 Toast.makeText(getActivity(), getString(R.string.toools_developing), Toast.LENGTH_SHORT).show();

@@ -25,4 +25,5 @@ dependencies {
     compile project(path: ':weylibrary')
     compile files('libs/mpandroidchartlibrary-2-1-0.jar')
     compile 'com.afollestad:material-dialogs:0.7.6.0'
+    compile 'com.prolificinteractive:material-calendarview:0.7.0'
 }
