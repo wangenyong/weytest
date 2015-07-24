@@ -1,8 +1,12 @@
 package com.wangenyong.weytest.fragments;
 
 
+import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
@@ -15,10 +19,12 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.simplelist.MaterialSimpleListAdapter;
 import com.afollestad.materialdialogs.simplelist.MaterialSimpleListItem;
+import com.wangenyong.mylibrary.tools.PhotoTools;
 import com.wangenyong.mylibrary.zxing.Intents;
 import com.wangenyong.weytest.R;
 import com.wangenyong.weytest.adapters.ToolsAdapter;
 import com.wangenyong.weytest.bean.MyTool;
+import com.wangenyong.weytest.dialogs.ImageViewDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +49,10 @@ public class ToolFragment extends Fragment implements ToolsAdapter.OnItemClickLi
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private String mCameraPhotoPath;
+    private final static int CAMERA_CODE = 20;
+    private final static int ALBUM_CODE = 21;
+    private final static int QR_CODE = 22;
 
 
     /**
@@ -111,7 +121,7 @@ public class ToolFragment extends Fragment implements ToolsAdapter.OnItemClickLi
             case QRCODE:
                 Intent intent = new Intent(Intents.Scan.ACTION);
                 intent.putExtra(Intents.Scan.RESULT_DISPLAY_DURATION_MS, 0L);
-                startActivityForResult(intent, 100);
+                startActivityForResult(intent, QR_CODE);
                 break;
             case PHOTO:
                 final MaterialSimpleListAdapter adapter = new MaterialSimpleListAdapter(getActivity());
@@ -127,8 +137,12 @@ public class ToolFragment extends Fragment implements ToolsAdapter.OnItemClickLi
                     .adapter(adapter, new MaterialDialog.ListCallback() {
                         @Override
                         public void onSelection(MaterialDialog materialDialog, View view, int i, CharSequence charSequence) {
-                            MaterialSimpleListItem item = adapter.getItem(i);
-                            Toast.makeText(getActivity(), String.valueOf(i), Toast.LENGTH_SHORT).show();
+                            PhotoTools photoTools = new PhotoTools(getString(R.string.tools_photo_dir), getString(R.string.tools_photo_album), "jpg");
+                            if (i == 0) {
+                                mCameraPhotoPath = photoTools.takeCameraPhotos(ToolFragment.this, CAMERA_CODE);
+                            } else if (i == 1) {
+                                photoTools.takeAlbumPhotos(ToolFragment.this, ALBUM_CODE);
+                            }
                             materialDialog.dismiss();
                         }
                     })
@@ -145,16 +159,37 @@ public class ToolFragment extends Fragment implements ToolsAdapter.OnItemClickLi
 
     }
 
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        // TODO Auto-generated method stub
-        /**
-         Log.d("QRCode Result", "requestCode: " + String.valueOf(requestCode));
-         Log.d("QRCode Result", "resultCode: " + String.valueOf(resultCode));
-         Log.d("QRCode Result", "intentAction: " + intent.getAction());
-         Log.d("QRCode Result", "scanResult: " + intent.getStringExtra(Intents.Scan.RESULT));
-         */
-        if (intent != null) {
-            Toast.makeText(getActivity(), intent.getStringExtra(Intents.Scan.RESULT), Toast.LENGTH_SHORT).show();
+        switch (requestCode) {
+            case CAMERA_CODE:
+                if (resultCode == Activity.RESULT_OK && mCameraPhotoPath != null) {
+                    ImageViewDialog.create(mCameraPhotoPath).show(getFragmentManager(), "camera_photo");
+                }
+                break;
+            case ALBUM_CODE:
+                if (resultCode == Activity.RESULT_OK && intent != null) {
+                    //获取图片的Uri
+                    Uri selectedImage = intent.getData();
+                    //获取图片路径
+                    String[] filePathColumn = { MediaStore.Images.Media.DATA };
+                    Cursor cursor = getActivity().getContentResolver().query(selectedImage,
+                            filePathColumn, null, null, null);
+                    cursor.moveToFirst();
+                    int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                    String picturePath = cursor.getString(columnIndex);
+                    cursor.close();
+
+                    ImageViewDialog.create(picturePath).show(getFragmentManager(), "album_photo");
+                }
+                break;
+            case QR_CODE:
+                if (intent != null) {
+                    Toast.makeText(getActivity(), intent.getStringExtra(Intents.Scan.RESULT), Toast.LENGTH_SHORT).show();
+                }
+                break;
+            default:
         }
+
     }
 }
