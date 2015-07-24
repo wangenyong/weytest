@@ -37,8 +37,6 @@ public class ImageViewDialog extends DialogFragment {
         ButterKnife.inject(this, view);
 
         MaterialDialog dialog = new MaterialDialog.Builder(getActivity())
-                .title(R.string.tools_photo_title)
-                .titleColor(getResources().getColor(R.color.primary_color))
                 .customView(view, false)
                 .positiveText(android.R.string.ok)
                 .build();
