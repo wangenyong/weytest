@@ -27,6 +27,7 @@
 
     <!-- Tools -->
     <string name="tools_qrcode">二维码</string>
+    <string name="tools_qrcode_dialog_title">二维码扫描结果</string>
     <string name="tools_photo">照片</string>
     <string name="tools_photo_dialog_camera">拍照</string>
     <string name="tools_photo_dialog_album">从相册选取</string>

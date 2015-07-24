@@ -184,8 +184,12 @@ public class ToolFragment extends Fragment implements ToolsAdapter.OnItemClickLi
                 }
                 break;
             case QR_CODE:
-                if (intent != null) {
-                    Toast.makeText(getActivity(), intent.getStringExtra(Intents.Scan.RESULT), Toast.LENGTH_SHORT).show();
+                if (resultCode == Activity.RESULT_OK && intent != null) {
+                    new MaterialDialog.Builder(getActivity())
+                            .title(R.string.tools_qrcode_dialog_title)
+                            .content(intent.getStringExtra(Intents.Scan.RESULT))
+                            .positiveText(android.R.string.ok)
+                            .show();
                 }
                 break;
             default:
