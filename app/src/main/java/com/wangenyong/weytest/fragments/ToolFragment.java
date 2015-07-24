@@ -12,6 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.afollestad.materialdialogs.simplelist.MaterialSimpleListAdapter;
+import com.afollestad.materialdialogs.simplelist.MaterialSimpleListItem;
 import com.wangenyong.mylibrary.zxing.Intents;
 import com.wangenyong.weytest.R;
 import com.wangenyong.weytest.adapters.ToolsAdapter;
@@ -109,6 +112,28 @@ public class ToolFragment extends Fragment implements ToolsAdapter.OnItemClickLi
                 Intent intent = new Intent(Intents.Scan.ACTION);
                 intent.putExtra(Intents.Scan.RESULT_DISPLAY_DURATION_MS, 0L);
                 startActivityForResult(intent, 100);
+                break;
+            case PHOTO:
+                final MaterialSimpleListAdapter adapter = new MaterialSimpleListAdapter(getActivity());
+                adapter.add(new MaterialSimpleListItem.Builder(getActivity())
+                        .content(getString(R.string.tools_photo_dialog_camera))
+                        .icon(R.drawable.ic_action_photo_camera)
+                        .build());
+                adapter.add(new MaterialSimpleListItem.Builder(getActivity())
+                        .content(getString(R.string.tools_photo_dialog_album))
+                        .icon(R.drawable.ic_action_photo_album)
+                        .build());
+                new MaterialDialog.Builder(getActivity())
+                    .adapter(adapter, new MaterialDialog.ListCallback() {
+                        @Override
+                        public void onSelection(MaterialDialog materialDialog, View view, int i, CharSequence charSequence) {
+                            MaterialSimpleListItem item = adapter.getItem(i);
+                            Toast.makeText(getActivity(), String.valueOf(i), Toast.LENGTH_SHORT).show();
+                            materialDialog.dismiss();
+                        }
+                    })
+                    .negativeText(getString(R.string.dialog_cancel))
+                    .show();
                 break;
             default:
                 Toast.makeText(getActivity(), getString(R.string.toools_developing), Toast.LENGTH_SHORT).show();
