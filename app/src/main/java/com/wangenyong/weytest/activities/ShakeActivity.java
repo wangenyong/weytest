@@ -1,6 +1,7 @@
 package com.wangenyong.weytest.activities;
 
 import android.app.Service;
+import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Build;
@@ -15,7 +16,7 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.widget.Toast;
 
-import com.wangenyong.mylibrary.tools.ShakeListenerUtils;
+import com.wangenyong.mylibrary.tools.ShakeDetector;
 import com.wangenyong.weytest.R;
 
 import butterknife.ButterKnife;
@@ -23,8 +24,10 @@ import butterknife.InjectView;
 
 public class ShakeActivity extends AppCompatActivity implements Handler.Callback {
     @InjectView(R.id.toolbar_shake) Toolbar shakeToolbar;
-    private ShakeListenerUtils shakeUtils;
+    public static final int SENSOR_SHAKE = 10;
     private SensorManager mSensorManager;
+    private Sensor mAccelerometer;
+    private ShakeDetector mShakeDetector;
     private Vibrator vibrator;
     private Handler mHandler;
 
@@ -43,29 +46,38 @@ public class ShakeActivity extends AppCompatActivity implements Handler.Callback
         }
 
         mHandler = new Handler(this);
-        shakeUtils = new ShakeListenerUtils(this, mHandler);
+        vibrator = (Vibrator) getSystemService(Service.VIBRATOR_SERVICE);
+        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        mAccelerometer = mSensorManager
+                .getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        mShakeDetector = new ShakeDetector();
+        mShakeDetector.setOnShakeListener(new ShakeDetector.OnShakeListener() {
+
+            @Override
+            public void onShake(int count) {
+                /*
+                 * The following method, "handleShakeEvent(count):" is a stub //
+                 * method you would use to setup whatever you want done once the
+                 * device has been shook.
+                 */
+                Message msg = new Message();
+                msg.what = SENSOR_SHAKE;
+                mHandler.sendMessage(msg);
+            }
+        });
     }
 
 
     @Override
     protected void onResume() {
         super.onResume();
-
-        //获取传感器管理服务
-        mSensorManager = (SensorManager) this.getSystemService(Service.SENSOR_SERVICE);
-        vibrator = (Vibrator) getSystemService(Service.VIBRATOR_SERVICE);
-        //加速度传感器
-        mSensorManager.registerListener(shakeUtils, mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
-                //还有SENSOR_DELAY_UI、SENSOR_DELAY_FASTEST、SENSOR_DELAY_GAME等，
-                //根据不同应用，需要的反应速率不同，具体根据实际情况设定
-                SensorManager.SENSOR_DELAY_NORMAL);
+        mSensorManager.registerListener(mShakeDetector, mAccelerometer, SensorManager.SENSOR_DELAY_UI);
     }
 
     @Override
     protected void onPause() {
+        mSensorManager.unregisterListener(mShakeDetector);
         super.onPause();
-        mSensorManager.unregisterListener(shakeUtils);
-
     }
 
     @Override
@@ -93,7 +105,7 @@ public class ShakeActivity extends AppCompatActivity implements Handler.Callback
     @Override
     public boolean handleMessage(Message msg) {
         switch (msg.what) {
-            case ShakeListenerUtils.SENSOR_SHAKE:
+            case SENSOR_SHAKE:
                 Toast.makeText(this, "Shaked! shaked!", Toast.LENGTH_SHORT).show();
                 vibrator.vibrate(500);
                 break;
