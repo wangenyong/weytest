@@ -159,7 +159,9 @@ public class ToolFragment extends Fragment implements ToolsAdapter.OnItemClickLi
                         .callback(new MaterialDialog.ButtonCallback() {
                             @Override
                             public void onPositive(MaterialDialog dialog) {
-                                Toast.makeText(getActivity(), materialCalendarView.getSelectedDate().toString(), Toast.LENGTH_SHORT).show();
+                                if (materialCalendarView.getSelectedDate() != null) {
+                                    Toast.makeText(getActivity(), materialCalendarView.getSelectedDate().toString(), Toast.LENGTH_SHORT).show();
+                                }
                             }
                         })
                         .build();
