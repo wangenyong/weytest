@@ -20,6 +20,8 @@ import java.util.List;
  * Created by wangenyong on 15/7/10.
  */
 public class MainAdapter extends RecyclerView.Adapter {
+    private static final int ITEM_VIEW_TYPE_HEADER = 0;
+    private static final int ITEM_VIEW_TYPE_ITEM = 1;
     private Context context;
     private List<Component> componentList;
     private OnItemClickLitener mOnItemClickLitener;
@@ -35,6 +37,10 @@ public class MainAdapter extends RecyclerView.Adapter {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        if (viewType == ITEM_VIEW_TYPE_HEADER) {
+            View itemLayoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_header_main, null);
+            return new HeaderViewHolder(itemLayoutView);
+        }
         // create a new view
         View itemLayoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_item_main, null);
         // create ViewHolder
@@ -44,7 +50,11 @@ public class MainAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
-        final Component component = componentList.get(position);
+        if (isHeader(position)) {
+            return;
+        }
+
+        final Component component = componentList.get(position - 1);
         final MainViewHolder mainViewHolder = (MainViewHolder) viewHolder;
         mainViewHolder.iconImg.setImageResource(component.getIconId());
         mainViewHolder.iconImg.setColorFilter(component.getColor());
@@ -77,9 +87,17 @@ public class MainAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return componentList.size();
+        return componentList.size() + 1;
     }
 
+    public boolean isHeader(int position) {
+        return position == 0;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return isHeader(position) ? ITEM_VIEW_TYPE_HEADER : ITEM_VIEW_TYPE_ITEM;
+    }
 
     /**
     public void addData(int position) {
@@ -105,6 +123,15 @@ public class MainAdapter extends RecyclerView.Adapter {
             super(itemLayoutView);
             iconImg = (ImageView) itemLayoutView.findViewById(R.id.img_main_item);
             titleTv = (TextView) itemLayoutView.findViewById(R.id.tv_main_item);
+        }
+    }
+
+    public static class HeaderViewHolder extends RecyclerView.ViewHolder {
+        ImageView imageView;
+
+        public HeaderViewHolder(View itemLayoutView) {
+            super(itemLayoutView);
+            imageView = (ImageView) itemLayoutView.findViewById(R.id.img_main_header);
         }
     }
 

@@ -83,8 +83,9 @@ public class MainFragment extends Fragment {
 
         initComponents();
         homeRecyclerView.setHasFixedSize(true);
-        homeRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 4));
-        MainAdapter mainAdapter = new MainAdapter(getActivity(), components);
+        final GridLayoutManager manager = new GridLayoutManager(getActivity(), 4);
+        homeRecyclerView.setLayoutManager(manager);
+        final MainAdapter mainAdapter = new MainAdapter(getActivity(), components);
         homeRecyclerView.addItemDecoration(new DividerGridItemDecoration(getActivity()));
         homeRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mainAdapter.setOnItemClickLitener(new MainAdapter.OnItemClickLitener() {
@@ -102,6 +103,13 @@ public class MainFragment extends Fragment {
             }
         });
         homeRecyclerView.setAdapter(mainAdapter);
+
+        manager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                return mainAdapter.isHeader(position) ? manager.getSpanCount() : 1;
+            }
+        });
 
         return rootView;
     }
