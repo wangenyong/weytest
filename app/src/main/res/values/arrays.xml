@@ -23,4 +23,14 @@
         <item>#FF9800</item>
         <item>#FF5722</item>
     </array>
+
+    <array name="shake_image">
+        <item>@drawable/img_shake_erhai</item>
+        <item>@drawable/img_shake_guaishulin</item>
+        <item>@drawable/img_shake_haiou</item>
+        <item>@drawable/img_shake_huyang</item>
+        <item>@drawable/img_shake_kiss</item>
+        <item>@drawable/img_shake_meili</item>
+        <item>@drawable/img_shake_sun</item>
+    </array>
 </resources>

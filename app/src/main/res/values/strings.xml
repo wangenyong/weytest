@@ -36,6 +36,7 @@
     <string name="tools_photo_album">dcim</string>
     <string name="tools_date">日期</string>
     <string name="tools_shake">摇一摇</string>
+    <string name="tools_shake_back_text">摇一摇有惊喜哦！</string>
     <string name="tools_map">地图</string>
     <string name="tools_gps">GPS</string>
 

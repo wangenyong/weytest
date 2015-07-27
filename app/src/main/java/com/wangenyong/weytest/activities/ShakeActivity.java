@@ -1,34 +1,40 @@
 package com.wangenyong.weytest.activities;
 
-import android.app.Service;
 import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.Typeface;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
-import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.Window;
-import android.widget.Toast;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.wangenyong.mylibrary.tools.ShakeDetector;
 import com.wangenyong.weytest.R;
+
+import java.util.Random;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class ShakeActivity extends AppCompatActivity implements Handler.Callback {
+public class ShakeActivity extends AppCompatActivity {
     @InjectView(R.id.toolbar_shake) Toolbar shakeToolbar;
-    public static final int SENSOR_SHAKE = 10;
+    @InjectView(R.id.tv_shake) TextView shakeTv;
+
     private SensorManager mSensorManager;
     private Sensor mAccelerometer;
     private ShakeDetector mShakeDetector;
-    private Vibrator vibrator;
+    private MaterialDialog dialog;
+    private ImageView imageView;
+    private TypedArray imgs;
+    private Random rand;
+
     private Handler mHandler;
 
     @Override
@@ -45,12 +51,19 @@ public class ShakeActivity extends AppCompatActivity implements Handler.Callback
             window.setStatusBarColor(getResources().getColor(R.color.dark_primary_color));
         }
 
-        mHandler = new Handler(this);
-        vibrator = (Vibrator) getSystemService(Service.VIBRATOR_SERVICE);
+        dialog = new MaterialDialog.Builder(ShakeActivity.this)
+                .customView(R.layout.dialog_imageview, false)
+                .build();
+        imageView =(ImageView) dialog.getCustomView().findViewById(R.id.img_dialog);
+        Typeface typeFace = Typeface.createFromAsset(getAssets(), "fonts/classicxing.ttf");
+        shakeTv.setTypeface(typeFace);
+
+        imgs = getResources().obtainTypedArray(R.array.shake_image);
+        rand = new Random();
+
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        mAccelerometer = mSensorManager
-                .getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        mShakeDetector = new ShakeDetector();
+        mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        mShakeDetector = new ShakeDetector(this, R.raw.shotgun_reloadd);
         mShakeDetector.setOnShakeListener(new ShakeDetector.OnShakeListener() {
 
             @Override
@@ -60,9 +73,15 @@ public class ShakeActivity extends AppCompatActivity implements Handler.Callback
                  * method you would use to setup whatever you want done once the
                  * device has been shook.
                  */
-                Message msg = new Message();
-                msg.what = SENSOR_SHAKE;
-                mHandler.sendMessage(msg);
+                if (dialog.isShowing()) {
+                    dialog.dismiss();
+                }
+
+                final int rndInt = rand.nextInt(imgs.length());
+                final int resID = imgs.getResourceId(rndInt, 0);
+                imageView.setImageResource(resID);
+                dialog.show();
+
             }
         });
     }
@@ -78,39 +97,5 @@ public class ShakeActivity extends AppCompatActivity implements Handler.Callback
     protected void onPause() {
         mSensorManager.unregisterListener(mShakeDetector);
         super.onPause();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_shake, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public boolean handleMessage(Message msg) {
-        switch (msg.what) {
-            case SENSOR_SHAKE:
-                Toast.makeText(this, "Shaked! shaked!", Toast.LENGTH_SHORT).show();
-                vibrator.vibrate(500);
-                break;
-        }
-
-        return true;
     }
 }
