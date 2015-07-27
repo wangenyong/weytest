@@ -23,6 +23,7 @@ import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.wangenyong.mylibrary.tools.PhotoTools;
 import com.wangenyong.mylibrary.zxing.Intents;
 import com.wangenyong.weytest.R;
+import com.wangenyong.weytest.activities.ShakeActivity;
 import com.wangenyong.weytest.adapters.ToolsAdapter;
 import com.wangenyong.weytest.bean.MyTool;
 import com.wangenyong.weytest.dialogs.ImageViewDialog;
@@ -121,9 +122,9 @@ public class ToolFragment extends Fragment implements ToolsAdapter.OnItemClickLi
     public void onItemClick(View view, int position) {
         switch (myTools.get(position).getToolTypes()) {
             case QRCODE:
-                Intent intent = new Intent(Intents.Scan.ACTION);
-                intent.putExtra(Intents.Scan.RESULT_DISPLAY_DURATION_MS, 0L);
-                startActivityForResult(intent, QR_CODE);
+                Intent scanIntent = new Intent(Intents.Scan.ACTION);
+                scanIntent.putExtra(Intents.Scan.RESULT_DISPLAY_DURATION_MS, 0L);
+                startActivityForResult(scanIntent, QR_CODE);
                 break;
             case PHOTO:
                 final MaterialSimpleListAdapter adapter = new MaterialSimpleListAdapter(getActivity());
@@ -164,6 +165,10 @@ public class ToolFragment extends Fragment implements ToolsAdapter.OnItemClickLi
                         .build();
                 materialCalendarView = (MaterialCalendarView) materialDialog.getCustomView().findViewById(R.id.calendarView_dialog);
                 materialDialog.show();
+                break;
+            case SHAKE:
+                Intent shakeIntent = new Intent(getActivity(), ShakeActivity.class);
+                startActivity(shakeIntent);
                 break;
             default:
                 Toast.makeText(getActivity(), getString(R.string.toools_developing), Toast.LENGTH_SHORT).show();

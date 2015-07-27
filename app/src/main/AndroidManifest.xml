@@ -24,8 +24,14 @@
         </activity>
         <activity
             android:name=".activities.TmpActivity"
+            android:label="@string/title_activity_tmp"
+            android:parentActivityName=".MainActivity" >
+        </activity>
+        <activity
+            android:name=".activities.ShakeActivity"
             android:parentActivityName=".MainActivity"
-            android:label="@string/title_activity_tmp" >
+            android:screenOrientation="portrait"
+            android:label="@string/title_activity_shake" >
         </activity>
     </application>
 
