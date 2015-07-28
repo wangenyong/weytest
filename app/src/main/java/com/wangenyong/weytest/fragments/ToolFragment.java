@@ -23,6 +23,7 @@ import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.wangenyong.mylibrary.tools.PhotoTools;
 import com.wangenyong.mylibrary.zxing.Intents;
 import com.wangenyong.weytest.R;
+import com.wangenyong.weytest.activities.MapActivity;
 import com.wangenyong.weytest.activities.ShakeActivity;
 import com.wangenyong.weytest.adapters.ToolsAdapter;
 import com.wangenyong.weytest.bean.MyTool;
@@ -171,6 +172,10 @@ public class ToolFragment extends Fragment implements ToolsAdapter.OnItemClickLi
             case SHAKE:
                 Intent shakeIntent = new Intent(getActivity(), ShakeActivity.class);
                 startActivity(shakeIntent);
+                break;
+            case MAP:
+                Intent mapIntent = new Intent(getActivity(), MapActivity.class);
+                startActivity(mapIntent);
                 break;
             default:
                 Toast.makeText(getActivity(), getString(R.string.toools_developing), Toast.LENGTH_SHORT).show();
