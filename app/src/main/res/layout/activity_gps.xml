@@ -1,17 +1,197 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.wangenyong.weytest.activities.GpsActivity">
+    android:layout_height="match_parent">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar_gps"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/primary_color"
-        app:theme="@style/WEYLibraryThemeToolbarDarkOverflow"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        android:layout_alignParentTop="true" />
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context="com.wangenyong.weytest.activities.GpsActivity">
 
-</RelativeLayout>
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_gps"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/primary_color"
+            app:theme="@style/WEYLibraryThemeToolbarDarkOverflow"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            android:layout_alignParentTop="true" />
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardview_gps_selectmode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="1dp"
+            app:cardUseCompatPadding="true"
+            android:layout_below="@+id/toolbar_gps">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tools_gps_select_mode_title"
+                    android:padding="16dp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/divider_color_light"/>
+
+                <RadioGroup
+                    android:id="@+id/radiogroup_gps_selectmode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/radiobutton_gps_radio_hight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:layout_weight="1"
+                        android:text="@string/tools_gps_select_mode_radio_high" />
+
+                    <RadioButton
+                        android:id="@+id/radiobutton_gps_radio_low"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/tools_gps_select_mode_radio_low" />
+
+                    <RadioButton
+                        android:id="@+id/radiobutton_radio_gps_device"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/tools_gps_select_mode_radio_device" />
+                </RadioGroup>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/divider_color_light"/>
+
+                <TextView
+                    android:id="@+id/tv_gps_selectmode_explain"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tools_gps_select_mode_hight_accuracy_desc"
+                    android:padding="16dp"/>
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardview_gps_coordinate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="1dp"
+            app:cardUseCompatPadding="true"
+            android:layout_below="@+id/cardview_gps_selectmode">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tools_gps_select_coordinate_title"
+                    android:padding="16dp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/divider_color_light"/>
+
+                <RadioGroup
+                    android:id="@+id/radiogroup_gps_selectCoordinates"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:orientation="vertical">
+
+                    <RadioButton
+                        android:id="@+id/radiobutton_gps_radio_gcj02"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/tools_gps_select_coordinate_gcj02" />
+
+                    <RadioButton
+                        android:id="@+id/radiobutton_gps_radio_bd09ll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/tools_gps_select_coordinate_bd09ll" />
+
+                    <RadioButton
+                        android:id="@+id/radiobutton_gps_radio_bd09"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:text="@string/tools_gps_select_coordinate_bd09" />
+                </RadioGroup>
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <TextView
+            android:id="@+id/tv_gps_frequence"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="@string/tools_gps_frequence"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/cardview_gps_coordinate"/>
+
+        <EditText
+            android:id="@+id/edittext_gps_frequence"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="1000"
+            android:inputType="number"
+            android:layout_below="@+id/cardview_gps_coordinate"
+            android:layout_toRightOf="@+id/tv_gps_frequence"/>
+
+
+        <CheckBox
+            android:id="@+id/checkbox_geofencelog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/tools_gps_geofencelog"
+            android:layout_below="@+id/tv_gps_frequence"
+            android:layout_alignParentLeft="true"/>
+
+        <com.wangenyong.mylibrary.views.PaperButton
+            android:id="@+id/btn_gps_addfence"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_below="@+id/checkbox_geofencelog"
+            app:paper_color="@color/primary_color"
+            app:paper_text_color="#ffffff"
+            app:paper_text="@string/tools_gps_start"
+            app:paper_text_size="14sp"/>
+
+        <TextView
+            android:id="@+id/tv_gps_location_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:layout_below="@+id/btn_gps_addfence"/>
+    </RelativeLayout>
+</ScrollView>
