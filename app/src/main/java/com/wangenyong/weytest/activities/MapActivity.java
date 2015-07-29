@@ -37,6 +37,7 @@ public class MapActivity extends AppCompatActivity {
             window.setStatusBarColor(getResources().getColor(R.color.dark_primary_color));
         }
 
+        mapView.showZoomControls(false);
         mBaiduMap = mapView.getMap();
     }
 

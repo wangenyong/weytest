@@ -21,4 +21,17 @@
         android:clickable="true"
         android:layout_below="@+id/toolbar_map"/>
 
+    <android.support.design.widget.FloatingActionButton
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:src="@drawable/ic_action_my_location"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="48dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        app:fabSize="mini"
+        app:elevation="4dp"
+        app:borderWidth="0dp"
+        android:clickable="true"/>
+
 </RelativeLayout>
