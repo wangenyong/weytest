@@ -2,24 +2,38 @@ package com.wangenyong.weytest.activities;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.BitmapDescriptor;
+import com.baidu.mapapi.map.MapStatusUpdate;
+import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.MyLocationData;
+import com.baidu.mapapi.model.LatLng;
 import com.wangenyong.weytest.R;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class MapActivity extends AppCompatActivity {
+public class MapActivity extends AppCompatActivity implements BDLocationListener {
     @InjectView(R.id.toolbar_map) Toolbar mapToolbar;
     @InjectView(R.id.bmapView) MapView mapView;
+    @InjectView(R.id.fab_map_location) FloatingActionButton locationFab;
 
+    private LocationClient mLocationClient;
+    private BitmapDescriptor mCurrentMarker = null;
     private BaiduMap mBaiduMap;
 
     @Override
@@ -39,10 +53,25 @@ public class MapActivity extends AppCompatActivity {
 
         mapView.showZoomControls(false);
         mBaiduMap = mapView.getMap();
+
+        mBaiduMap.setMyLocationEnabled(true);
+        mLocationClient = new LocationClient(getApplicationContext()); // 实例化LocationClient类
+        mLocationClient.registerLocationListener(this); // 注册监听函数
+
+        locationFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initLocation();
+                mLocationClient.start();
+            }
+        });
     }
 
     @Override
     protected void onDestroy() {
+        //退出时销毁定位
+        mLocationClient.stop();
+        mBaiduMap.setMyLocationEnabled(false);
         super.onDestroy();
         //在activity执行onDestroy时执行mMapView.onDestroy()，实现地图生命周期管理
         mapView.onDestroy();
@@ -59,6 +88,7 @@ public class MapActivity extends AppCompatActivity {
         //在activity执行onPause时执行mMapView. onPause ()，实现地图生命周期管理
         mapView.onPause();
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -80,5 +110,35 @@ public class MapActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void initLocation(){
+        LocationClientOption option = new LocationClientOption();
+        option.setOpenGps(true);
+        option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);//设置定位模式
+        option.setCoorType("bd09ll");//返回的定位结果是百度经纬度，默认值gcj02
+        //当不设此项，或者所设的整数值小于1000（ms）时，采用一次定位模式。
+        //option.setScanSpan(5000);
+        option.setIsNeedAddress(true);
+        option.setNeedDeviceDirect(true);
+        mLocationClient.setLocOption(option);
+    }
+
+    @Override
+    public void onReceiveLocation(BDLocation location) {
+        // map view 销毁后不在处理新接收的位置
+        if (location == null || mapView == null)
+            return;
+        MyLocationData locData = new MyLocationData.Builder()
+                .accuracy(location.getRadius())
+                        // 此处设置开发者获取到的方向信息，顺时针0-360
+                .direction(100).latitude(location.getLatitude())
+                .longitude(location.getLongitude()).build();
+        mBaiduMap.setMyLocationData(locData);    //设置定位数据
+
+        LatLng ll = new LatLng(location.getLatitude(), location.getLongitude());
+        MapStatusUpdate u = MapStatusUpdateFactory.newLatLngZoom(ll, 16);   //设置地图中心点以及缩放级别
+        //MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(ll);
+        mBaiduMap.animateMapStatus(u);
     }
 }
