@@ -24,6 +24,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -181,6 +182,31 @@ public class ViewsActivity extends AppCompatActivity implements ColorChooserDial
         TintableImageView tintableButton = (TintableImageView) getLayoutInflater().inflate(R.layout.button_tintable, null);
         tintableButton.setLayoutParams(lp);
         myViews.add(new MyView(getString(R.string.button_tintable), tintableButton));
+
+        //textCircleButton
+        Button textCircleButton = new Button(this);
+        LinearLayout.LayoutParams textCircleLp = new LinearLayout.LayoutParams(
+                DimensionTools.dpToPx(150, getResources()),
+                DimensionTools.dpToPx(150, getResources()));
+        int textCircleSize = DimensionTools.dpToPx(16, getResources());
+        textCircleLp.setMargins(textCircleSize, textCircleSize, textCircleSize, textCircleSize);
+        textCircleButton.setLayoutParams(textCircleLp);
+        textCircleButton.setBackgroundResource(R.drawable.btn_selector_circle);
+        textCircleButton.setText(getString(R.string.button_text_circle_en));
+        textCircleButton.setTextColor(getResources().getColor(R.color.white));
+        myViews.add(new MyView(getString(R.string.button_text_circle), textCircleButton));
+
+        //iconCircleButton
+        ImageButton iconCircleButton = new ImageButton(this);
+        LinearLayout.LayoutParams iconCircleLp = new LinearLayout.LayoutParams(
+                DimensionTools.dpToPx(80, getResources()),
+                DimensionTools.dpToPx(80, getResources()));
+        int iconCircleSize = DimensionTools.dpToPx(16, getResources());
+        iconCircleLp.setMargins(iconCircleSize, iconCircleSize, iconCircleSize, iconCircleSize);
+        iconCircleButton.setLayoutParams(iconCircleLp);
+        iconCircleButton.setBackgroundResource(R.drawable.btn_selector_circle);
+        iconCircleButton.setImageResource(R.drawable.ic_action_android);
+        myViews.add(new MyView(getString(R.string.button_icon_circle), iconCircleButton));
     }
 
     /**
