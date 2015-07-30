@@ -32,11 +32,19 @@ public class PopButtonFragment extends Fragment implements View.OnClickListener 
     @InjectView(R.id.fab_anim_pop_up_two) FloatingActionButton popUpTwoFab;
     @InjectView(R.id.fab_anim_pop_up_three) FloatingActionButton popUpThreeFab;
 
+    @InjectView(R.id.fab_anim_pop_random) FloatingActionButton popRandomFab;
+    @InjectView(R.id.fab_anim_pop_random_one) FloatingActionButton popRandomOneFab;
+    @InjectView(R.id.fab_anim_pop_random_two) FloatingActionButton popRandomTwoFab;
+    @InjectView(R.id.fab_anim_pop_random_three) FloatingActionButton popRandomThreeFab;
+    @InjectView(R.id.fab_anim_pop_random_four) FloatingActionButton popRandomFourFab;
+    @InjectView(R.id.fab_anim_pop_random_five) FloatingActionButton popRandomFiveFab;
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
     private boolean isPopUp = false;
+    private boolean isPopRandom = false;
     private Toast mToast;
 
 
@@ -82,6 +90,7 @@ public class PopButtonFragment extends Fragment implements View.OnClickListener 
         popUpOneFab.setOnClickListener(this);
         popUpTwoFab.setOnClickListener(this);
         popUpThreeFab.setOnClickListener(this);
+        popRandomFab.setOnClickListener(this);
 
         return rootView;
     }
@@ -94,6 +103,12 @@ public class PopButtonFragment extends Fragment implements View.OnClickListener 
                     popUpBack();
                 else popUp();
                 isPopUp = !isPopUp;
+                break;
+            case R.id.fab_anim_pop_random:
+                if (isPopRandom)
+                    popRandomBack();
+                else popRandom();
+                isPopRandom = !isPopRandom;
                 break;
             case R.id.fab_anim_pop_up_one:
                 showToast("Pop One");
@@ -109,55 +124,52 @@ public class PopButtonFragment extends Fragment implements View.OnClickListener 
     }
 
     private void popUp() {
-        popUpOneFab.animate()
-                .translationY(-600f)
-                .rotation(720f)
-                .setInterpolator(new DecelerateInterpolator())
-                .setDuration(500)
-                .alpha(1f)
-                .start();
-
-        popUpTwoFab.animate()
-                .translationY(-400f)
-                .rotation(720f)
-                .setInterpolator(new DecelerateInterpolator())
-                .setDuration(500)
-                .alpha(1f)
-                .start();
-
-        popUpThreeFab.animate()
-                .translationY(-200f)
-                .rotation(720f)
-                .setInterpolator(new DecelerateInterpolator())
-                .setDuration(500)
-                .alpha(1f)
-                .start();
+        popUpOneFab.animate().translationY(-600f).rotation(720f).setInterpolator(new DecelerateInterpolator()).setDuration(500)
+                .alpha(1f).start();
+        popUpTwoFab.animate().translationY(-400f).rotation(720f).setInterpolator(new DecelerateInterpolator()).setDuration(500)
+                .alpha(1f).start();
+        popUpThreeFab.animate().translationY(-200f).rotation(720f).setInterpolator(new DecelerateInterpolator()).setDuration(500)
+                .alpha(1f).start();
     }
 
     private void popUpBack() {
-        popUpOneFab.animate()
-                .translationY(0f)
-                .rotation(0f)
-                .setInterpolator(new DecelerateInterpolator())
-                .setDuration(500)
-                .alpha(0f)
-                .start();
+        popUpOneFab.animate().translationY(0f).rotation(0f).setInterpolator(new DecelerateInterpolator()).setDuration(500)
+                .alpha(0f).start();
+        popUpTwoFab.animate().translationY(0f).rotation(0f).setInterpolator(new DecelerateInterpolator()).setDuration(500)
+                .alpha(0f).start();
+        popUpThreeFab.animate().translationY(0f).rotation(0f).setInterpolator(new DecelerateInterpolator()).setDuration(500)
+                .alpha(0f).start();
+    }
 
-        popUpTwoFab.animate()
-                .translationY(0f)
-                .rotation(0f)
-                .setInterpolator(new DecelerateInterpolator())
-                .setDuration(500)
-                .alpha(0f)
-                .start();
+    private void popRandom() {
+        double xd = Math.sqrt(Math.pow(400, 2) / 2);
+        float xf = (float) xd;
+        double yd = Math.sqrt(Math.pow(400, 2) - Math.pow(xd/2, 2));
+        float yf = (float) yd;
 
-        popUpThreeFab.animate()
-                .translationY(0f)
-                .rotation(0f)
-                .setInterpolator(new DecelerateInterpolator())
-                .setDuration(500)
-                .alpha(0f)
-                .start();
+        popRandomOneFab.animate().translationY(-400f).rotation(720f).setInterpolator(new DecelerateInterpolator()).setDuration(500)
+                .alpha(1f).start();
+        popRandomTwoFab.animate().translationY(-yf).translationX(xf/2).rotation(720f).setInterpolator(new DecelerateInterpolator()).setDuration(500)
+                .alpha(1f).start();
+        popRandomThreeFab.animate().translationY(-xf).translationX(xf).rotation(720f).setInterpolator(new DecelerateInterpolator()).setDuration(500)
+                .alpha(1f).start();
+        popRandomFourFab.animate().translationY(-xf/2).translationX(yf).rotation(720f).setInterpolator(new DecelerateInterpolator()).setDuration(500)
+                .alpha(1f).start();
+        popRandomFiveFab.animate().translationX(400f).rotation(720f).setInterpolator(new DecelerateInterpolator()).setDuration(500)
+                .alpha(1f).start();
+    }
+
+    private void popRandomBack() {
+        popRandomOneFab.animate().translationY(0f).rotation(0f).setInterpolator(new DecelerateInterpolator()).setDuration(500)
+                .alpha(0f).start();
+        popRandomTwoFab.animate().translationY(0f).translationX(0f).rotation(0f).setInterpolator(new DecelerateInterpolator()).setDuration(500)
+                .alpha(0f).start();
+        popRandomThreeFab.animate().translationY(0f).translationX(0f).rotation(0f).setInterpolator(new DecelerateInterpolator()).setDuration(500)
+                .alpha(0f).start();
+        popRandomFourFab.animate().translationY(0f).translationX(0f).rotation(0f).setInterpolator(new DecelerateInterpolator()).setDuration(500)
+                .alpha(0f).start();
+        popRandomFiveFab.animate().translationX(0f).rotation(0f).setInterpolator(new DecelerateInterpolator()).setDuration(500)
+                .alpha(0f).start();
     }
 
 
