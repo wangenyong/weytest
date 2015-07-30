@@ -1,0 +1,66 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.wangenyong.weytest.fragments.PopButtonFragment">
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_anim_pop_up_one"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:src="@drawable/ic_action_android"
+        android:layout_margin="32dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        app:backgroundTint="@color/dark_primary_color"
+        app:fabSize="normal"
+        android:alpha="0"
+        app:elevation="4dp"
+        app:borderWidth="0dp"
+        android:clickable="true"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_anim_pop_up_two"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:src="@drawable/ic_action_android"
+        android:layout_margin="32dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        app:backgroundTint="@color/primary_color"
+        app:fabSize="normal"
+        android:alpha="0"
+        app:elevation="4dp"
+        app:borderWidth="0dp"
+        android:clickable="true"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_anim_pop_up_three"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:src="@drawable/ic_action_android"
+        android:layout_margin="32dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        app:backgroundTint="@color/light_primary_color"
+        app:fabSize="normal"
+        android:alpha="0"
+        app:elevation="4dp"
+        app:borderWidth="0dp"
+        android:clickable="true"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_anim_pop_up"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:src="@drawable/ic_action_android"
+        android:layout_margin="32dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        app:fabSize="normal"
+        app:elevation="4dp"
+        app:borderWidth="0dp"
+        android:clickable="true"/>
+
+</RelativeLayout>
