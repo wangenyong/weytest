@@ -26,5 +26,6 @@ dependencies {
     compile files('libs/mpandroidchartlibrary-2-1-0.jar')
     compile 'com.afollestad:material-dialogs:0.7.6.0'
     compile 'com.prolificinteractive:material-calendarview:0.7.0'
+    compile 'com.jpardogo.materialtabstrip:library:1.0.9'
     compile files('libs/BaiduLBS_Android.jar')
 }

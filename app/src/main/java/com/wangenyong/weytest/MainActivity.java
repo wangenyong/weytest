@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.wangenyong.weytest.activities.TmpActivity;
+import com.wangenyong.weytest.fragments.AnimationFragment;
 import com.wangenyong.weytest.fragments.DefaultFragment;
 import com.wangenyong.weytest.fragments.MainFragment;
 import com.wangenyong.weytest.fragments.TestFragment;
@@ -108,6 +109,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.nav_tools:
                 fragment = ToolFragment.newInstance("", "");
+                break;
+            case R.id.nav_animation:
+                fragment = AnimationFragment.newInstance("", "");
                 break;
             case R.id.nav_tmp:
                 Intent intent = new Intent(MainActivity.this, TmpActivity.class);
