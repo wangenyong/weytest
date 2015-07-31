@@ -142,20 +142,21 @@ public class PopButtonFragment extends Fragment implements View.OnClickListener 
     }
 
     private void popRandom() {
-        double xd = Math.sqrt(Math.pow(400, 2) / 2);
-        float xf = (float) xd;
-        double yd = Math.sqrt(Math.pow(400, 2) - Math.pow(xd/2, 2));
-        float yf = (float) yd;
+        float radius = 400f;
+        double lengthDouble = Math.sqrt(Math.pow(radius, 2) / 2);
+        float lengthFloat = (float) lengthDouble;
+        double lengthXDouble = Math.sqrt(Math.pow(radius, 2) - Math.pow(lengthDouble/2, 2));
+        float lengthXFloat = (float) lengthXDouble;
 
-        popRandomOneFab.animate().translationY(-400f).rotation(720f).setInterpolator(new DecelerateInterpolator()).setDuration(500)
+        popRandomOneFab.animate().translationY(-radius).rotation(720f).setInterpolator(new DecelerateInterpolator()).setDuration(500)
                 .alpha(1f).start();
-        popRandomTwoFab.animate().translationY(-yf).translationX(xf/2).rotation(720f).setInterpolator(new DecelerateInterpolator()).setDuration(500)
+        popRandomTwoFab.animate().translationY(-lengthXFloat).translationX(lengthFloat/2+10).rotation(720f).setInterpolator(new DecelerateInterpolator()).setDuration(500)
                 .alpha(1f).start();
-        popRandomThreeFab.animate().translationY(-xf).translationX(xf).rotation(720f).setInterpolator(new DecelerateInterpolator()).setDuration(500)
+        popRandomThreeFab.animate().translationY(-lengthFloat).translationX(lengthFloat).rotation(720f).setInterpolator(new DecelerateInterpolator()).setDuration(500)
                 .alpha(1f).start();
-        popRandomFourFab.animate().translationY(-xf/2).translationX(yf).rotation(720f).setInterpolator(new DecelerateInterpolator()).setDuration(500)
+        popRandomFourFab.animate().translationY(-lengthFloat/2-10).translationX(lengthXFloat).rotation(720f).setInterpolator(new DecelerateInterpolator()).setDuration(500)
                 .alpha(1f).start();
-        popRandomFiveFab.animate().translationX(400f).rotation(720f).setInterpolator(new DecelerateInterpolator()).setDuration(500)
+        popRandomFiveFab.animate().translationX(radius).rotation(720f).setInterpolator(new DecelerateInterpolator()).setDuration(500)
                 .alpha(1f).start();
     }
 
