@@ -9,4 +9,38 @@
         android:layout_height="wrap_content"
         android:scaleType="fitCenter"
         android:adjustViewBounds="true"/>
+
+    <LinearLayout
+        android:id="@+id/linearlayout_swip_list_item"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/img_swipe_list_item"
+        android:layout_alignBottom="@+id/img_swipe_list_item"
+        android:background="@color/transparent_black"
+        android:orientation="vertical"
+        android:translationX="300dp">
+
+        <TextView
+            android:id="@+id/tv_swipe_list_item_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:textSize="16sp"
+            android:textColor="@color/light_primary_color"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider_color"/>
+
+        <TextView
+            android:id="@+id/tv_swipe_list_item_intro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lineSpacingMultiplier="1.5"
+            android:padding="16dp"
+            android:textSize="12sp"
+            android:textColor="@color/light_primary_color" />
+    </LinearLayout>
 </RelativeLayout>

@@ -91,11 +91,11 @@ public class SwipeListFragment extends Fragment {
     private void initSwipeList() {
         swipeListItems.clear();
 
-        swipeListItems.add(new SwipeListItem(R.drawable.img_shake_meili));
-        swipeListItems.add(new SwipeListItem(R.drawable.img_shake_guaishulin));
-        swipeListItems.add(new SwipeListItem(R.drawable.img_shake_sun));
-        swipeListItems.add(new SwipeListItem(R.drawable.img_shake_haiou));
-        swipeListItems.add(new SwipeListItem(R.drawable.img_shake_huyang));
+        swipeListItems.add(new SwipeListItem(R.drawable.img_shake_meili, getString(R.string.animation_swipe_list_meili_title), getString(R.string.animation_swipe_list_meili_intro)));
+        swipeListItems.add(new SwipeListItem(R.drawable.img_shake_guaishulin, getString(R.string.animation_swipe_list_guaishulin_title), getString(R.string.animation_swipe_list_guaishulin_intro)));
+        swipeListItems.add(new SwipeListItem(R.drawable.img_shake_sun, getString(R.string.animation_swipe_list_juyanhai_title), getString(R.string.animation_swipe_list_juyanhai_intro)));
+        swipeListItems.add(new SwipeListItem(R.drawable.img_shake_haiou, getString(R.string.animation_swipe_list_haigeng_title), getString(R.string.animation_swipe_list_haigeng_intro)));
+        swipeListItems.add(new SwipeListItem(R.drawable.img_shake_huyang, getString(R.string.animation_swipe_list_huyang_title), getString(R.string.animation_swipe_list_huyang_intro)));
 
 
 

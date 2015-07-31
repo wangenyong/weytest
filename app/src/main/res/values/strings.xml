@@ -65,7 +65,17 @@
     <!-- Animation -->
     <string name="animation_pou_button">弹出按钮</string>
     <string name="animation_pop_button_summary">类似&#160;Path&#160;一样的弹出卫星菜单，或者直线方向弹出。</string>
-    <string name="animation_swipe_list">列表手势</string>
+    <string name="animation_swipe_list">列表滑出</string>
+    <string name="animation_swipe_list_meili_title">梅里日照金山</string>
+    <string name="animation_swipe_list_meili_intro">照片拍摄于2015年5月1日，梅里雪山和西藏的冈仁波齐、青海的阿尼玛卿山、青海的尕朵觉沃并称为藏传佛教四大神山。</string>
+    <string name="animation_swipe_list_guaishulin_title">怪树林日落</string>
+    <string name="animation_swipe_list_guaishulin_intro">怪树林在额济纳旗达来呼布镇西南28公里处，苍凉的“怪树林”，据说是黑将军及众将士不死的灵魂所在。</string>
+    <string name="animation_swipe_list_juyanhai_title">居延海日出</string>
+    <string name="animation_swipe_list_juyanhai_intro">位于内蒙古自治区阿拉善盟额济纳旗北部，汉代称“居延泽”，后也称“西海”，唐代以来一直称“居延海”。是穿越巴丹吉林沙漠和大戈壁通往漠北的重要通道。古代认为这里就是《尚书》所谓的“流沙”[1]。目前，东居延海为国家级水利风景区。</string>
+    <string name="animation_swipe_list_haigeng_title">海埂红嘴鸥</string>
+    <string name="animation_swipe_list_haigeng_intro">红嘴鸥（学名：Larus ridibundus），俗称“水鸽子”，体形和毛色都与鸽子相似，体长37-43厘米，翼展94-105厘米，体重225-350克，寿命32年。嘴和脚皆呈红色，身体大部分的羽毛是白色，尾羽黑色。</string>
+    <string name="animation_swipe_list_huyang_title">胡杨林</string>
+    <string name="animation_swipe_list_huyang_intro">胡杨是落叶中型天然乔木，直径可达1.5米，木质纤细柔软，树叶阔大清香。耐旱耐涝，生命顽强，是自然界稀有的树种之一。</string>
 
     <!-- Button -->
     <string name="button_standard">标准按钮</string>
