@@ -1,6 +1,7 @@
 package com.wangenyong.weytest.fragments;
 
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.StringRes;
 import android.support.design.widget.FloatingActionButton;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wangenyong.weytest.R;
@@ -26,6 +28,8 @@ public class PopButtonFragment extends Fragment implements View.OnClickListener 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    @InjectView(R.id.tv_animation_pop_button_summary) TextView summaryTv;
 
     @InjectView(R.id.fab_anim_pop_up) FloatingActionButton popUpFab;
     @InjectView(R.id.fab_anim_pop_up_one) FloatingActionButton popUpOneFab;
@@ -85,6 +89,9 @@ public class PopButtonFragment extends Fragment implements View.OnClickListener 
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_pop_button, container, false);
         ButterKnife.inject(this, rootView);
+
+        Typeface typeFace = Typeface.createFromAsset(getActivity().getAssets(), "fonts/classicxing.ttf");
+        summaryTv.setTypeface(typeFace);
 
         popUpFab.setOnClickListener(this);
         popUpOneFab.setOnClickListener(this);

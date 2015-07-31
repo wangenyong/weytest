@@ -8,7 +8,7 @@
     <color name="secondary_text">#727272</color>
     <color name="divider_color">#b6b6b6</color>
     <color name="shadow_color">#929292</color>
-    <color name="transparent_black">#cc000000</color>
+    <color name="transparent_black">#aa000000</color>
 
     <!-- Button -->
     <color name="button_border_normal">#607d8b</color>

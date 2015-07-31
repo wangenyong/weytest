@@ -64,6 +64,7 @@
 
     <!-- Animation -->
     <string name="animation_pou_button">弹出按钮</string>
+    <string name="animation_pop_button_summary">类似&#160;Path&#160;一样的弹出卫星菜单，或者直线方向弹出。</string>
 
     <!-- Button -->
     <string name="button_standard">标准按钮</string>
