@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.wangenyong.mylibrary.views.CircleMenuLayout;
+import com.wangenyong.mylibrary.views.CircleButtonLayout;
 import com.wangenyong.weytest.R;
 
 import butterknife.ButterKnife;
@@ -32,7 +32,8 @@ public class CircleMenuFragment extends Fragment {
 
     private Toast mToast;
 
-    @InjectView(R.id.layout_circle_menu) CircleMenuLayout circleMenuLayout;
+    //@InjectView(R.id.layout_circle_menu) CircleMenuLayout circleMenuLayout;
+    @InjectView(R.id.layout_circle_button) CircleButtonLayout circleButtonLayout;
 
     private String[] mItemTexts = new String[] {"添加", "备份", "通知", "定位", "播放"};
     private int[] mItemImgs = new int[] {R.drawable.ic_circle_menu_add,
@@ -78,13 +79,12 @@ public class CircleMenuFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_circle_menu, container, false);
         ButterKnife.inject(this, rootView);
 
-        circleMenuLayout.setMenuItemIconsAndTexts(mItemImgs, mItemTexts);
-
-
-        circleMenuLayout.setOnMenuItemClickListener(new CircleMenuLayout.OnMenuItemClickListener() {
+        //circleMenuLayout.setMenuItemIconsAndTexts(mItemImgs, mItemTexts);
+        circleButtonLayout.setmItemImgs(mItemImgs);
+        circleButtonLayout.setOnMenuItemClickListener(new CircleButtonLayout.OnMenuItemClickListener() {
             @Override
             public void itemClick(View view, int pos) {
-                showToast(mItemTexts[pos]);
+                showToast(String.valueOf(pos));
             }
 
             @Override
