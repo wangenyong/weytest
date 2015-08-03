@@ -85,7 +85,8 @@ public class AnimationFragment extends Fragment {
         AnimationAdapter adapter = new AnimationAdapter(getChildFragmentManager());
         adapter.addFragment(SwipeListFragment.newInstance("", ""), getString(R.string.animation_swipe_list));
         adapter.addFragment(PopButtonFragment.newInstance("", ""), getString(R.string.animation_pou_button));
-        adapter.addFragment(TestFragment.newInstance("Animation 3"), "Animation 3");
+        adapter.addFragment(CircleMenuFragment.newInstance("", ""), getString(R.string.animation_circle_menu));
+        adapter.addFragment(TestFragment.newInstance("Animation"), "Animation");
         viewPager.setAdapter(adapter);
     }
 

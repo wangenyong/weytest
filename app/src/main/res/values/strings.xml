@@ -76,6 +76,8 @@
     <string name="animation_swipe_list_haigeng_intro">红嘴鸥（学名：Larus ridibundus），俗称“水鸽子”，体形和毛色都与鸽子相似，体长37-43厘米，翼展94-105厘米，体重225-350克，寿命32年。嘴和脚皆呈红色，身体大部分的羽毛是白色，尾羽黑色。</string>
     <string name="animation_swipe_list_huyang_title">胡杨林</string>
     <string name="animation_swipe_list_huyang_intro">胡杨是落叶中型天然乔木，直径可达1.5米，木质纤细柔软，树叶阔大清香。耐旱耐涝，生命顽强，是自然界稀有的树种之一。</string>
+    <string name="animation_circle_menu">圆形菜单</string>
+
 
     <!-- Button -->
     <string name="button_standard">标准按钮</string>
