@@ -1,5 +1,7 @@
 package com.wangenyong.weytest.activities;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,15 +9,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
+import android.widget.ImageView;
 
-import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
+import com.wangenyong.mylibrary.drawables.CircleImageDrawable;
 import com.wangenyong.weytest.R;
-
-import java.util.ArrayList;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -37,35 +34,9 @@ public class TmpActivity extends AppCompatActivity {
             window.setStatusBarColor(getResources().getColor(R.color.dark_primary_color));
         }
 
-        LineChart chart = (LineChart) findViewById(R.id.chart);
-        ArrayList<Entry> valsComp1 = new ArrayList<Entry>();
-        ArrayList<Entry> valsComp2 = new ArrayList<Entry>();
-
-        Entry c1e1 = new Entry(100.000f, 0); // 0 == quarter 1
-        valsComp1.add(c1e1);
-        Entry c1e2 = new Entry(50.000f, 1); // 1 == quarter 2 ...
-        valsComp1.add(c1e2);
-        Entry c2e1 = new Entry(120.000f, 0); // 0 == quarter 1
-        valsComp2.add(c2e1);
-        Entry c2e2 = new Entry(110.000f, 1); // 1 == quarter 2 ...
-        valsComp2.add(c2e2);
-
-        LineDataSet setComp1 = new LineDataSet(valsComp1, "Company 1");
-        setComp1.setAxisDependency(YAxis.AxisDependency.LEFT);
-        LineDataSet setComp2 = new LineDataSet(valsComp2, "Company 2");
-        setComp2.setAxisDependency(YAxis.AxisDependency.LEFT);
-
-        ArrayList<LineDataSet> dataSets = new ArrayList<LineDataSet>();
-        dataSets.add(setComp1);
-        dataSets.add(setComp2);
-
-        ArrayList<String> xVals = new ArrayList<String>();
-        xVals.add("1.Q"); xVals.add("2.Q"); xVals.add("3.Q"); xVals.add("4.Q");
-
-        LineData data = new LineData(xVals, dataSets);
-
-        chart.setData(data);
-        chart.invalidate();
+        ImageView imageView = (ImageView) findViewById(R.id.img_tmp);
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.img_guilunmei);
+        imageView.setImageDrawable(new CircleImageDrawable(bitmap));
     }
 
     @Override

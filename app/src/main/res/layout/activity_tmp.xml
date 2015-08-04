@@ -16,17 +16,9 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         />
 
-    <com.github.mikephil.charting.charts.LineChart
-        android:id="@+id/chart"
-        android:layout_width="match_parent"
-        android:layout_height="200dp" />
-
-
-    <ImageButton
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:src="@drawable/ic_action_android"
-        android:background="@drawable/btn_selector_circle"
-        android:layout_margin="32dp"/>
+    <ImageView
+        android:id="@+id/img_tmp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
