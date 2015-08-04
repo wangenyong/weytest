@@ -6,6 +6,13 @@
     android:background="@color/light_primary_color"
     tools:context="com.wangenyong.weytest.fragments.CircleMenuFragment">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
+        android:src="@drawable/img_tree"/>
+
     <!--
     <com.wangenyong.mylibrary.views.CircleMenuLayout
         android:id="@+id/layout_circle_menu"
@@ -38,12 +45,17 @@
         android:layout_centerHorizontal="true"
         android:layout_centerInParent="true">
 
-        <TextView
+        <android.support.design.widget.FloatingActionButton
             android:id="@id/id_circle_button_item_center"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="WoW!"/>
+            android:layout_width="wrap_content"
+            android:src="@drawable/ic_action_android"
+            app:backgroundTint="@color/primary_color"
+            app:fabSize="normal"
+            app:elevation="4dp"
+            app:borderWidth="0dp"
+            android:clickable="true"/>
+
     </com.wangenyong.mylibrary.views.CircleButtonLayout>
 
 </RelativeLayout>
