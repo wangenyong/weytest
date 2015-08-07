@@ -30,7 +30,7 @@ public class DesignAdapter extends RecyclerView.Adapter<DesignAdapter.ViewHolder
     public DesignAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view
         View itemLayoutView = LayoutInflater.from(parent.getContext()).inflate(
-                R.layout.recycler_item_design, null);
+                R.layout.recycler_item_design, parent, false);
 
         // create ViewHolder
         ViewHolder viewHolder = new ViewHolder(itemLayoutView);

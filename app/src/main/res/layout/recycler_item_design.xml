@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:background="?android:attr/selectableItemBackground">
+            android:background="@color/light_primary_color">
 
             <ImageView
                 android:id="@+id/img_design_item"
@@ -32,11 +32,11 @@
 
             <ImageView
                 android:id="@+id/img_design_item_favorite"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_action_favorite"
-                android:background="@color/light_primary_color"
                 android:scaleType="fitCenter"
+                android:layout_gravity="center_horizontal"
                 android:padding="8dp"/>
 
         </LinearLayout>
