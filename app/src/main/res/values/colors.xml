@@ -13,4 +13,6 @@
     <!-- Button -->
     <color name="button_border_normal">#607d8b</color>
     <color name="button_border_selected">#cfd8dc</color>
+
+    <color name="favoriate">#f44336</color>
 </resources>
