@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.wangenyong.weytest.R;
 import com.wangenyong.weytest.adapters.DesignAdapter;
+import com.wangenyong.weytest.bean.MyDesign;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +36,7 @@ public class DesignFragment extends Fragment {
 
     @InjectView(R.id.recyclerview_design) RecyclerView designRecyclerView;
     private DesignAdapter designAdapter;
-    private List<Integer> images = new ArrayList<Integer>();
+    private List<MyDesign> myDesigns = new ArrayList<MyDesign>();
     private RecyclerView.LayoutManager mLayoutManager;
 
     /**
@@ -76,12 +77,12 @@ public class DesignFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_design, container, false);
         ButterKnife.inject(this, rootView);
 
-        images.clear();
-        images.add(R.drawable.img_design_wallet);
+        myDesigns.clear();
+        myDesigns.add(new MyDesign(R.drawable.img_design_wallet, "com.wangenyong.wallet"));
 
         mLayoutManager = new LinearLayoutManager(getActivity());
         designRecyclerView.setLayoutManager(mLayoutManager);
-        designAdapter = new DesignAdapter(getActivity(), images);
+        designAdapter = new DesignAdapter(getActivity(), myDesigns);
         designRecyclerView.setAdapter(designAdapter);
 
         return rootView;

@@ -80,6 +80,9 @@
     <string name="animation_circle_menu">圆形菜单</string>
 
 
+    <!-- Design -->
+    <string name="design_null_app_error">此设计案例并未安装</string>
+
     <!-- Button -->
     <string name="button_standard">标准按钮</string>
     <string name="button_standard_en">STANDARD BUTTON</string>
