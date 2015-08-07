@@ -19,7 +19,7 @@ import butterknife.InjectView;
 
 public class TmpActivity extends AppCompatActivity {
     @InjectView(R.id.toolbar_tmp) Toolbar tmpToolbar;
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
