@@ -110,6 +110,8 @@
     <string name="progress_standard_horizontal">标准水平进度条</string>
     <string name="progress_standard_horizontal_de">标准确定水平进度条</string>
     <string name="progress_custom">自定义进度条</string>
+    <string name="progress_number_horizontal">数字水平进度条</string>
+    <string name="progress_number_round">数字圆形进度条</string>
 
     <!-- ImageView -->
     <string name="imageview_standard">标准图片</string>

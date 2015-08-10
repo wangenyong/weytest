@@ -54,6 +54,7 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.utils.PercentFormatter;
 import com.wangenyong.mylibrary.tools.DimensionTools;
+import com.wangenyong.mylibrary.views.HorizontalProgressBarWithNumber;
 import com.wangenyong.mylibrary.views.TintableImageView;
 import com.wangenyong.weytest.R;
 import com.wangenyong.weytest.adapters.ViewsAdapter;
@@ -260,6 +261,13 @@ public class ViewsActivity extends AppCompatActivity implements ColorChooserDial
         FrameLayout customBar = (FrameLayout) getLayoutInflater().inflate(R.layout.progressbar_custom, null);
         customBar.setLayoutParams(lp);
         myViews.add(new MyView(getString(R.string.progress_custom), customBar));
+
+        HorizontalProgressBarWithNumber horizontalProgressBarWithNumber = new HorizontalProgressBarWithNumber(this, null);
+        horizontalProgressBarWithNumber.setProgress(56);
+        horizontalProgressBarWithNumber.setLayoutParams(lp);
+        myViews.add((new MyView(getString(R.string.progress_number_horizontal), horizontalProgressBarWithNumber)));
+
+
     }
 
     /**
