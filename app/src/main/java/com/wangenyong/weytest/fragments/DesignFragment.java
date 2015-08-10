@@ -79,6 +79,7 @@ public class DesignFragment extends Fragment {
 
         myDesigns.clear();
         myDesigns.add(new MyDesign(R.drawable.img_design_wallet, "com.wangenyong.wallet"));
+        myDesigns.add(new MyDesign(R.drawable.img_design_slidemenu, "com.wangenyong.slidemenu"));
 
         mLayoutManager = new LinearLayoutManager(getActivity());
         designRecyclerView.setLayoutManager(mLayoutManager);
