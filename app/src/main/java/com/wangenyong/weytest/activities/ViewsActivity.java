@@ -55,6 +55,7 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.utils.PercentFormatter;
 import com.wangenyong.mylibrary.tools.DimensionTools;
 import com.wangenyong.mylibrary.views.HorizontalProgressBarWithNumber;
+import com.wangenyong.mylibrary.views.RoundProgressBarWidthNumber;
 import com.wangenyong.mylibrary.views.TintableImageView;
 import com.wangenyong.weytest.R;
 import com.wangenyong.weytest.adapters.ViewsAdapter;
@@ -267,7 +268,10 @@ public class ViewsActivity extends AppCompatActivity implements ColorChooserDial
         horizontalProgressBarWithNumber.setLayoutParams(lp);
         myViews.add((new MyView(getString(R.string.progress_number_horizontal), horizontalProgressBarWithNumber)));
 
-
+        RoundProgressBarWidthNumber roundProgressBarWidthNumber = new RoundProgressBarWidthNumber(this, null);
+        roundProgressBarWidthNumber.setProgress(65);
+        roundProgressBarWidthNumber.setLayoutParams(lp);
+        myViews.add(new MyView(getString(R.string.progress_number_round), roundProgressBarWidthNumber));
     }
 
     /**
