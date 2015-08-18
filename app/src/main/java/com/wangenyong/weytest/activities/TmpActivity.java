@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.wangenyong.mylibrary.drawables.CircleImageDrawable;
 import com.wangenyong.weytest.R;
@@ -19,6 +20,7 @@ import butterknife.InjectView;
 
 public class TmpActivity extends AppCompatActivity {
     @InjectView(R.id.toolbar_tmp) Toolbar tmpToolbar;
+    @InjectView(R.id.tv_tmp) TextView tmpTv;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,8 @@ public class TmpActivity extends AppCompatActivity {
         ImageView imageView = (ImageView) findViewById(R.id.img_tmp);
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.img_guilunmei);
         imageView.setImageDrawable(new CircleImageDrawable(bitmap));
+
+        tmpTv.setError("Wrong!");
     }
 
     @Override
