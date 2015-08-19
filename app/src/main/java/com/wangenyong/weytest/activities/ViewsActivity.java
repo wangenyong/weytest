@@ -54,6 +54,7 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.utils.PercentFormatter;
 import com.wangenyong.mylibrary.tools.DimensionTools;
+import com.wangenyong.mylibrary.views.ClearEditText;
 import com.wangenyong.mylibrary.views.HorizontalProgressBarWithNumber;
 import com.wangenyong.mylibrary.views.RoundProgressBarWidthNumber;
 import com.wangenyong.mylibrary.views.TintableImageView;
@@ -231,6 +232,11 @@ public class ViewsActivity extends AppCompatActivity implements ColorChooserDial
         cornerBorderEditText.setLayoutParams(lp);
         cornerBorderEditText.setBackgroundResource(R.drawable.edittext_selector_corner_border);
         myViews.add(new MyView(getString(R.string.edittext_border_corner), cornerBorderEditText));
+
+        ClearEditText clearEditText = new ClearEditText(this);
+        clearEditText.setLayoutParams(lp);
+        clearEditText.setHint(getString(R.string.edittext_clear_en));
+        myViews.add(new MyView(getString(R.string.edittext_clear), clearEditText));
     }
 
     /**

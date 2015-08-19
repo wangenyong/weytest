@@ -104,6 +104,8 @@
     <string name="edittext_standard_en">stander edittext</string>
     <string name="edittext_border_corner">圆角输入框</string>
     <string name="edittext_border_corner_en">border corner edittext</string>
+    <string name="edittext_clear">可清除的输入框</string>
+    <string name="edittext_clear_en">clear edittext</string>
 
     <!-- Progress -->
     <string name="progress_standard">标准进度条</string>
