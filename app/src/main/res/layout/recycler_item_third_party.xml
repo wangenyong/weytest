@@ -18,7 +18,7 @@
             android:orientation="vertical"
             android:background="?android:attr/selectableItemBackground">
 
-            <ImageView
+            <com.wangenyong.mylibrary.views.SImageView
                 android:id="@+id/img_third_party_item"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

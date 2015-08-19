@@ -84,6 +84,10 @@
     <!-- Design -->
     <string name="design_null_app_error">此设计案例并未安装</string>
 
+    <!-- Third Party -->
+    <string name="third_party_null_error">此应用并未安装</string>
+    <string name="third_party_fab">Fab</string>
+
     <!-- Button -->
     <string name="button_standard">标准按钮</string>
     <string name="button_standard_en">STANDARD BUTTON</string>
