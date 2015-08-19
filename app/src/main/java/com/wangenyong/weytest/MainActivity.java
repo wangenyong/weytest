@@ -20,6 +20,7 @@ import com.wangenyong.weytest.fragments.DefaultFragment;
 import com.wangenyong.weytest.fragments.DesignFragment;
 import com.wangenyong.weytest.fragments.MainFragment;
 import com.wangenyong.weytest.fragments.TestFragment;
+import com.wangenyong.weytest.fragments.ThirdPartyFragment;
 import com.wangenyong.weytest.fragments.ToolFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -116,6 +117,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.nav_design:
                 fragment = DesignFragment.newInstance("", "");
+                break;
+            case R.id.nav_third_party:
+                fragment = ThirdPartyFragment.newInstance("", "");
                 break;
             case R.id.nav_tmp:
                 Intent intent = new Intent(MainActivity.this, TmpActivity.class);

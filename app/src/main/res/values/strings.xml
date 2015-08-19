@@ -21,6 +21,7 @@
     <string name="drawer_tools">工具集合</string>
     <string name="drawer_animation">动画效果</string>
     <string name="drawer_design">设计案例</string>
+    <string name="drawer_third_party">第三方库</string>
     <string name="drawer_tmp">临时页面</string>
 
 
