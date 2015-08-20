@@ -3,54 +3,52 @@ package com.wangenyong.weytest.adapters;
 import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.wangenyong.mylibrary.adapters.adapterdelegates.AbsAdapterDelegate;
-import com.wangenyong.mylibrary.views.SImageView;
 import com.wangenyong.weytest.R;
 import com.wangenyong.weytest.bean.Item;
-import com.wangenyong.weytest.bean.ThirdPartyItem;
+import com.wangenyong.weytest.bean.MyDesign;
 
 import java.util.List;
 
 /**
- * Created by wangenyong on 15/8/19.
+ * Created by wangenyong on 15/8/20.
  */
-public class ThirdPartyAdapterDelegate extends AbsAdapterDelegate<List<Item>> {
+public class IISAAdapterDelegate extends AbsAdapterDelegate<List<Item>> {
     private LayoutInflater inflater;
     private Activity activity;
 
-    public ThirdPartyAdapterDelegate(Activity activity, int viewType) {
+    public IISAAdapterDelegate(Activity activity, int viewType) {
         super(viewType);
         inflater = activity.getLayoutInflater();
         this.activity = activity;
     }
 
     @Override public boolean isForViewType(@NonNull List<Item> items, int position) {
-        return items.get(position) instanceof ThirdPartyItem;
+        return items.get(position) instanceof MyDesign;
     }
 
     @NonNull @Override public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent) {
-        return new ThirdPartyViewHolder(inflater.inflate(R.layout.recycler_item_third_party, parent, false));
+        return new DesignBigViewHolder(inflater.inflate(R.layout.recycler_item_design_big, parent, false));
     }
 
     @Override public void onBindViewHolder(@NonNull List<Item> items, int position,
                                            @NonNull RecyclerView.ViewHolder holder) {
-        ThirdPartyViewHolder vh = (ThirdPartyViewHolder) holder;
-        final ThirdPartyItem thirdParty = (ThirdPartyItem) items.get(position);
-        vh.imageView.setImageResource(thirdParty.getImage());
-        vh.viewTitleTv.setText(thirdParty.getTitle());
+        DesignBigViewHolder vh = (DesignBigViewHolder) holder;
+        final MyDesign myDesign = (MyDesign) items.get(position);
+
+        vh.mainImg.setImageResource(myDesign.getImageId());
         vh.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
-                    Intent launchIntent = activity.getPackageManager().getLaunchIntentForPackage(thirdParty.getLink());
+                    Intent launchIntent = activity.getPackageManager().getLaunchIntentForPackage(myDesign.getPackageName());
                     activity.startActivity(launchIntent);
                 } catch (NullPointerException e) {
                     Toast.makeText(activity, activity.getString(R.string.third_party_null_error), Toast.LENGTH_SHORT).show();
@@ -59,17 +57,15 @@ public class ThirdPartyAdapterDelegate extends AbsAdapterDelegate<List<Item>> {
         });
     }
 
+    static class DesignBigViewHolder extends RecyclerView.ViewHolder {
+        ImageView mainImg;
+        ImageView favoriateImg;
 
-    static class ThirdPartyViewHolder extends RecyclerView.ViewHolder {
-        TextView viewTitleTv;
-        CardView cardView;
-        SImageView imageView;
 
-        public ThirdPartyViewHolder(View itemView) {
-            super(itemView);
-            viewTitleTv = (TextView) itemView.findViewById(R.id.tv_third_party_item);
-            cardView = (CardView) itemView.findViewById(R.id.cardview_third_party_item);
-            imageView = (SImageView) itemView.findViewById(R.id.img_third_party_item);
+        public DesignBigViewHolder(View itemLayoutView) {
+            super(itemLayoutView);
+            mainImg = (ImageView) itemLayoutView.findViewById(R.id.img_design_item);
+            favoriateImg = (ImageView) itemLayoutView.findViewById(R.id.img_design_item_favorite);
         }
     }
 }

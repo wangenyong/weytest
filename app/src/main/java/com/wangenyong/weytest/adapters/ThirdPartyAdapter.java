@@ -21,7 +21,7 @@ public class ThirdPartyAdapter extends RecyclerView.Adapter {
 
         // Delegates
         delegatesManager = new AdapterDelegatesManager<>();
-        delegatesManager.addDelegate(new ThirdPartyAdapterDelegate(activity, 0));
+        delegatesManager.addDelegate(new ITSAAdapterDelegate(activity, 0));
 
     }
 

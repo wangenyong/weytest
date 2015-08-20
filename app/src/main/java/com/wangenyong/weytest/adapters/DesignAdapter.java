@@ -21,8 +21,8 @@ public class DesignAdapter extends RecyclerView.Adapter {
 
         // Delegates
         delegatesManager = new AdapterDelegatesManager<>();
-        delegatesManager.addDelegate(new DesignBigAdapterDelegate(activity, 0));
-        delegatesManager.addDelegate(new ThirdPartyAdapterDelegate(activity, 1));
+        delegatesManager.addDelegate(new IISAAdapterDelegate(activity, 0));
+        delegatesManager.addDelegate(new ITSAAdapterDelegate(activity, 1));
 
     }
 
