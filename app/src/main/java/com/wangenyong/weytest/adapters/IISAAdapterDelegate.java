@@ -35,7 +35,7 @@ public class IISAAdapterDelegate extends AbsAdapterDelegate<List<Item>> {
     }
 
     @NonNull @Override public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent) {
-        return new DesignBigViewHolder(inflater.inflate(R.layout.recycler_item_design_big, parent, false));
+        return new DesignBigViewHolder(inflater.inflate(R.layout.recycler_item_img_icon_style_a, parent, false));
     }
 
     @Override public void onBindViewHolder(@NonNull List<Item> items, int position,
@@ -64,8 +64,8 @@ public class IISAAdapterDelegate extends AbsAdapterDelegate<List<Item>> {
 
         public DesignBigViewHolder(View itemLayoutView) {
             super(itemLayoutView);
-            mainImg = (ImageView) itemLayoutView.findViewById(R.id.img_design_item);
-            favoriateImg = (ImageView) itemLayoutView.findViewById(R.id.img_design_item_favorite);
+            mainImg = (ImageView) itemLayoutView.findViewById(R.id.img_img_icon_style_a_item);
+            favoriateImg = (ImageView) itemLayoutView.findViewById(R.id.img_img_icon_style_a_favorite);
         }
     }
 }
