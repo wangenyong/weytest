@@ -3,7 +3,7 @@ package com.wangenyong.weytest.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +11,9 @@ import android.view.ViewGroup;
 
 import com.wangenyong.weytest.R;
 import com.wangenyong.weytest.adapters.DesignAdapter;
+import com.wangenyong.weytest.bean.Item;
 import com.wangenyong.weytest.bean.MyDesign;
+import com.wangenyong.weytest.bean.ThirdPartyItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +38,7 @@ public class DesignFragment extends Fragment {
 
     @InjectView(R.id.recyclerview_design) RecyclerView designRecyclerView;
     private DesignAdapter designAdapter;
-    private List<MyDesign> myDesigns = new ArrayList<MyDesign>();
+    private List<Item> myDesigns = new ArrayList<Item>();
     private RecyclerView.LayoutManager mLayoutManager;
 
     /**
@@ -78,13 +80,22 @@ public class DesignFragment extends Fragment {
         ButterKnife.inject(this, rootView);
 
         myDesigns.clear();
-        myDesigns.add(new MyDesign(R.drawable.img_design_wallet, "com.wangenyong.wallet"));
-        myDesigns.add(new MyDesign(R.drawable.img_design_slidemenu, "com.wangenyong.slidemenu"));
+        myDesigns.add(new MyDesign(R.drawable.img_design_wallet, "com.wangenyong.wallet", 4));
+        myDesigns.add(new ThirdPartyItem(R.drawable.img_design_slidemenu, "com.wangenyong.slidemenu", "SlideMenu" , 2));
 
-        mLayoutManager = new LinearLayoutManager(getActivity());
-        designRecyclerView.setLayoutManager(mLayoutManager);
+        final GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 4);
+        //mLayoutManager = new LinearLayoutManager(getActivity());
+
+        designRecyclerView.setLayoutManager(gridLayoutManager);
         designAdapter = new DesignAdapter(getActivity(), myDesigns);
         designRecyclerView.setAdapter(designAdapter);
+
+        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                return designAdapter.getSpanCount(position);
+            }
+        });
 
         return rootView;
     }

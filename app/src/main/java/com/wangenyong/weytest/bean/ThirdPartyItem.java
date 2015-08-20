@@ -8,6 +8,11 @@ public class ThirdPartyItem extends Item {
     private String title;
     private String link;
 
+    public ThirdPartyItem(int image, String link, String title, int count) {
+        this(image, link, title);
+        this.count = count;
+    }
+
     public ThirdPartyItem(int image, String link, String title) {
         this.image = image;
         this.link = link;

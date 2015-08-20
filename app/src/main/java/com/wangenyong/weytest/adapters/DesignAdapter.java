@@ -1,84 +1,49 @@
 package com.wangenyong.weytest.adapters;
 
-import android.content.Context;
-import android.content.Intent;
+import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.wangenyong.weytest.R;
-import com.wangenyong.weytest.bean.MyDesign;
+import com.wangenyong.mylibrary.adapters.adapterdelegates.AdapterDelegatesManager;
+import com.wangenyong.weytest.bean.Item;
 
 import java.util.List;
 
 /**
  * Created by wangenyong on 15/8/7.
  */
-public class DesignAdapter extends RecyclerView.Adapter<DesignAdapter.ViewHolder> {
-    private Context context;
-    private List<MyDesign> myDesignList;
+public class DesignAdapter extends RecyclerView.Adapter {
+    private AdapterDelegatesManager<List<Item>> delegatesManager;
+    private List<Item> items;
 
-    public DesignAdapter(Context context, List<MyDesign> myDesignList) {
-        this.context = context;
-        this.myDesignList = myDesignList;
+    public DesignAdapter(Activity activity, List<Item> items) {
+        this.items = items;
+
+        // Delegates
+        delegatesManager = new AdapterDelegatesManager<>();
+        delegatesManager.addDelegate(new DesignBigAdapterDelegate(activity, 0));
+        delegatesManager.addDelegate(new ThirdPartyAdapterDelegate(activity, 1));
+
     }
 
-    @Override
-    public DesignAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        // create a new view
-        View itemLayoutView = LayoutInflater.from(parent.getContext()).inflate(
-                R.layout.recycler_item_design, parent, false);
-
-        // create ViewHolder
-        ViewHolder viewHolder = new ViewHolder(itemLayoutView);
-        return viewHolder;
+    public int getSpanCount(int position) {
+        return items.get(position).getCount();
     }
 
-    @Override
-    public void onBindViewHolder(final ViewHolder viewHolder, int position) {
-        final MyDesign myDesign = myDesignList.get(position);
 
-        viewHolder.mainImg.setImageResource(myDesign.getImageId());
-
-        viewHolder.favoriateImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                viewHolder.favoriateImg.setColorFilter(context.getResources().getColor(R.color.favoriate));
-            }
-        });
-
-        viewHolder.mainImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    Intent launchIntent = context.getPackageManager().getLaunchIntentForPackage(myDesign.getPackageName());
-                    context.startActivity(launchIntent);
-                } catch (NullPointerException e) {
-                    Toast.makeText(context, context.getString(R.string.design_null_app_error), Toast.LENGTH_SHORT).show();
-                }
-
-            }
-        });
+    @Override public int getItemViewType(int position) {
+        return delegatesManager.getItemViewType(items, position);
     }
 
-    @Override
-    public int getItemCount() {
-        return myDesignList.size();
+    @Override public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return delegatesManager.onCreateViewHolder(parent, viewType);
     }
 
-    // inner class to hold a reference to each item of RecyclerView
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView mainImg;
-        ImageView favoriateImg;
+    @Override public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        delegatesManager.onBindViewHolder(items, position, holder);
+    }
 
-
-        public ViewHolder(View itemLayoutView) {
-            super(itemLayoutView);
-            mainImg = (ImageView) itemLayoutView.findViewById(R.id.img_design_item);
-            favoriateImg = (ImageView) itemLayoutView.findViewById(R.id.img_design_item_favorite);
-        }
+    @Override public int getItemCount() {
+        return items.size();
     }
 }
