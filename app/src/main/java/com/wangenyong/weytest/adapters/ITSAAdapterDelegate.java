@@ -37,7 +37,7 @@ public class ITSAAdapterDelegate extends AbsAdapterDelegate<List<Item>> {
     }
 
     @NonNull @Override public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent) {
-        return new ThirdPartyViewHolder(inflater.inflate(R.layout.recycler_item_third_party, parent, false));
+        return new ThirdPartyViewHolder(inflater.inflate(R.layout.recycler_item_img_txt_style_a, parent, false));
     }
 
     @Override public void onBindViewHolder(@NonNull List<Item> items, int position,
@@ -67,9 +67,9 @@ public class ITSAAdapterDelegate extends AbsAdapterDelegate<List<Item>> {
 
         public ThirdPartyViewHolder(View itemView) {
             super(itemView);
-            viewTitleTv = (TextView) itemView.findViewById(R.id.tv_third_party_item);
-            cardView = (CardView) itemView.findViewById(R.id.cardview_third_party_item);
-            imageView = (SImageView) itemView.findViewById(R.id.img_third_party_item);
+            viewTitleTv = (TextView) itemView.findViewById(R.id.tv_img_txt_style_a_item);
+            cardView = (CardView) itemView.findViewById(R.id.cardview_img_txt_style_a_item);
+            imageView = (SImageView) itemView.findViewById(R.id.img_img_txt_style_a_item);
         }
     }
 }
