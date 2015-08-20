@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import com.wangenyong.weytest.R;
 import com.wangenyong.weytest.adapters.ThirdPartyAdapter;
 import com.wangenyong.weytest.bean.Item;
-import com.wangenyong.weytest.bean.ThirdPartyItem;
+import com.wangenyong.weytest.bean.ImgTxtItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,7 +78,7 @@ public class ThirdPartyFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_third_party, container, false);
         ButterKnife.inject(this, rootView);
 
-        items.add(new ThirdPartyItem(R.drawable.img_third_party_fab, "com.getbase.floatingactionbutton.sample", getString(R.string.third_party_fab)));
+        items.add(new ImgTxtItem(R.drawable.img_third_party_fab, "com.getbase.floatingactionbutton.sample", getString(R.string.third_party_fab)));
 
         thirdPartyAdapter = new ThirdPartyAdapter(getActivity(), items);
         thirdPartyRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));

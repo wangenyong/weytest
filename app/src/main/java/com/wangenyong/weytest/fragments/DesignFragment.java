@@ -12,8 +12,8 @@ import android.view.ViewGroup;
 import com.wangenyong.weytest.R;
 import com.wangenyong.weytest.adapters.DesignAdapter;
 import com.wangenyong.weytest.bean.Item;
-import com.wangenyong.weytest.bean.MyDesign;
-import com.wangenyong.weytest.bean.ThirdPartyItem;
+import com.wangenyong.weytest.bean.ImgIconItem;
+import com.wangenyong.weytest.bean.ImgTxtItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,8 +80,8 @@ public class DesignFragment extends Fragment {
         ButterKnife.inject(this, rootView);
 
         myDesigns.clear();
-        myDesigns.add(new MyDesign(R.drawable.img_design_wallet, "com.wangenyong.wallet", 4));
-        myDesigns.add(new ThirdPartyItem(R.drawable.img_design_slidemenu, "com.wangenyong.slidemenu", "SlideMenu" , 2));
+        myDesigns.add(new ImgIconItem(R.drawable.img_design_wallet, "com.wangenyong.wallet", 4));
+        myDesigns.add(new ImgTxtItem(R.drawable.img_design_slidemenu, "com.wangenyong.slidemenu", "SlideMenu" , 2));
 
         final GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 4);
         //mLayoutManager = new LinearLayoutManager(getActivity());

@@ -13,7 +13,7 @@ import android.widget.Toast;
 import com.wangenyong.mylibrary.adapters.adapterdelegates.AbsAdapterDelegate;
 import com.wangenyong.weytest.R;
 import com.wangenyong.weytest.bean.Item;
-import com.wangenyong.weytest.bean.MyDesign;
+import com.wangenyong.weytest.bean.ImgIconItem;
 
 import java.util.List;
 
@@ -31,7 +31,7 @@ public class IISAAdapterDelegate extends AbsAdapterDelegate<List<Item>> {
     }
 
     @Override public boolean isForViewType(@NonNull List<Item> items, int position) {
-        return items.get(position) instanceof MyDesign;
+        return items.get(position) instanceof ImgIconItem;
     }
 
     @NonNull @Override public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent) {
@@ -41,14 +41,14 @@ public class IISAAdapterDelegate extends AbsAdapterDelegate<List<Item>> {
     @Override public void onBindViewHolder(@NonNull List<Item> items, int position,
                                            @NonNull RecyclerView.ViewHolder holder) {
         DesignBigViewHolder vh = (DesignBigViewHolder) holder;
-        final MyDesign myDesign = (MyDesign) items.get(position);
+        final ImgIconItem imgIconItem = (ImgIconItem) items.get(position);
 
-        vh.mainImg.setImageResource(myDesign.getImageId());
+        vh.mainImg.setImageResource(imgIconItem.getImageId());
         vh.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
-                    Intent launchIntent = activity.getPackageManager().getLaunchIntentForPackage(myDesign.getPackageName());
+                    Intent launchIntent = activity.getPackageManager().getLaunchIntentForPackage(imgIconItem.getPackageName());
                     activity.startActivity(launchIntent);
                 } catch (NullPointerException e) {
                     Toast.makeText(activity, activity.getString(R.string.third_party_null_error), Toast.LENGTH_SHORT).show();

@@ -15,7 +15,7 @@ import com.wangenyong.mylibrary.adapters.adapterdelegates.AbsAdapterDelegate;
 import com.wangenyong.mylibrary.views.SImageView;
 import com.wangenyong.weytest.R;
 import com.wangenyong.weytest.bean.Item;
-import com.wangenyong.weytest.bean.ThirdPartyItem;
+import com.wangenyong.weytest.bean.ImgTxtItem;
 
 import java.util.List;
 
@@ -33,7 +33,7 @@ public class ITSAAdapterDelegate extends AbsAdapterDelegate<List<Item>> {
     }
 
     @Override public boolean isForViewType(@NonNull List<Item> items, int position) {
-        return items.get(position) instanceof ThirdPartyItem;
+        return items.get(position) instanceof ImgTxtItem;
     }
 
     @NonNull @Override public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent) {
@@ -43,7 +43,7 @@ public class ITSAAdapterDelegate extends AbsAdapterDelegate<List<Item>> {
     @Override public void onBindViewHolder(@NonNull List<Item> items, int position,
                                            @NonNull RecyclerView.ViewHolder holder) {
         ThirdPartyViewHolder vh = (ThirdPartyViewHolder) holder;
-        final ThirdPartyItem thirdParty = (ThirdPartyItem) items.get(position);
+        final ImgTxtItem thirdParty = (ImgTxtItem) items.get(position);
         vh.imageView.setImageResource(thirdParty.getImage());
         vh.viewTitleTv.setText(thirdParty.getTitle());
         vh.itemView.setOnClickListener(new View.OnClickListener() {
