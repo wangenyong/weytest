@@ -82,6 +82,7 @@ public class DesignFragment extends Fragment {
         myDesigns.clear();
         myDesigns.add(new ImgIconItem(R.drawable.img_design_wallet, "com.wangenyong.wallet", 4));
         myDesigns.add(new ImgTxtItem(R.drawable.img_design_slidemenu, "com.wangenyong.slidemenu", "SlideMenu" , 2));
+        myDesigns.add(new ImgTxtItem(R.drawable.img_design_menu_profile, "com.wangenyong.menuprofile", "MenuProfile", 2));
 
         final GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 4);
         //mLayoutManager = new LinearLayoutManager(getActivity());
