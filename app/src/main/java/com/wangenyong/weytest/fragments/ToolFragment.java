@@ -11,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,8 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.simplelist.MaterialSimpleListAdapter;
 import com.afollestad.materialdialogs.simplelist.MaterialSimpleListItem;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+import com.wangenyong.mylibrary.itemtouchhelper.OnStartDragListener;
+import com.wangenyong.mylibrary.itemtouchhelper.SimpleItemTouchHelperCallback;
 import com.wangenyong.mylibrary.tools.PhotoTools;
 import com.wangenyong.mylibrary.zxing.Intents;
 import com.wangenyong.weytest.R;
@@ -57,6 +60,8 @@ public class ToolFragment extends Fragment implements ToolsAdapter.OnItemClickLi
     private final static int CAMERA_CODE = 20;
     private final static int ALBUM_CODE = 21;
     private final static int QR_CODE = 22;
+
+    private ItemTouchHelper mItemTouchHelper;
 
 
     /**
@@ -104,6 +109,9 @@ public class ToolFragment extends Fragment implements ToolsAdapter.OnItemClickLi
         toolRecyclerView.setAdapter(toolsAdapter);
         toolRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
+        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(toolsAdapter);
+        mItemTouchHelper = new ItemTouchHelper(callback);
+        mItemTouchHelper.attachToRecyclerView(toolRecyclerView);
 
         return rootView;
     }
@@ -121,8 +129,8 @@ public class ToolFragment extends Fragment implements ToolsAdapter.OnItemClickLi
 
     private MaterialCalendarView materialCalendarView;
     @Override
-    public void onItemClick(View view, int position) {
-        switch (myTools.get(position).getToolTypes()) {
+    public void onItemClick(View view, MyTool.Types type) {
+        switch (type) {
             case QRCODE:
                 Intent scanIntent = new Intent(Intents.Scan.ACTION);
                 scanIntent.putExtra(Intents.Scan.RESULT_DISPLAY_DURATION_MS, 0L);

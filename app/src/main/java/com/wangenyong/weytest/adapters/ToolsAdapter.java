@@ -1,6 +1,7 @@
 package com.wangenyong.weytest.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,15 +10,18 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.wangenyong.mylibrary.itemtouchhelper.ItemTouchHelperAdapter;
+import com.wangenyong.mylibrary.itemtouchhelper.ItemTouchHelperViewHolder;
 import com.wangenyong.weytest.R;
 import com.wangenyong.weytest.bean.MyTool;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
  * Created by wangenyong on 15/7/22.
  */
-public class ToolsAdapter extends RecyclerView.Adapter<ToolsAdapter.ViewHolder> {
+public class ToolsAdapter extends RecyclerView.Adapter<ToolsAdapter.ViewHolder> implements ItemTouchHelperAdapter {
     private List<MyTool> myTools;
     private LayoutInflater mInflater;
     private OnItemClickLitener mOnItemClickLitener;
@@ -45,7 +49,7 @@ public class ToolsAdapter extends RecyclerView.Adapter<ToolsAdapter.ViewHolder> 
 
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, final int position) {
+    public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
         final MyTool myTool = myTools.get(position);
         viewHolder.imageView.setImageResource(myTool.getImage());
         viewHolder.viewTitleTv.setText(myTool.getTitle());
@@ -54,10 +58,23 @@ public class ToolsAdapter extends RecyclerView.Adapter<ToolsAdapter.ViewHolder> 
             viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mOnItemClickLitener.onItemClick(v, position);
+                    mOnItemClickLitener.onItemClick(v, myTool.getToolTypes());
                 }
             });
         }
+    }
+
+    @Override
+    public void onItemDismiss(int position) {
+        myTools.remove(position);
+        notifyItemRemoved(position);
+    }
+
+    @Override
+    public boolean onItemMove(int fromPosition, int toPosition) {
+        Collections.swap(myTools, fromPosition, toPosition);
+        notifyItemMoved(fromPosition, toPosition);
+        return true;
     }
 
     @Override
@@ -66,7 +83,7 @@ public class ToolsAdapter extends RecyclerView.Adapter<ToolsAdapter.ViewHolder> 
     }
 
     // inner class to hold a reference to each item of RecyclerView
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder implements ItemTouchHelperViewHolder {
         TextView viewTitleTv;
         CardView cardView;
         ImageView imageView;
@@ -77,11 +94,21 @@ public class ToolsAdapter extends RecyclerView.Adapter<ToolsAdapter.ViewHolder> 
             cardView = (CardView) itemLayoutView.findViewById(R.id.cardview_tools_item);
             imageView = (ImageView) itemLayoutView.findViewById(R.id.img_tools_item);
         }
+
+        @Override
+        public void onItemSelected() {
+            viewTitleTv.setBackgroundColor(Color.LTGRAY);
+        }
+
+        @Override
+        public void onItemClear() {
+            viewTitleTv.setBackgroundColor(0);
+        }
     }
 
 
     public interface OnItemClickLitener {
-        void onItemClick(View view, int position);
+        void onItemClick(View view, MyTool.Types type);
 
         void onItemLongClick(View view, int position);
     }
