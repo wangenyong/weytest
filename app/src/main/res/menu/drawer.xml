@@ -11,10 +11,6 @@
             android:icon="@drawable/ic_action_tools"
             android:title="@string/drawer_tools" />
         <item
-            android:id="@+id/nav_animation"
-            android:icon="@drawable/ic_action_animation"
-            android:title="@string/drawer_animation" />
-        <item
             android:id="@+id/nav_design"
             android:icon="@drawable/ic_action_design"
             android:title="@string/drawer_design" />
@@ -26,6 +22,10 @@
             android:id="@+id/nav_tmp"
             android:icon="@drawable/ic_action_tmp"
             android:title="@string/drawer_tmp" />
+        <item
+            android:id="@+id/nav_animation"
+            android:icon="@drawable/ic_action_animation"
+            android:title="@string/drawer_animation" />
     </group>
 
     <item android:title="Sub items">

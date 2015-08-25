@@ -84,6 +84,7 @@ public class DesignFragment extends Fragment {
         myDesigns.add(new ImgTxtItem(R.drawable.img_design_slidemenu, "com.wangenyong.slidemenu", "SlideMenu", 2));
         myDesigns.add(new ImgTxtItem(R.drawable.img_design_menu_profile, "com.wangenyong.menuprofile", "MenuProfile", 2));
         myDesigns.add(new ImgTxtItem(R.drawable.img_design_textinputlayout, "com.wangenyong.textinputlayoutdemo", "Login", 2));
+        myDesigns.add(new ImgTxtItem(R.drawable.img_design_list_drag_swipe, "com.wangenyong.listdragswipe", "List", 2));
         myDesigns.add(new ImgIconItem(R.drawable.img_design_wallet, "com.wangenyong.wallet", 4));
 
 
