@@ -2,6 +2,7 @@ package com.wangenyong.weytest.adapters;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wangenyong.mylibrary.adapters.adapterdelegates.AbsAdapterDelegate;
+import com.wangenyong.mylibrary.itemtouchhelper.ItemTouchHelperViewHolder;
 import com.wangenyong.mylibrary.views.SImageView;
 import com.wangenyong.weytest.R;
 import com.wangenyong.weytest.bean.Item;
@@ -60,7 +62,7 @@ public class ITSAAdapterDelegate extends AbsAdapterDelegate<List<Item>> {
     }
 
 
-    static class ThirdPartyViewHolder extends RecyclerView.ViewHolder {
+    static class ThirdPartyViewHolder extends RecyclerView.ViewHolder implements ItemTouchHelperViewHolder {
         TextView viewTitleTv;
         CardView cardView;
         SImageView imageView;
@@ -70,6 +72,16 @@ public class ITSAAdapterDelegate extends AbsAdapterDelegate<List<Item>> {
             viewTitleTv = (TextView) itemView.findViewById(R.id.tv_img_txt_style_a_item);
             cardView = (CardView) itemView.findViewById(R.id.cardview_img_txt_style_a_item);
             imageView = (SImageView) itemView.findViewById(R.id.img_img_txt_style_a_item);
+        }
+
+        @Override
+        public void onItemSelected() {
+            viewTitleTv.setBackgroundColor(Color.LTGRAY);
+        }
+
+        @Override
+        public void onItemClear() {
+            viewTitleTv.setBackgroundColor(0);
         }
     }
 }

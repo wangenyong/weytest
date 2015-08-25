@@ -5,14 +5,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
 import com.wangenyong.mylibrary.adapters.adapterdelegates.AdapterDelegatesManager;
+import com.wangenyong.mylibrary.itemtouchhelper.ItemTouchHelperAdapter;
 import com.wangenyong.weytest.bean.Item;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
  * Created by wangenyong on 15/8/7.
  */
-public class DesignAdapter extends RecyclerView.Adapter {
+public class DesignAdapter extends RecyclerView.Adapter implements ItemTouchHelperAdapter {
     private AdapterDelegatesManager<List<Item>> delegatesManager;
     private List<Item> items;
 
@@ -45,5 +47,18 @@ public class DesignAdapter extends RecyclerView.Adapter {
 
     @Override public int getItemCount() {
         return items.size();
+    }
+
+    @Override
+    public void onItemDismiss(int position) {
+        items.remove(position);
+        notifyItemRemoved(position);
+    }
+
+    @Override
+    public boolean onItemMove(int fromPosition, int toPosition) {
+        Collections.swap(items, fromPosition, toPosition);
+        notifyItemMoved(fromPosition, toPosition);
+        return true;
     }
 }

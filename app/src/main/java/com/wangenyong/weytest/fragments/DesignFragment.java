@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.wangenyong.mylibrary.itemtouchhelper.SimpleItemTouchHelperCallback;
 import com.wangenyong.weytest.R;
 import com.wangenyong.weytest.adapters.DesignAdapter;
 import com.wangenyong.weytest.bean.Item;
@@ -40,6 +42,8 @@ public class DesignFragment extends Fragment {
     private DesignAdapter designAdapter;
     private List<Item> myDesigns = new ArrayList<Item>();
     private RecyclerView.LayoutManager mLayoutManager;
+
+    private ItemTouchHelper mItemTouchHelper;
 
     /**
      * Use this factory method to create a new instance of
@@ -82,9 +86,9 @@ public class DesignFragment extends Fragment {
         myDesigns.clear();
 
         myDesigns.add(new ImgTxtItem(R.drawable.img_design_slidemenu, "com.wangenyong.slidemenu", "SlideMenu", 2));
+        myDesigns.add(new ImgTxtItem(R.drawable.img_design_list_drag_swipe, "com.wangenyong.listdragswipe", "List", 2));
         myDesigns.add(new ImgTxtItem(R.drawable.img_design_menu_profile, "com.wangenyong.menuprofile", "MenuProfile", 2));
         myDesigns.add(new ImgTxtItem(R.drawable.img_design_textinputlayout, "com.wangenyong.textinputlayoutdemo", "Login", 2));
-        myDesigns.add(new ImgTxtItem(R.drawable.img_design_list_drag_swipe, "com.wangenyong.listdragswipe", "List", 2));
         myDesigns.add(new ImgIconItem(R.drawable.img_design_wallet, "com.wangenyong.wallet", 4));
 
 
@@ -101,6 +105,10 @@ public class DesignFragment extends Fragment {
                 return designAdapter.getSpanCount(position);
             }
         });
+
+        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(designAdapter);
+        mItemTouchHelper = new ItemTouchHelper(callback);
+        mItemTouchHelper.attachToRecyclerView(designRecyclerView);
 
         return rootView;
     }
