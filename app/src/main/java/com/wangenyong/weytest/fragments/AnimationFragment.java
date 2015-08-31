@@ -1,10 +1,10 @@
 package com.wangenyong.weytest.fragments;
 
 
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,7 +31,8 @@ public class AnimationFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     @InjectView(R.id.tabs_animation) PagerSlidingTabStrip animationTabs;
-    @InjectView(R.id.viewpager_animation) ViewPager animationViewPager;
+    @InjectView(R.id.viewpager_animation)
+    ViewPager animationViewPager;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -82,7 +83,7 @@ public class AnimationFragment extends Fragment {
 
 
     private void setupViewPager(ViewPager viewPager) {
-        AnimationAdapter adapter = new AnimationAdapter(getChildFragmentManager());
+        AnimationAdapter adapter = new AnimationAdapter(getFragmentManager());
         adapter.addFragment(CircleMenuFragment.newInstance("", ""), getString(R.string.animation_circle_menu));
         adapter.addFragment(TestFragment.newInstance("Animation"), "Animation");
         viewPager.setAdapter(adapter);

@@ -2,12 +2,12 @@ package com.wangenyong.weytest.fragments;
 
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -21,7 +21,6 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.simplelist.MaterialSimpleListAdapter;
 import com.afollestad.materialdialogs.simplelist.MaterialSimpleListItem;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
-import com.wangenyong.mylibrary.itemtouchhelper.OnStartDragListener;
 import com.wangenyong.mylibrary.itemtouchhelper.SimpleItemTouchHelperCallback;
 import com.wangenyong.mylibrary.tools.PhotoTools;
 import com.wangenyong.mylibrary.zxing.Intents;
@@ -31,7 +30,6 @@ import com.wangenyong.weytest.activities.MapActivity;
 import com.wangenyong.weytest.activities.ShakeActivity;
 import com.wangenyong.weytest.adapters.ToolsAdapter;
 import com.wangenyong.weytest.bean.MyTool;
-import com.wangenyong.weytest.dialogs.ImageViewDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -152,9 +150,9 @@ public class ToolFragment extends Fragment implements ToolsAdapter.OnItemClickLi
                         public void onSelection(MaterialDialog materialDialog, View view, int i, CharSequence charSequence) {
                             PhotoTools photoTools = new PhotoTools(getString(R.string.tools_photo_dir), getString(R.string.tools_photo_album), "jpg");
                             if (i == 0) {
-                                mCameraPhotoPath = photoTools.takeCameraPhotos(ToolFragment.this, CAMERA_CODE);
+                                //mCameraPhotoPath = photoTools.takeCameraPhotos(ToolFragment.this, CAMERA_CODE);
                             } else if (i == 1) {
-                                photoTools.takeAlbumPhotos(ToolFragment.this, ALBUM_CODE);
+                                //photoTools.takeAlbumPhotos(ToolFragment.this, ALBUM_CODE);
                             }
                             materialDialog.dismiss();
                         }
@@ -205,7 +203,7 @@ public class ToolFragment extends Fragment implements ToolsAdapter.OnItemClickLi
         switch (requestCode) {
             case CAMERA_CODE:
                 if (resultCode == Activity.RESULT_OK && mCameraPhotoPath != null) {
-                    ImageViewDialog.create(mCameraPhotoPath).show(getFragmentManager(), "camera_photo");
+                    //ImageViewDialog.create(mCameraPhotoPath).show(getFragmentManager(), "camera_photo");
                 }
                 break;
             case ALBUM_CODE:
@@ -221,7 +219,7 @@ public class ToolFragment extends Fragment implements ToolsAdapter.OnItemClickLi
                     String picturePath = cursor.getString(columnIndex);
                     cursor.close();
 
-                    ImageViewDialog.create(picturePath).show(getFragmentManager(), "album_photo");
+                    //ImageViewDialog.create(picturePath).show(getFragmentManager(), "album_photo");
                 }
                 break;
             case QR_CODE:

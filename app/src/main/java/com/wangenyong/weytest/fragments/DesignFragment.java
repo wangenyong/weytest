@@ -1,8 +1,8 @@
 package com.wangenyong.weytest.fragments;
 
 
+import android.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -13,9 +13,9 @@ import android.view.ViewGroup;
 import com.wangenyong.mylibrary.itemtouchhelper.SimpleItemTouchHelperCallback;
 import com.wangenyong.weytest.R;
 import com.wangenyong.weytest.adapters.DesignAdapter;
-import com.wangenyong.weytest.bean.Item;
 import com.wangenyong.weytest.bean.ImgIconItem;
 import com.wangenyong.weytest.bean.ImgTxtItem;
+import com.wangenyong.weytest.bean.Item;
 
 import java.util.ArrayList;
 import java.util.List;
