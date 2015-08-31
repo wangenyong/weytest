@@ -59,6 +59,7 @@ public class ToolFragment extends Fragment implements ToolsAdapter.OnItemClickLi
 
     final private int REQUEST_CODE_TAKE_PHOTO_PERMISSIONS = 123;
     final private int REQUEST_CODE_QR_PERMISSIONS = 124;
+    final private int REQUEST_CODE_GPS_PERMISSIONS = 125;
 
     @InjectView(R.id.recyclerview_tool) RecyclerView toolRecyclerView;
     private ToolsAdapter toolsAdapter;
@@ -312,6 +313,44 @@ public class ToolFragment extends Fragment implements ToolsAdapter.OnItemClickLi
         startActivityForResult(scanIntent, QR_CODE);
     }
 
+    private void getGPS() {
+        List<String> permissionsNeeded = new ArrayList<String>();
+        final List<String> permissionsList = new ArrayList<String>();
+
+        if (!addPermission(permissionsList, Manifest.permission.ACCESS_FINE_LOCATION))
+            permissionsNeeded.add("ACCESS_FINE_LOCATION");
+        if (!addPermission(permissionsList, Manifest.permission.ACCESS_COARSE_LOCATION))
+            permissionsNeeded.add("ACCESS_COARSE_LOCATION");
+        if (!addPermission(permissionsList, Manifest.permission.READ_PHONE_STATE))
+            permissionsNeeded.add("READ_PHONE_STATE");
+
+        if (permissionsList.size() > 0) {
+            if (permissionsNeeded.size() > 0) {
+                // Need Rationale
+                String message = "You need to grant access to " + permissionsNeeded.get(0);
+                for (int i = 1; i < permissionsNeeded.size(); i++)
+                    message = message + ", " + permissionsNeeded.get(i);
+                showMessageOKCancel(message,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                FragmentCompat.requestPermissions(ToolFragment.this, permissionsList.toArray(new String[permissionsList.size()]),
+                                        REQUEST_CODE_GPS_PERMISSIONS);
+                            }
+                        });
+                return;
+            }
+            FragmentCompat.requestPermissions(ToolFragment.this, permissionsList.toArray(new String[permissionsList.size()]),
+                    REQUEST_CODE_GPS_PERMISSIONS);
+            return;
+        }
+
+        Intent gpsIntent = new Intent(getActivity(), GpsActivity.class);
+        startActivity(gpsIntent);
+    }
+
+
+
     private boolean addPermission(List<String> permissionsList, String permission) {
         if (ContextCompat.checkSelfPermission(getActivity(), permission) != PackageManager.PERMISSION_GRANTED) {
             permissionsList.add(permission);
@@ -360,6 +399,32 @@ public class ToolFragment extends Fragment implements ToolsAdapter.OnItemClickLi
                             .show();
                 }
                 break;
+            /**
+            case REQUEST_CODE_GPS_PERMISSIONS:
+            {
+                Map<String, Integer> perms = new HashMap<String, Integer>();
+                // Initial
+                perms.put(Manifest.permission.ACCESS_FINE_LOCATION, PackageManager.PERMISSION_GRANTED);
+                perms.put(Manifest.permission.ACCESS_COARSE_LOCATION, PackageManager.PERMISSION_GRANTED);
+                perms.put(Manifest.permission.READ_PHONE_STATE, PackageManager.PERMISSION_GRANTED);
+                // Fill with results
+                for (int i = 0; i < permissions.length; i++)
+                    perms.put(permissions[i], grantResults[i]);
+                // Check for ACCESS_FINE_LOCATION
+                if (perms.get(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                        && perms.get(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                        && perms.get(Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
+                    // All Permissions Granted
+                    Intent gpsIntent = new Intent(getActivity(), GpsActivity.class);
+                    startActivity(gpsIntent);
+                } else {
+                    // Permission Denied
+                    Toast.makeText(getActivity(), "Some Permission is Denied", Toast.LENGTH_SHORT)
+                            .show();
+                }
+            }
+            break;
+             */
             default:
                 super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
