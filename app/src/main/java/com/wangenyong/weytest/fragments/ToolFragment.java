@@ -11,6 +11,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v13.app.FragmentCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -142,9 +143,7 @@ public class ToolFragment extends Fragment implements ToolsAdapter.OnItemClickLi
     public void onItemClick(View view, MyTool.Types type) {
         switch (type) {
             case QRCODE:
-                Intent scanIntent = new Intent(Intents.Scan.ACTION);
-                scanIntent.putExtra(Intents.Scan.RESULT_DISPLAY_DURATION_MS, 0L);
-                startActivityForResult(scanIntent, QR_CODE);
+                startQRCodeScan();
                 break;
             case PHOTO:
                 final MaterialSimpleListAdapter adapter = new MaterialSimpleListAdapter(getActivity());
@@ -269,13 +268,13 @@ public class ToolFragment extends Fragment implements ToolsAdapter.OnItemClickLi
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                requestPermissions(permissionsList.toArray(new String[permissionsList.size()]),
+                                FragmentCompat.requestPermissions(ToolFragment.this, permissionsList.toArray(new String[permissionsList.size()]),
                                         REQUEST_CODE_TAKE_PHOTO_PERMISSIONS);
                             }
                         });
                 return;
             }
-            requestPermissions(permissionsList.toArray(new String[permissionsList.size()]),
+            FragmentCompat.requestPermissions(ToolFragment.this, permissionsList.toArray(new String[permissionsList.size()]),
                     REQUEST_CODE_TAKE_PHOTO_PERMISSIONS);
             return;
         }
@@ -284,11 +283,40 @@ public class ToolFragment extends Fragment implements ToolsAdapter.OnItemClickLi
 
     }
 
+
+    private void startQRCodeScan() {
+        int hasWriteContactsPermission = ContextCompat.checkSelfPermission(getActivity(),
+                Manifest.permission.CAMERA);
+        if (hasWriteContactsPermission != PackageManager.PERMISSION_GRANTED) {
+            if (!FragmentCompat.shouldShowRequestPermissionRationale(ToolFragment.this,
+                    Manifest.permission.CAMERA)) {
+                showMessageOKCancel("You need to allow access to Contacts",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                FragmentCompat.requestPermissions(ToolFragment.this,
+                                        new String[] {Manifest.permission.CAMERA},
+                                        REQUEST_CODE_QR_PERMISSIONS);
+                            }
+                        });
+                return;
+            }
+            FragmentCompat.requestPermissions(ToolFragment.this,
+                    new String[] {Manifest.permission.CAMERA},
+                    REQUEST_CODE_QR_PERMISSIONS);
+            return;
+        }
+
+        Intent scanIntent = new Intent(Intents.Scan.ACTION);
+        scanIntent.putExtra(Intents.Scan.RESULT_DISPLAY_DURATION_MS, 0L);
+        startActivityForResult(scanIntent, QR_CODE);
+    }
+
     private boolean addPermission(List<String> permissionsList, String permission) {
         if (ContextCompat.checkSelfPermission(getActivity(), permission) != PackageManager.PERMISSION_GRANTED) {
             permissionsList.add(permission);
             // Check for Rationale Option
-            if (!shouldShowRequestPermissionRationale(permission))
+            if (!FragmentCompat.shouldShowRequestPermissionRationale(ToolFragment.this, permission))
                 return false;
         }
         return true;
@@ -320,6 +348,18 @@ public class ToolFragment extends Fragment implements ToolsAdapter.OnItemClickLi
                 }
             }
             break;
+            case REQUEST_CODE_QR_PERMISSIONS:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // Permission Granted
+                    Intent scanIntent = new Intent(Intents.Scan.ACTION);
+                    scanIntent.putExtra(Intents.Scan.RESULT_DISPLAY_DURATION_MS, 0L);
+                    startActivityForResult(scanIntent, QR_CODE);
+                } else {
+                    // Permission Denied
+                    Toast.makeText(getActivity(), "CAMERA Denied", Toast.LENGTH_SHORT)
+                            .show();
+                }
+                break;
             default:
                 super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
