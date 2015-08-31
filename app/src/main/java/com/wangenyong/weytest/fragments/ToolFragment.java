@@ -1,13 +1,18 @@
 package com.wangenyong.weytest.fragments;
 
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -30,9 +35,12 @@ import com.wangenyong.weytest.activities.MapActivity;
 import com.wangenyong.weytest.activities.ShakeActivity;
 import com.wangenyong.weytest.adapters.ToolsAdapter;
 import com.wangenyong.weytest.bean.MyTool;
+import com.wangenyong.weytest.dialogs.ImageViewDialog;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -48,6 +56,9 @@ public class ToolFragment extends Fragment implements ToolsAdapter.OnItemClickLi
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    final private int REQUEST_CODE_TAKE_PHOTO_PERMISSIONS = 123;
+    final private int REQUEST_CODE_QR_PERMISSIONS = 124;
+
     @InjectView(R.id.recyclerview_tool) RecyclerView toolRecyclerView;
     private ToolsAdapter toolsAdapter;
     private List<MyTool> myTools = new ArrayList<MyTool>();
@@ -60,6 +71,7 @@ public class ToolFragment extends Fragment implements ToolsAdapter.OnItemClickLi
     private final static int QR_CODE = 22;
 
     private ItemTouchHelper mItemTouchHelper;
+    private PhotoTools photoTools;
 
 
     /**
@@ -148,11 +160,11 @@ public class ToolFragment extends Fragment implements ToolsAdapter.OnItemClickLi
                     .adapter(adapter, new MaterialDialog.ListCallback() {
                         @Override
                         public void onSelection(MaterialDialog materialDialog, View view, int i, CharSequence charSequence) {
-                            PhotoTools photoTools = new PhotoTools(getString(R.string.tools_photo_dir), getString(R.string.tools_photo_album), "jpg");
+                            photoTools = new PhotoTools(getString(R.string.tools_photo_dir), getString(R.string.tools_photo_album), "jpg");
                             if (i == 0) {
-                                //mCameraPhotoPath = photoTools.takeCameraPhotos(ToolFragment.this, CAMERA_CODE);
+                                takePhotoFromCamera();
                             } else if (i == 1) {
-                                //photoTools.takeAlbumPhotos(ToolFragment.this, ALBUM_CODE);
+                                photoTools.takeAlbumPhotos(ToolFragment.this, ALBUM_CODE);
                             }
                             materialDialog.dismiss();
                         }
@@ -203,7 +215,7 @@ public class ToolFragment extends Fragment implements ToolsAdapter.OnItemClickLi
         switch (requestCode) {
             case CAMERA_CODE:
                 if (resultCode == Activity.RESULT_OK && mCameraPhotoPath != null) {
-                    //ImageViewDialog.create(mCameraPhotoPath).show(getFragmentManager(), "camera_photo");
+                    ImageViewDialog.create(mCameraPhotoPath).show(getFragmentManager(), "camera_photo");
                 }
                 break;
             case ALBUM_CODE:
@@ -219,7 +231,7 @@ public class ToolFragment extends Fragment implements ToolsAdapter.OnItemClickLi
                     String picturePath = cursor.getString(columnIndex);
                     cursor.close();
 
-                    //ImageViewDialog.create(picturePath).show(getFragmentManager(), "album_photo");
+                    ImageViewDialog.create(picturePath).show(getFragmentManager(), "album_photo");
                 }
                 break;
             case QR_CODE:
@@ -234,5 +246,91 @@ public class ToolFragment extends Fragment implements ToolsAdapter.OnItemClickLi
             default:
         }
 
+    }
+
+    private void takePhotoFromCamera() {
+        List<String> permissionsNeeded = new ArrayList<String>();
+        final List<String> permissionsList = new ArrayList<String>();
+
+        if (!addPermission(permissionsList, Manifest.permission.CAMERA))
+            permissionsNeeded.add("CAMERA");
+        if (!addPermission(permissionsList, Manifest.permission.WRITE_EXTERNAL_STORAGE))
+            permissionsNeeded.add("WRITE_EXTERNAL_STORAGE");
+        if (!addPermission(permissionsList, Manifest.permission.READ_EXTERNAL_STORAGE))
+            permissionsNeeded.add("READ_EXTERNAL_STORAGE");
+
+        if (permissionsList.size() > 0) {
+            if (permissionsNeeded.size() > 0) {
+                // Need Rationale
+                String message = "You need to grant access to " + permissionsNeeded.get(0);
+                for (int i = 1; i < permissionsNeeded.size(); i++)
+                    message = message + ", " + permissionsNeeded.get(i);
+                showMessageOKCancel(message,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                requestPermissions(permissionsList.toArray(new String[permissionsList.size()]),
+                                        REQUEST_CODE_TAKE_PHOTO_PERMISSIONS);
+                            }
+                        });
+                return;
+            }
+            requestPermissions(permissionsList.toArray(new String[permissionsList.size()]),
+                    REQUEST_CODE_TAKE_PHOTO_PERMISSIONS);
+            return;
+        }
+
+        mCameraPhotoPath = photoTools.takeCameraPhotos(ToolFragment.this, CAMERA_CODE);
+
+    }
+
+    private boolean addPermission(List<String> permissionsList, String permission) {
+        if (ContextCompat.checkSelfPermission(getActivity(), permission) != PackageManager.PERMISSION_GRANTED) {
+            permissionsList.add(permission);
+            // Check for Rationale Option
+            if (!shouldShowRequestPermissionRationale(permission))
+                return false;
+        }
+        return true;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_CODE_TAKE_PHOTO_PERMISSIONS:
+            {
+                Map<String, Integer> perms = new HashMap<String, Integer>();
+                // Initial
+                perms.put(Manifest.permission.CAMERA, PackageManager.PERMISSION_GRANTED);
+                perms.put(Manifest.permission.READ_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
+                perms.put(Manifest.permission.WRITE_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
+                // Fill with results
+                for (int i = 0; i < permissions.length; i++)
+                    perms.put(permissions[i], grantResults[i]);
+                // Check for ACCESS_FINE_LOCATION
+                if (perms.get(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
+                        && perms.get(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+                        && perms.get(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                    // All Permissions Granted
+                    mCameraPhotoPath = photoTools.takeCameraPhotos(ToolFragment.this, CAMERA_CODE);
+                } else {
+                    // Permission Denied
+                    Toast.makeText(getActivity(), "Some Permission is Denied", Toast.LENGTH_SHORT)
+                            .show();
+                }
+            }
+            break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
+
+    private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
+        new AlertDialog.Builder(getActivity())
+                .setMessage(message)
+                .setPositiveButton("OK", okListener)
+                .setNegativeButton("Cancel", null)
+                .create()
+                .show();
     }
 }
