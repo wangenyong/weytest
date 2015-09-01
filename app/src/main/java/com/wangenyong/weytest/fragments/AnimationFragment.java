@@ -83,7 +83,7 @@ public class AnimationFragment extends Fragment {
 
 
     private void setupViewPager(ViewPager viewPager) {
-        AnimationAdapter adapter = new AnimationAdapter(getFragmentManager());
+        AnimationAdapter adapter = new AnimationAdapter(getChildFragmentManager());
         adapter.addFragment(CircleMenuFragment.newInstance("", ""), getString(R.string.animation_circle_menu));
         adapter.addFragment(TestFragment.newInstance("Animation"), "Animation");
         viewPager.setAdapter(adapter);
