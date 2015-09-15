@@ -7,6 +7,9 @@ import android.os.Vibrator;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.GeofenceClient;
 import com.baidu.location.LocationClient;
+import com.orhanobut.logger.LogLevel;
+import com.orhanobut.logger.Logger;
+import com.wangenyong.weytest.BuildConfig;
 
 /**
  * Created by wangenyong on 15/7/28.
@@ -21,9 +24,17 @@ public class LocationApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        Logger.init("DSWEY")                  // default PRETTYLOGGER or use just init()
+                //.setMethodCount(3)            // default 2
+                //.hideThreadInfo()             // default shown
+                .setLogLevel(BuildConfig.DEBUG ? LogLevel.FULL : LogLevel.NONE);   // default LogLevel.FULL
+                //.setMethodOffset(2);          // default 0
+
         mLocationClient = new LocationClient(this.getApplicationContext());
         mGeofenceClient = new GeofenceClient(getApplicationContext());
         mVibrator =(Vibrator)getApplicationContext().getSystemService(Service.VIBRATOR_SERVICE);
+
     }
 
 
