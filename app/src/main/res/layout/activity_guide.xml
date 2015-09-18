@@ -6,10 +6,55 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.wangenyong.weytest.activities.GuideActivity">
 
-    <RelativeLayout
+    <android.support.percent.PercentRelativeLayout
         android:id="@+id/blurredview_guideview"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/img_like1_guideview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_alignParentTop="true"
+            app:layout_heightPercent="20%"
+            android:src="@drawable/img_guideview_like01"
+            android:scaleType="centerCrop"/>
+
+        <ImageView
+            android:id="@+id/img_like2_guideview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_below="@+id/img_like1_guideview"
+            app:layout_heightPercent="20%"
+            android:src="@drawable/img_guideview_like02"
+            android:scaleType="centerCrop"/>
+
+        <ImageView
+            android:id="@+id/img_like3_guideview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_below="@+id/img_like2_guideview"
+            app:layout_heightPercent="20%"
+            android:src="@drawable/img_guideview_like03"
+            android:scaleType="centerCrop"/>
+
+        <ImageView
+            android:id="@+id/img_like4_guideview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_below="@+id/img_like3_guideview"
+            app:layout_heightPercent="20%"
+            android:src="@drawable/img_guideview_like04"
+            android:scaleType="centerCrop"/>
+
+        <ImageView
+            android:id="@+id/img_like5_guideview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_below="@+id/img_like4_guideview"
+            app:layout_heightPercent="20%"
+            android:src="@drawable/img_guideview_like05"
+            android:scaleType="centerCrop"/>
 
         <com.wangenyong.mylibrary.views.CircularImageView
             android:id="@+id/header_guideview"
@@ -28,7 +73,26 @@
             android:text="@string/guideview_say"
             android:layout_centerInParent="true"/>
 
-    </RelativeLayout>
+        <ImageView
+            android:id="@+id/img_logo_guideview"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:src="@drawable/img_logo_big"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="64dp"/>
+
+        <TextView
+            android:id="@+id/tv_logo_name_guideview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textColor="@color/primary_text"
+            android:textSize="24sp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/img_logo_guideview"
+            android:layout_marginTop="16dp"/>
+
+    </android.support.percent.PercentRelativeLayout>
 
     <com.wangenyong.mylibrary.views.BlurringView
         android:id="@+id/blurringView_guideview"
@@ -44,5 +108,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         ></android.support.v4.view.ViewPager>
+
+    <Button
+        android:id="@+id/btn_go_guideview"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/btn_selector_circle"
+        android:text="GO"
+        android:textSize="20sp"
+        android:enabled="false"
+        android:textColor="@color/white"
+        android:layout_centerInParent="true" />
 
 </RelativeLayout>
