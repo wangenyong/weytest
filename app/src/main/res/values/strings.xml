@@ -16,6 +16,15 @@
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
 
+    <!-- GuideView -->
+    <string name="guideview_self_title">我是谁？</string>
+    <string name="guideview_self_content">我是王大水，一名互联网的搬运工！</string>
+    <string name="guideview_like_title">我喜欢？</string>
+    <string name="guideview_like_content">我喜欢旅行、骑车、徒步！</string>
+    <string name="guideview_this_title">这里是？</string>
+    <string name="guideview_this_content">这里是大水库，互联网的收藏库！</string>
+    <string name="guideview_say">&#160;一个人时\n\n&#160;善待自己</string>
+
     <!-- Drawer -->
     <string name="drawer_view">视图组件</string>
     <string name="drawer_tools">工具集合</string>
