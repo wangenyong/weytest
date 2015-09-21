@@ -100,6 +100,7 @@
     <string name="third_party_progressbar">ProgressBar</string>
     <string name="third_party_wave_swipe">WaveSwipe</string>
     <string name="third_party_editext">EditText</string>
+    <string name="third_party_span">Span</string>
 
     <!-- Button -->
     <string name="button_standard">标准按钮</string>
