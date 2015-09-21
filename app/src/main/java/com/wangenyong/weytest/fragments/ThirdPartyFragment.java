@@ -82,6 +82,7 @@ public class ThirdPartyFragment extends Fragment {
         items.add(new ImgTxtItem(R.drawable.img_third_party_mpchart, "com.xxmassdeveloper.mpchartexample", getString(R.string.third_party_mpchart)));
         items.add(new ImgTxtItem(R.drawable.img_third_party_progressbar, "fr.castorflex.android.smoothprogressbar.sample", getString(R.string.third_party_progressbar)));
         items.add(new ImgTxtItem(R.drawable.img_third_party_wave_swipe, "jp.co.recruit_lifestyle.sample", getString(R.string.third_party_wave_swipe)));
+        items.add(new ImgTxtItem(R.drawable.img_third_party_edittext, "com.github.florent37.materialtextfield.sample", getString(R.string.third_party_editext)));
 
         thirdPartyAdapter = new ThirdPartyAdapter(getActivity(), items);
         thirdPartyRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
