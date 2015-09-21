@@ -98,6 +98,7 @@
     <string name="third_party_fab">Fab</string>
     <string name="third_party_mpchart">MPChart</string>
     <string name="third_party_progressbar">ProgressBar</string>
+    <string name="third_party_wave_swipe">WaveSwipe</string>
 
     <!-- Button -->
     <string name="button_standard">标准按钮</string>
