@@ -31,4 +31,5 @@ dependencies {
     compile 'com.prolificinteractive:material-calendarview:0.7.0'
     compile 'com.jpardogo.materialtabstrip:library:1.0.9'
     compile files('libs/BaiduLBS_Android.jar')
+    compile 'me.relex:circleindicator:1.1.5@aar'
 }

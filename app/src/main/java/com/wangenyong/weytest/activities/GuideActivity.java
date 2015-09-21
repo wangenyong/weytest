@@ -29,6 +29,7 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import me.relex.circleindicator.CircleIndicator;
 
 public class GuideActivity extends AppCompatActivity {
     @InjectView(R.id.blurredview_guideview) PercentRelativeLayout blurredView;
@@ -44,6 +45,7 @@ public class GuideActivity extends AppCompatActivity {
     @InjectView(R.id.img_logo_guideview) ImageView logoImg;
     @InjectView(R.id.tv_logo_name_guideview) TextView nameTv;
     @InjectView(R.id.btn_go_guideview) Button goBtn;
+    @InjectView(R.id.indicator_guideview) CircleIndicator indicator;
 
     private List<Fragment> fragmentList = new ArrayList<>();
     private GuideFragment fragment00, fragment01, fragment02;
@@ -89,8 +91,7 @@ public class GuideActivity extends AppCompatActivity {
         viewPager.setOffscreenPageLimit(2);
         viewPager.setAdapter(adapter);
         viewPager.setPageTransformer(true, new HKTransformer());
-
-
+        indicator.setViewPager(viewPager);
     }
 
     private void setFullscreen() {
