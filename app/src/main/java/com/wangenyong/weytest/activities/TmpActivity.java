@@ -6,14 +6,26 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.orhanobut.logger.Logger;
 import com.wangenyong.mylibrary.drawables.CircleImageDrawable;
 import com.wangenyong.weytest.R;
+import com.wangenyong.weytest.experiment.Book;
+import com.wangenyong.weytest.experiment.Books;
+import com.wangenyong.weytest.experiment.Joke;
+import com.wangenyong.weytest.experiment.Novel;
+
+import java.io.IOException;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -41,6 +53,49 @@ public class TmpActivity extends AppCompatActivity {
         imageView.setImageDrawable(new CircleImageDrawable(bitmap));
 
         tmpTv.setError("Wrong!");
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        Books c = new Books();
+        c.getBookList().add(new Novel(3243, "woman fight"));
+        c.getBookList().add(new Joke(55, false));
+
+        String s = null;
+        try {
+            s = mapper.writeValueAsString(c);
+        }
+        catch (JsonProcessingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        Logger.json(s);
+
+        Books c2 = null;
+        try {
+            c2 = mapper.readValue(s, Books.class);
+        }
+        catch (JsonParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        catch (JsonMappingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        if (c2 != null) {
+            System.out.println("----- Items List -----");
+
+            for (Book mi : c2.getBookList()) {
+                Log.d("DSWEY", "Type = " + mi.getClass() +  ", num = "+ mi.getNum() );
+            }
+        }
+
     }
 
     @Override
