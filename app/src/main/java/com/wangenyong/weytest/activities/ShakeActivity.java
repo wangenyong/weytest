@@ -20,12 +20,12 @@ import com.wangenyong.weytest.R;
 
 import java.util.Random;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 public class ShakeActivity extends AppCompatActivity {
-    @InjectView(R.id.toolbar_shake) Toolbar shakeToolbar;
-    @InjectView(R.id.tv_shake) TextView shakeTv;
+    @Bind(R.id.toolbar_shake) Toolbar shakeToolbar;
+    @Bind(R.id.tv_shake) TextView shakeTv;
 
     private SensorManager mSensorManager;
     private Sensor mAccelerometer;
@@ -42,7 +42,7 @@ public class ShakeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shake);
 
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         setSupportActionBar(shakeToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

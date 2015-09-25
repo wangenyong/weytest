@@ -16,8 +16,8 @@ import com.wangenyong.weytest.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,8 +30,8 @@ public class AnimationFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    @InjectView(R.id.tabs_animation) PagerSlidingTabStrip animationTabs;
-    @InjectView(R.id.viewpager_animation)
+    @Bind(R.id.tabs_animation) PagerSlidingTabStrip animationTabs;
+    @Bind(R.id.viewpager_animation)
     ViewPager animationViewPager;
 
     // TODO: Rename and change types of parameters
@@ -75,7 +75,7 @@ public class AnimationFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_animation, container, false);
-        ButterKnife.inject(this, rootView);
+        ButterKnife.bind(this, rootView);
         setupViewPager(animationViewPager);
         animationTabs.setViewPager(animationViewPager);
         return rootView;
@@ -117,5 +117,10 @@ public class AnimationFragment extends Fragment {
         public CharSequence getPageTitle(int position) {
             return mFragmentTitles.get(position);
         }
+    }
+
+    @Override public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
     }
 }

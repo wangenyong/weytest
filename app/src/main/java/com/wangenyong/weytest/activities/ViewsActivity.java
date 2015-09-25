@@ -69,14 +69,14 @@ import com.wangenyong.weytest.dialogs.ColorChooserDialog;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 public class ViewsActivity extends AppCompatActivity implements ColorChooserDialog.Callback {
-    @InjectView(R.id.toolbar_views) Toolbar viewsToolbar;
-    @InjectView(R.id.collapsing_toolbar_views) CollapsingToolbarLayout viewsCoolapsingLayout;
-    @InjectView(R.id.recyclerview_views) RecyclerView viewsRecyclerView;
-    @InjectView(R.id.img_views_backdrop) ImageView backdropImg;
+    @Bind(R.id.toolbar_views) Toolbar viewsToolbar;
+    @Bind(R.id.collapsing_toolbar_views) CollapsingToolbarLayout viewsCoolapsingLayout;
+    @Bind(R.id.recyclerview_views) RecyclerView viewsRecyclerView;
+    @Bind(R.id.img_views_backdrop) ImageView backdropImg;
 
     private RecyclerView.LayoutManager mLayoutManager;
     private ViewsAdapter viewsAdapter;
@@ -101,7 +101,7 @@ public class ViewsActivity extends AppCompatActivity implements ColorChooserDial
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_views);
 
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         setSupportActionBar(viewsToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

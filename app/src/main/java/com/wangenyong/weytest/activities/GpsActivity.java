@@ -21,18 +21,18 @@ import com.baidu.location.LocationClientOption;
 import com.wangenyong.mylibrary.views.PaperButton;
 import com.wangenyong.weytest.R;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 public class GpsActivity extends AppCompatActivity implements BDLocationListener {
-    @InjectView(R.id.toolbar_gps) Toolbar gpsToolbar;
-    @InjectView(R.id.radiogroup_gps_selectmode) RadioGroup selectModeRadioGroup;
-    @InjectView(R.id.radiogroup_gps_selectCoordinates) RadioGroup selectCoordinatesRadioGroup;
-    @InjectView(R.id.tv_gps_selectmode_explain) TextView modeInfoTv;
-    @InjectView(R.id.edittext_gps_frequence) EditText frequenceEdttxt;
-    @InjectView(R.id.checkbox_geofencelog) CheckBox geofencelogCheckBox;
-    @InjectView(R.id.tv_gps_location_result) TextView loactionResultTv;
-    @InjectView(R.id.btn_gps_addfence) PaperButton startLocationBtn;
+    @Bind(R.id.toolbar_gps) Toolbar gpsToolbar;
+    @Bind(R.id.radiogroup_gps_selectmode) RadioGroup selectModeRadioGroup;
+    @Bind(R.id.radiogroup_gps_selectCoordinates) RadioGroup selectCoordinatesRadioGroup;
+    @Bind(R.id.tv_gps_selectmode_explain) TextView modeInfoTv;
+    @Bind(R.id.edittext_gps_frequence) EditText frequenceEdttxt;
+    @Bind(R.id.checkbox_geofencelog) CheckBox geofencelogCheckBox;
+    @Bind(R.id.tv_gps_location_result) TextView loactionResultTv;
+    @Bind(R.id.btn_gps_addfence) PaperButton startLocationBtn;
 
     private LocationClient mLocationClient;
     private LocationClientOption.LocationMode tempMode = LocationClientOption.LocationMode.Hight_Accuracy;
@@ -43,7 +43,7 @@ public class GpsActivity extends AppCompatActivity implements BDLocationListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gps);
 
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         setSupportActionBar(gpsToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

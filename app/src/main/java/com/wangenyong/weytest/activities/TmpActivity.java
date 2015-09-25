@@ -27,19 +27,19 @@ import com.wangenyong.weytest.experiment.Novel;
 
 import java.io.IOException;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 public class TmpActivity extends AppCompatActivity {
-    @InjectView(R.id.toolbar_tmp) Toolbar tmpToolbar;
-    @InjectView(R.id.tv_tmp) TextView tmpTv;
+    @Bind(R.id.toolbar_tmp) Toolbar tmpToolbar;
+    @Bind(R.id.tv_tmp) TextView tmpTv;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tmp);
 
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         setSupportActionBar(tmpToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

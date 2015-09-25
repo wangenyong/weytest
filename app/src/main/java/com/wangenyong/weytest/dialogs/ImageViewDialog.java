@@ -13,14 +13,14 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.wangenyong.mylibrary.tools.PhotoTools;
 import com.wangenyong.weytest.R;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 /**
  * Created by wangenyong on 15/7/24.
  */
 public class ImageViewDialog extends DialogFragment {
-    @InjectView(R.id.img_dialog) ImageView dialogImg;
+    @Bind(R.id.img_dialog) ImageView dialogImg;
 
     public static ImageViewDialog create(String mPhotoPath) {
         ImageViewDialog dialog = new ImageViewDialog();
@@ -34,7 +34,7 @@ public class ImageViewDialog extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_imageview, null);
-        ButterKnife.inject(this, view);
+        ButterKnife.bind(this, view);
 
         MaterialDialog dialog = new MaterialDialog.Builder(getActivity())
                 .customView(view, false)

@@ -24,13 +24,13 @@ import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.model.LatLng;
 import com.wangenyong.weytest.R;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 public class MapActivity extends AppCompatActivity implements BDLocationListener {
-    @InjectView(R.id.toolbar_map) Toolbar mapToolbar;
-    @InjectView(R.id.bmapView) MapView mapView;
-    @InjectView(R.id.fab_map_location) FloatingActionButton locationFab;
+    @Bind(R.id.toolbar_map) Toolbar mapToolbar;
+    @Bind(R.id.bmapView) MapView mapView;
+    @Bind(R.id.fab_map_location) FloatingActionButton locationFab;
 
     private LocationClient mLocationClient;
     private BitmapDescriptor mCurrentMarker = null;
@@ -42,7 +42,7 @@ public class MapActivity extends AppCompatActivity implements BDLocationListener
         SDKInitializer.initialize(getApplicationContext());
         setContentView(R.layout.activity_map);
 
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         setSupportActionBar(mapToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

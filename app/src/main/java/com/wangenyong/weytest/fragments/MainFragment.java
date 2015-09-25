@@ -19,8 +19,8 @@ import com.wangenyong.weytest.bean.Component;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,7 +33,7 @@ public class MainFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    @InjectView(R.id.recyclerview_home) RecyclerView homeRecyclerView;
+    @Bind(R.id.recyclerview_home) RecyclerView homeRecyclerView;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -78,7 +78,7 @@ public class MainFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-        ButterKnife.inject(this, rootView);
+        ButterKnife.bind(this, rootView);
 
 
         initComponents();
@@ -131,4 +131,8 @@ public class MainFragment extends Fragment {
                 getResources().getColor(R.color.accent_color), Component.DIALOG));
     }
 
+    @Override public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
+    }
 }

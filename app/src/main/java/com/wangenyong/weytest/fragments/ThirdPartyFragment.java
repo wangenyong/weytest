@@ -18,8 +18,8 @@ import com.wangenyong.weytest.bean.Item;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -36,7 +36,7 @@ public class ThirdPartyFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    @InjectView(R.id.recyclerview_third_party) RecyclerView thirdPartyRecyclerView;
+    @Bind(R.id.recyclerview_third_party) RecyclerView thirdPartyRecyclerView;
     private ThirdPartyAdapter thirdPartyAdapter;
     private List<Item> items = new ArrayList<Item>();
 
@@ -76,7 +76,7 @@ public class ThirdPartyFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_third_party, container, false);
-        ButterKnife.inject(this, rootView);
+        ButterKnife.bind(this, rootView);
 
         items.add(new ImgTxtItem(R.drawable.img_third_party_fab, "com.getbase.floatingactionbutton.sample", getString(R.string.third_party_fab)));
         items.add(new ImgTxtItem(R.drawable.img_third_party_mpchart, "com.xxmassdeveloper.mpchartexample", getString(R.string.third_party_mpchart)));
@@ -90,6 +90,11 @@ public class ThirdPartyFragment extends Fragment {
         thirdPartyRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
         return rootView;
+    }
+
+    @Override public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
     }
 
 }

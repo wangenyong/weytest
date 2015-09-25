@@ -27,25 +27,25 @@ import com.wangenyong.weytest.fragments.GuideFragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import me.relex.circleindicator.CircleIndicator;
 
 public class GuideActivity extends AppCompatActivity {
-    @InjectView(R.id.blurredview_guideview) PercentRelativeLayout blurredView;
-    @InjectView(R.id.blurringView_guideview) BlurringView blurringView;
-    @InjectView(R.id.viewpager_guideview) ViewPager viewPager;
-    @InjectView(R.id.header_guideview) CircularImageView headerImg;
-    @InjectView(R.id.tv_say_guideview) TextView sayTv;
-    @InjectView(R.id.img_like1_guideview) ImageView like1Img;
-    @InjectView(R.id.img_like2_guideview) ImageView like2Img;
-    @InjectView(R.id.img_like3_guideview) ImageView like3Img;
-    @InjectView(R.id.img_like4_guideview) ImageView like4Img;
-    @InjectView(R.id.img_like5_guideview) ImageView like5Img;
-    @InjectView(R.id.img_logo_guideview) ImageView logoImg;
-    @InjectView(R.id.tv_logo_name_guideview) TextView nameTv;
-    @InjectView(R.id.btn_go_guideview) Button goBtn;
-    @InjectView(R.id.indicator_guideview) CircleIndicator indicator;
+    @Bind(R.id.blurredview_guideview) PercentRelativeLayout blurredView;
+    @Bind(R.id.blurringView_guideview) BlurringView blurringView;
+    @Bind(R.id.viewpager_guideview) ViewPager viewPager;
+    @Bind(R.id.header_guideview) CircularImageView headerImg;
+    @Bind(R.id.tv_say_guideview) TextView sayTv;
+    @Bind(R.id.img_like1_guideview) ImageView like1Img;
+    @Bind(R.id.img_like2_guideview) ImageView like2Img;
+    @Bind(R.id.img_like3_guideview) ImageView like3Img;
+    @Bind(R.id.img_like4_guideview) ImageView like4Img;
+    @Bind(R.id.img_like5_guideview) ImageView like5Img;
+    @Bind(R.id.img_logo_guideview) ImageView logoImg;
+    @Bind(R.id.tv_logo_name_guideview) TextView nameTv;
+    @Bind(R.id.btn_go_guideview) Button goBtn;
+    @Bind(R.id.indicator_guideview) CircleIndicator indicator;
 
     private List<Fragment> fragmentList = new ArrayList<>();
     private GuideFragment fragment00, fragment01, fragment02;
@@ -59,7 +59,7 @@ public class GuideActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_guide);
 
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         determineScreenSize();
 

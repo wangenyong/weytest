@@ -10,8 +10,8 @@ import android.widget.TextView;
 
 import com.wangenyong.weytest.R;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,8 +28,8 @@ public class GuideFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    @InjectView(R.id.tv_title) TextView title;
-    @InjectView(R.id.tv_content) TextView content;
+    @Bind(R.id.tv_title) TextView title;
+    @Bind(R.id.tv_content) TextView content;
 
 
     /**
@@ -68,12 +68,16 @@ public class GuideFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_guide, container, false);
-        ButterKnife.inject(this, rootView);
+        ButterKnife.bind(this, rootView);
         title.setText(mParam1);
         content.setText(mParam2);
 
         return rootView;
     }
 
+    @Override public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
+    }
 
 }

@@ -43,8 +43,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,7 +61,7 @@ public class ToolFragment extends Fragment implements ToolsAdapter.OnItemClickLi
     final private int REQUEST_CODE_QR_PERMISSIONS = 124;
     final private int REQUEST_CODE_GPS_PERMISSIONS = 125;
 
-    @InjectView(R.id.recyclerview_tool) RecyclerView toolRecyclerView;
+    @Bind(R.id.recyclerview_tool) RecyclerView toolRecyclerView;
     private ToolsAdapter toolsAdapter;
     private List<MyTool> myTools = new ArrayList<MyTool>();
     // TODO: Rename and change types of parameters
@@ -112,7 +112,7 @@ public class ToolFragment extends Fragment implements ToolsAdapter.OnItemClickLi
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_tool, container, false);
-        ButterKnife.inject(this, rootView);
+        ButterKnife.bind(this, rootView);
 
         initData();
         toolsAdapter = new ToolsAdapter(getActivity(), myTools);
@@ -437,5 +437,10 @@ public class ToolFragment extends Fragment implements ToolsAdapter.OnItemClickLi
                 .setNegativeButton("Cancel", null)
                 .create()
                 .show();
+    }
+
+    @Override public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
     }
 }

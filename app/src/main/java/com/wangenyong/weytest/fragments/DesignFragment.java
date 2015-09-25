@@ -20,8 +20,8 @@ import com.wangenyong.weytest.bean.Item;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -38,7 +38,7 @@ public class DesignFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    @InjectView(R.id.recyclerview_design) RecyclerView designRecyclerView;
+    @Bind(R.id.recyclerview_design) RecyclerView designRecyclerView;
     private DesignAdapter designAdapter;
     private List<Item> myDesigns = new ArrayList<Item>();
     private RecyclerView.LayoutManager mLayoutManager;
@@ -81,7 +81,7 @@ public class DesignFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_design, container, false);
-        ButterKnife.inject(this, rootView);
+        ButterKnife.bind(this, rootView);
 
         myDesigns.clear();
 
@@ -113,5 +113,9 @@ public class DesignFragment extends Fragment {
         return rootView;
     }
 
+    @Override public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
+    }
 
 }

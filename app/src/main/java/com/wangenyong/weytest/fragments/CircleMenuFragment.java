@@ -12,8 +12,8 @@ import android.widget.Toast;
 import com.wangenyong.mylibrary.views.CircleButtonLayout;
 import com.wangenyong.weytest.R;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,7 +33,7 @@ public class CircleMenuFragment extends Fragment {
     private Toast mToast;
 
     //@InjectView(R.id.layout_circle_menu) CircleMenuLayout circleMenuLayout;
-    @InjectView(R.id.layout_circle_button) CircleButtonLayout circleButtonLayout;
+    @Bind(R.id.layout_circle_button) CircleButtonLayout circleButtonLayout;
 
     private String[] mItemTexts = new String[] {"添加", "备份", "通知", "定位", "播放"};
     private int[] mItemImgs = new int[] {R.drawable.ic_circle_menu_add,
@@ -77,7 +77,7 @@ public class CircleMenuFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_circle_menu, container, false);
-        ButterKnife.inject(this, rootView);
+        ButterKnife.bind(this, rootView);
 
         //circleMenuLayout.setMenuItemIconsAndTexts(mItemImgs, mItemTexts);
         circleButtonLayout.setmItemImgs(mItemImgs);
@@ -111,4 +111,8 @@ public class CircleMenuFragment extends Fragment {
         showToast(getString(message));
     }
 
+    @Override public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
+    }
 }
