@@ -69,6 +69,7 @@ public class TmpActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        Logger.d(s);
         Logger.json(s);
 
         Books c2 = null;
@@ -92,10 +93,9 @@ public class TmpActivity extends AppCompatActivity {
             System.out.println("----- Items List -----");
 
             for (Book mi : c2.getBookList()) {
-                Log.d("DSWEY", "Type = " + mi.getClass() +  ", num = "+ mi.getNum() );
+                Log.d("DSWEY", "Type = " + mi.getClass() + ", num = " + mi.getNum());
             }
         }
-
     }
 
     @Override

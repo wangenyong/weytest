@@ -2,6 +2,7 @@ package com.wangenyong.weytest.activities;
 
 import android.app.Application;
 import android.app.Service;
+import android.content.Context;
 import android.os.Vibrator;
 
 import com.baidu.location.BDLocationListener;
@@ -9,6 +10,8 @@ import com.baidu.location.GeofenceClient;
 import com.baidu.location.LocationClient;
 import com.orhanobut.logger.LogLevel;
 import com.orhanobut.logger.Logger;
+import com.squareup.leakcanary.LeakCanary;
+import com.squareup.leakcanary.RefWatcher;
 import com.wangenyong.weytest.BuildConfig;
 
 /**
@@ -20,10 +23,17 @@ public class LocationApplication extends Application {
     public BDLocationListener mMyLocationListener;
 
     public Vibrator mVibrator;
+    private RefWatcher refWatcher;
+
+    public static RefWatcher getRefWatcher(Context context) {
+        LocationApplication application = (LocationApplication) context.getApplicationContext();
+        return application.refWatcher;
+    }
 
     @Override
     public void onCreate() {
         super.onCreate();
+        refWatcher = LeakCanary.install(this);
 
         Logger.init("DSWEY")                  // default PRETTYLOGGER or use just init()
                 //.setMethodCount(3)            // default 2

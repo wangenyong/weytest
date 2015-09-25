@@ -40,4 +40,6 @@ dependencies {
     compile 'com.jpardogo.materialtabstrip:library:1.0.9'
     compile files('libs/BaiduLBS_Android.jar')
     compile 'me.relex:circleindicator:1.1.5@aar'
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.3.1'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.3.1'
 }
