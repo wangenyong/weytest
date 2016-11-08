@@ -34,7 +34,6 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.GravityEnum;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.Theme;
-import com.afollestad.materialdialogs.ThemeSingleton;
 import com.afollestad.materialdialogs.internal.MDTintHelper;
 import com.afollestad.materialdialogs.simplelist.MaterialSimpleListAdapter;
 import com.afollestad.materialdialogs.simplelist.MaterialSimpleListItem;
@@ -798,7 +797,7 @@ public class ViewsActivity extends AppCompatActivity implements ColorChooserDial
                     }
                 });
 
-                int widgetColor = ThemeSingleton.get().widgetColor;
+                int widgetColor = getResources().getColor(R.color.accent_color);
                 MDTintHelper.setTint(checkbox,
                         widgetColor == 0 ? getResources().getColor(R.color.accent_color) : widgetColor);
 

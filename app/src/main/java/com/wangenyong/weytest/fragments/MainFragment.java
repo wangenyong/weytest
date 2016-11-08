@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.wangenyong.mylibrary.decorators.DividerGridItemDecoration;
 import com.wangenyong.weytest.R;
 import com.wangenyong.weytest.adapters.MainAdapter;
 import com.wangenyong.weytest.bean.Component;
@@ -86,7 +85,7 @@ public class MainFragment extends Fragment {
         final GridLayoutManager manager = new GridLayoutManager(getActivity(), 4);
         homeRecyclerView.setLayoutManager(manager);
         final MainAdapter mainAdapter = new MainAdapter(getActivity(), components);
-        homeRecyclerView.addItemDecoration(new DividerGridItemDecoration(getActivity()));
+
         homeRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mainAdapter.setOnItemClickLitener(new MainAdapter.OnItemClickLitener() {
             @Override
